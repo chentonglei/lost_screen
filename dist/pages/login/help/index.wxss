@@ -1,0 +1,42 @@
+page{
+  height: 100%;
+  width: 100%;
+  background:#FFFFFF;
+}
+.app {
+  width: 90%;
+  height: 100%;
+  margin: auto;
+}
+.top {
+  height: 170rpx;
+  width: 100%;
+  font-size: 40rpx;
+  text-align: center;
+  background:#FFFFFF;
+}
+.top_title{
+  padding-top: 90rpx;
+}
+.bottom{
+  margin-top: 30rpx;
+  width: 100%;
+}
+.bottom_one{
+  display: block;
+  border-bottom: 2rpx solid #474763;
+}
+.bottom_name{
+  margin-top: 20rpx;
+}
+.bottom_answer{
+  color: #707070;
+  margin: 20rpx auto;
+  width: 90%;
+}
+.ps{
+  margin-top: 20rpx;
+  font-size: 30rpx;
+  color: rgb(119, 116, 113);
+}
+

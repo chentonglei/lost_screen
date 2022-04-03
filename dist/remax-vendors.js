@@ -26863,6 +26863,68 @@ if (false) {} else {
 
 /***/ }),
 
+/***/ "./node_modules/remax/esm/index.js":
+/*!*****************************************!*\
+  !*** ./node_modules/remax/esm/index.js ***!
+  \*****************************************/
+/*! exports provided: render, createAppConfig, createPageConfig, usePageInstance, useComponentInstance, useQuery, useNativeEffect, unstable_batchedUpdates */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* istanbul ignore next */
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _main__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./main */ "./node_modules/remax/esm/main.mini.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _main__WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "createAppConfig", function() { return _main__WEBPACK_IMPORTED_MODULE_0__["createAppConfig"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "createPageConfig", function() { return _main__WEBPACK_IMPORTED_MODULE_0__["createPageConfig"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "usePageInstance", function() { return _main__WEBPACK_IMPORTED_MODULE_0__["usePageInstance"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "useComponentInstance", function() { return _main__WEBPACK_IMPORTED_MODULE_0__["useComponentInstance"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "useQuery", function() { return _main__WEBPACK_IMPORTED_MODULE_0__["useQuery"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "useNativeEffect", function() { return _main__WEBPACK_IMPORTED_MODULE_0__["useNativeEffect"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "unstable_batchedUpdates", function() { return _main__WEBPACK_IMPORTED_MODULE_0__["unstable_batchedUpdates"]; });
+
+
+
+/***/ }),
+
+/***/ "./node_modules/remax/esm/main.mini.js":
+/*!*********************************************!*\
+  !*** ./node_modules/remax/esm/main.mini.js ***!
+  \*********************************************/
+/*! exports provided: render, createAppConfig, createPageConfig, usePageInstance, useComponentInstance, useQuery, useNativeEffect, unstable_batchedUpdates */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* istanbul ignore next */
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _remax_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @remax/runtime */ "./node_modules/@remax/runtime/esm/index.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _remax_runtime__WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "createAppConfig", function() { return _remax_runtime__WEBPACK_IMPORTED_MODULE_0__["createAppConfig"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "createPageConfig", function() { return _remax_runtime__WEBPACK_IMPORTED_MODULE_0__["createPageConfig"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "usePageInstance", function() { return _remax_runtime__WEBPACK_IMPORTED_MODULE_0__["usePageInstance"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "useComponentInstance", function() { return _remax_runtime__WEBPACK_IMPORTED_MODULE_0__["useComponentInstance"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "useQuery", function() { return _remax_runtime__WEBPACK_IMPORTED_MODULE_0__["useQuery"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "useNativeEffect", function() { return _remax_runtime__WEBPACK_IMPORTED_MODULE_0__["useNativeEffect"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "unstable_batchedUpdates", function() { return _remax_runtime__WEBPACK_IMPORTED_MODULE_0__["unstable_batchedUpdates"]; });
+
+
+
+/***/ }),
+
 /***/ "./node_modules/remax/one.js":
 /*!***********************************!*\
   !*** ./node_modules/remax/one.js ***!

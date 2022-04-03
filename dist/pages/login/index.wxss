@@ -1,49 +1,120 @@
 page{
   height: 100%;
   width: 100%;
-  background-image: url('https://img1.baidu.com/it/u=1906963233,3295368107&fm=26&fmt=auto&gp=0.jpg');
-  background-size:cover;
+  background:#FFFFFF;
 }
 .app {
+  width: 90%;
+  height: 100%;
+  margin: 150rpx auto;
+}
+.top{
+  height: 200rpx;
   width: 100%;
-  height: 100%;
-  margin: 500rpx auto;
 }
-.id{
-  width: 95%;
-  margin: 20rpx auto;
+.top_left{
+  float: left;
+  display: block;
+}
+.top_title{
+  font-size: 50rpx;
+}
+.top_button{
+  font-size: 30rpx;
+  margin-top: 20rpx;
+  background-color: #f4ea2a;
+}
+.people{
+  margin-top: 30rpx;
+  float: right;
+  width: 200rpx;
+}
+.people_img{
+  float: right;
+  width: 130rpx;
+  height: 130rpx;
+}
+.mid{
+  margin-top: 10rpx;
+  width: 100%;
+  height: 220rpx;
+  border-top-left-radius:20rpx;
+  border-top-right-radius:20rpx;
+  background-color: #474763;
+}
+.mid_top{
+  border-bottom: 2rpx solid white;
+  height: 80rpx;
+}
+.mid_top_left{
+  margin-top: 15rpx;
+  margin-left: 20rpx;
+  float: left;
+  font-size: 40rpx;
+  color: #FFFFFF;
+}
+.mid_top_right{
+  margin-top: 15rpx;
+  margin-right: 20rpx;
+  float: right;
+  font-size: 30rpx;
+  color: #cdcdcd;
+}
+.mid_bottom{
+  height:140rpx;
+  width: 100%;
   display: flex;
-
+  justify-content: space-around;
+  align-items: center;
+  flex-wrap: nowrap;
 }
-.idinput{
-  width: 80%;
-  margin-left: 25rpx;
-  border: solid 1rpx white;
-}
-
-.anniu{
-  height:100rpx;
-  width:95%;
-  margin: 15rpx auto;
-  display: flex;
-}
-.anniuleft{
-  width: 50%;
+.mid_bottom_one{
+  display: flex; 
+  flex-direction: column; /* 竖着走  两端 中间 */
+  justify-content: space-between; 
+  align-items: center;
+  color: #FFFFFF;
+  font-size: 30rpx;
+  width: 20%;
   height: 100%;
-  border-top-left-radius: 50rpx;
-  border-bottom-left-radius: 50rpx;
-  background:#30AE29;
-  text-align: center;
-  line-height: 100rpx;
 }
-.anniuright{
-  width: 50%;
-  height: 100%;
-  border-top-right-radius: 50rpx;
-  border-bottom-right-radius: 50rpx;
-  background: #FFFFFF;
-  text-align: center;
-  line-height: 100rpx;
+.mid_name{
+  margin-bottom: 10rpx;
 }
-
-
+.mid_img{
+  height: 70rpx;
+  width: 70rpx;
+  margin-top: 15rpx;
+}
+.bottom{
+  margin-top: 30rpx;
+  width: 100%;
+}
+.bottom_one{
+  height: 140rpx;
+  border-bottom: 2rpx solid #474763;
+}
+.bottom_left{
+  margin-top: 40rpx;
+  float: left;
+}
+.bottom_left_img{
+  height: 50rpx;
+  width: 50rpx;
+  float: left;
+}
+.bottom_name{
+  padding-left: 20rpx;
+  float: left;
+}
+.bottom_right_img{
+  margin-top: 50rpx;
+  float: right;
+  height: 30rpx;
+  width: 30rpx;
+}
+.exit_name{
+  padding-left: 20rpx;
+  float: left;
+  color: red;
+}

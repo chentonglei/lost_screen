@@ -1,48 +1,120 @@
 page{
   height: 100%;
   width: 100%;
-  background-image: url('https://img1.baidu.com/it/u=1906963233,3295368107&fm=26&fmt=auto&gp=0.jpg');
-  background-size:cover;
+  background:#FFFFFF;
 }
 .app {
+  width: 90%;
+  height: 100%;
+  margin: 150px auto;
+}
+.top{
+  height: 200px;
   width: 100%;
-  height: 100%;
-  margin: 500px auto;
 }
-.id{
-  width: 95%;
-  margin: 20px auto;
+.top_left{
+  float: left;
+  display: block;
+}
+.top_title{
+  font-size: 50px;
+}
+.top_button{
+  font-size: 30px;
+  margin-top: 20px;
+  background-color: #f4ea2a;
+}
+.people{
+  margin-top: 30px;
+  float: right;
+  width: 200px;
+}
+.people_img{
+  float: right;
+  width: 130px;
+  height: 130px;
+}
+.mid{
+  margin-top: 10px;
+  width: 100%;
+  height: 220px;
+  border-top-left-radius:20px;
+  border-top-right-radius:20px;
+  background-color: #474763;
+}
+.mid_top{
+  border-bottom: 2px solid white;
+  height: 80px;
+}
+.mid_top_left{
+  margin-top: 15px;
+  margin-left: 20px;
+  float: left;
+  font-size: 40px;
+  color: #FFFFFF;
+}
+.mid_top_right{
+  margin-top: 15px;
+  margin-right: 20px;
+  float: right;
+  font-size: 30px;
+  color: #cdcdcd;
+}
+.mid_bottom{
+  height:140px;
+  width: 100%;
   display: flex;
-
+  justify-content: space-around;
+  align-items: center;
+  flex-wrap: nowrap;
 }
-.idinput{
-  width: 80%;
-  margin-left: 25px;
-  border: solid 1px white;
-}
-
-.anniu{
-  height:100px;
-  width:95%;
-  margin: 15px auto;
-  display: flex;
-}
-.anniuleft{
-  width: 50%;
+.mid_bottom_one{
+  display: flex; 
+  flex-direction: column; /* 竖着走  两端 中间 */
+  justify-content: space-between; 
+  align-items: center;
+  color: #FFFFFF;
+  font-size: 30px;
+  width: 20%;
   height: 100%;
-  border-top-left-radius: 50px;
-  border-bottom-left-radius: 50px;
-  background:#30AE29;
-  text-align: center;
-  line-height: 100px;
 }
-.anniuright{
-  width: 50%;
-  height: 100%;
-  border-top-right-radius: 50px;
-  border-bottom-right-radius: 50px;
-  background: #FFFFFF;
-  text-align: center;
-  line-height: 100px;
+.mid_name{
+  margin-bottom: 10px;
 }
-
+.mid_img{
+  height: 70px;
+  width: 70px;
+  margin-top: 15px;
+}
+.bottom{
+  margin-top: 30px;
+  width: 100%;
+}
+.bottom_one{
+  height: 140px;
+  border-bottom: 2px solid #474763;
+}
+.bottom_left{
+  margin-top: 40px;
+  float: left;
+}
+.bottom_left_img{
+  height: 50px;
+  width: 50px;
+  float: left;
+}
+.bottom_name{
+  padding-left: 20px;
+  float: left;
+}
+.bottom_right_img{
+  margin-top: 50px;
+  float: right;
+  height: 30px;
+  width: 30px;
+}
+.exit_name{
+  padding-left: 20px;
+  float: left;
+  color: red;
+}
