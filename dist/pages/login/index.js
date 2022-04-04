@@ -220,6 +220,12 @@ var bottom = [{
         url: "/pages/login/help/index"
       });
     }
+
+    if (item.name === '个人中心') {
+      Object(remax_one__WEBPACK_IMPORTED_MODULE_1__["navigateTo"])({
+        url: "/pages/login/setting/index"
+      });
+    }
   };
 
   var login = function login() {

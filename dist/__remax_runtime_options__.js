@@ -945,13 +945,17 @@ module.exports = {
   }
 },
       pageEvents: {
-  "pages/login/index": [],
   "pages/index/index": [],
+  "pages/login/index": [],
   "pages/login/release/index": [
     "onLoad"
   ],
   "pages/login/school/index": [],
-  "pages/login/help/index": []
+  "pages/login/help/index": [],
+  "pages/login/setting/index": [],
+  "pages/index/release/index": [
+    "onLoad"
+  ]
 },
       appEvents: []
     }

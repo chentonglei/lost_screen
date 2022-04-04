@@ -98,6 +98,11 @@ export default () => {
         url: `/pages/login/help/index`,
       })
     }
+    if (item.name === '个人中心') {
+      navigateTo({
+        url: `/pages/login/setting/index`,
+      })
+    }
   }
   const login = () => {
     wx.login({

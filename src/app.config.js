@@ -1,10 +1,12 @@
 module.exports = {
   pages: [
-    'pages/login/index',
     'pages/index/index',
+    'pages/login/index',
     'pages/login/release/index',
     'pages/login/school/index',
     'pages/login/help/index',
+    'pages/login/setting/index',
+    'pages/index/release/index',
   ],
   window: {
     navigationStyle: 'custom',
@@ -12,16 +14,16 @@ module.exports = {
   tabBar: {
     list: [
       {
-        pagePath: 'pages/login/index',
-        text: '个人页',
-        iconPath: './icon_people.png',
-        selectedIconPath: './after_people.png',
-      },
-      {
         pagePath: 'pages/index/index',
         text: '首页',
         iconPath: './icon_home.png',
         selectedIconPath: './after_home.png',
+      },
+      {
+        pagePath: 'pages/login/index',
+        text: '个人页',
+        iconPath: './icon_people.png',
+        selectedIconPath: './after_people.png',
       },
     ],
   },
