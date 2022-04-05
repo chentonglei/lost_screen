@@ -90,6 +90,11 @@ export default () => {
     var currentdate = year + seperator1 + month + seperator1 + strDate
     return currentdate
   }
+  const changepwd = () => {
+    navigateTo({
+      url: `/pages/login/revise/index`,
+    })
+  }
   return (
     <View className="app">
       <View className="top">
@@ -171,6 +176,9 @@ export default () => {
         </View>
       </Form>
       <View className="ps">如需修改学校、姓名请联系管理员QQ:382023278</View>
+      <View className="register" onClick={() => changepwd()}>
+        密码修改
+      </View>
     </View>
   )
 }

@@ -34,49 +34,6 @@ const bottom = [
   { name: '帮助与反馈', img: help },
 ]
 export default () => {
-  const formReset = (e) => {
-    console.log('form发生了reset事件，携带数据为：', e.target)
-  }
-  const formSubmit = (e) => {
-    console.log('form发生了submit事件，携带数据为：', e.target)
-    const id = e.target.value.id
-    const pwd = e.target.value.psw
-    if (id === 'admin' && pwd === '123') {
-      console.log('登录成功')
-      wx.showModal({
-        title: '提示',
-        content: '登录成功',
-        success(res) {
-          if (res.confirm) {
-            console.log('用户点击确定')
-          } else if (res.cancel) {
-            console.log('用户点击取消')
-          }
-        },
-      })
-      navigateTo({
-        url: '/pages/index/index',
-      })
-    } else {
-      console.log('登录失败')
-      setPwd('')
-      formReset(e)
-      /* console.log(password);
-      setPassword(''); */
-      wx.showModal({
-        /* title: '提示', */
-        content: '登录失败',
-        success(res) {
-          if (res.confirm) {
-            console.log('用户点击确定')
-          } else if (res.cancel) {
-            console.log('用户点击取消')
-          }
-        },
-      })
-      console.log('form发生了submit事件，携带数据为：', e.target)
-    }
-  }
   const MidButton = (item) => {
     navigateTo({
       url: `/pages/login/release/index?title=${item.name}`,
@@ -105,20 +62,8 @@ export default () => {
     }
   }
   const login = () => {
-    wx.login({
-      success(res) {
-        if (res.code) {
-          //发起网络请求
-          wx.request({
-            url: 'https://example.com/onLogin',
-            data: {
-              code: res.code,
-            },
-          })
-        } else {
-          console.log('登录失败！' + res.errMsg)
-        }
-      },
+    navigateTo({
+      url: `/pages/login/pwd/index`,
     })
   }
   const exit = () => {}

@@ -47,6 +47,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var remax__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! remax */ "./node_modules/remax/esm/index.js");
 /* harmony import */ var _png__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./加号.png */ "./src/pages/index/加号.png");
 /* harmony import */ var _png__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./位置.png */ "./src/pages/index/位置.png");
+/* harmony import */ var _login_school__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../login/school */ "./src/pages/login/school/index.js");
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -58,6 +59,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]; if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
 
 
 
@@ -77,6 +79,12 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
   var release = function release() {
     Object(remax_one__WEBPACK_IMPORTED_MODULE_1__["navigateTo"])({
       url: "/pages/index/release/index"
+    });
+  };
+
+  var school = function school() {
+    Object(remax_one__WEBPACK_IMPORTED_MODULE_1__["navigateTo"])({
+      url: "/pages/index/school/index"
     });
   };
 
@@ -113,7 +121,11 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
     src: _png__WEBPACK_IMPORTED_MODULE_4__["default"],
     mode: "widthFix",
     className: "address_img"
-  }), "\u5168\u90E8\u5B66\u6821")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(remax_one__WEBPACK_IMPORTED_MODULE_1__["View"], {
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(remax_one__WEBPACK_IMPORTED_MODULE_1__["View"], {
+    onClick: function onClick() {
+      return school();
+    }
+  }, "\u5168\u90E8\u5B66\u6821"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(remax_one__WEBPACK_IMPORTED_MODULE_1__["View"], {
     className: "end"
   }, "\u6682\u65E0\u6570\u636E...."));
 });
@@ -146,7 +158,7 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ 2:
+/***/ 1:
 /*!**********************************************!*\
   !*** multi ./src/pages/index/index.entry.js ***!
   \**********************************************/
@@ -158,4 +170,4 @@ module.exports = __webpack_require__(/*! D:\福建工程学院\毕设\代码\los
 
 /***/ })
 
-},[[2,"runtime","remax-vendors"]]]);
+},[[1,"runtime","remax-vendors"]]]);

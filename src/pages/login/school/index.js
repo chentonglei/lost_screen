@@ -16,43 +16,29 @@ export default () => {
     console.log('form发生了reset事件，携带数据为：', e.target)
   }
   const formSubmit = (e) => {
-    console.log('form发生了submit事件，携带数据为：', e.target)
-    const id = e.target.value.id
-    const pwd = e.target.value.psw
-    if (id === 'admin' && pwd === '123') {
-      console.log('登录成功')
-      wx.showModal({
-        title: '提示',
-        content: '登录成功',
-        success(res) {
-          if (res.confirm) {
-            console.log('用户点击确定')
-          } else if (res.cancel) {
-            console.log('用户点击取消')
-          }
-        },
-      })
-      navigateTo({
-        url: '/pages/index/index',
+    var str = '请输入'
+    if (!e.target.value.Sch_id) {
+      str += '学校代码'
+      str += '、'
+    }
+    if (!e.target.value.Sch_name) {
+      str += '学校名'
+      str += '、'
+    }
+    const editedText = str.slice(0, str.length - 1) + '！'
+    console.log(editedText)
+    if (str !== '请输入') {
+      wx.showToast({
+        title: editedText,
+        icon: 'none',
+        duration: 2000,
       })
     } else {
-      console.log('登录失败')
-      setPwd('')
-      formReset(e)
-      /* console.log(password);
-    setPassword(''); */
-      wx.showModal({
-        /* title: '提示', */
-        content: '登录失败',
-        success(res) {
-          if (res.confirm) {
-            console.log('用户点击确定')
-          } else if (res.cancel) {
-            console.log('用户点击取消')
-          }
-        },
+      wx.showToast({
+        title: '上传成功',
+        icon: 'success',
+        duration: 2000,
       })
-      console.log('form发生了submit事件，携带数据为：', e.target)
     }
   }
   const sendImg = () => {

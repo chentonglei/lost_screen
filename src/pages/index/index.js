@@ -13,6 +13,7 @@ import { useQuery, usePageInstance } from 'remax'
 import { usePageEvent } from 'remax/macro'
 import send from './加号.png'
 import address from './位置.png'
+import school from '../login/school'
 export default () => {
   const [isModalVisible, setIsModalVisible] = useState('失物')
   const changeButton = (title) => {
@@ -21,6 +22,11 @@ export default () => {
   const release = () => {
     navigateTo({
       url: `/pages/index/release/index`,
+    })
+  }
+  const school = () => {
+    navigateTo({
+      url: `/pages/index/school/index`,
     })
   }
   return (
@@ -51,7 +57,7 @@ export default () => {
         </View>
         <View className="mid_right">
           <Image src={address} mode="widthFix" className="address_img" />
-          全部学校
+          <View onClick={() => school()}>全部学校</View>
         </View>
       </View>
       <View className="end">暂无数据....</View>

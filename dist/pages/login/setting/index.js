@@ -156,6 +156,12 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
     return currentdate;
   };
 
+  var changepwd = function changepwd() {
+    Object(remax_one__WEBPACK_IMPORTED_MODULE_1__["navigateTo"])({
+      url: "/pages/login/revise/index"
+    });
+  };
+
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(remax_one__WEBPACK_IMPORTED_MODULE_1__["View"], {
     className: "app"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(remax_one__WEBPACK_IMPORTED_MODULE_1__["View"], {
@@ -240,7 +246,12 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
     type: "submit"
   }, "\u4FEE\u6539"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(remax_one__WEBPACK_IMPORTED_MODULE_1__["View"], {
     className: "ps"
-  }, "\u5982\u9700\u4FEE\u6539\u5B66\u6821\u3001\u59D3\u540D\u8BF7\u8054\u7CFB\u7BA1\u7406\u5458QQ:382023278"));
+  }, "\u5982\u9700\u4FEE\u6539\u5B66\u6821\u3001\u59D3\u540D\u8BF7\u8054\u7CFB\u7BA1\u7406\u5458QQ:382023278"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(remax_one__WEBPACK_IMPORTED_MODULE_1__["View"], {
+    className: "register",
+    onClick: function onClick() {
+      return changepwd();
+    }
+  }, "\u5BC6\u7801\u4FEE\u6539"));
 });
 
 /***/ }),

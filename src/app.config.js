@@ -7,6 +7,10 @@ module.exports = {
     'pages/login/help/index',
     'pages/login/setting/index',
     'pages/index/release/index',
+    'pages/index/school/index',
+    'pages/login/pwd/index',
+    'pages/login/register/index',
+    'pages/login/revise/index',
   ],
   window: {
     navigationStyle: 'custom',

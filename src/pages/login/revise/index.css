@@ -50,6 +50,7 @@ page{
   width: 300px;
 }
 .ps{
+  float: right;
   margin-top: 20px;
   font-size: 30px;
   color: rgb(119, 116, 113);
@@ -62,9 +63,4 @@ page{
 .bottom_right{
   width: 70%;
   text-align: center;
-}
-.register{
-  margin-top: 10px;
-  float:right;
-  text-decoration:underline
 }

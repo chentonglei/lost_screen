@@ -63,3 +63,8 @@ page{
   width: 70%;
   text-align: center;
 }
+.register{
+  margin-top: 10rpx;
+  float:right;
+  text-decoration:underline
+}

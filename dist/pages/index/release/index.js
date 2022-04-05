@@ -104,45 +104,55 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
   };
 
   var formSubmit = function formSubmit(e) {
-    console.log('form发生了submit事件，携带数据为：', e.target);
-    var id = e.target.value.id;
-    var pwd = e.target.value.psw;
+    if (isModalVisible === '失物') {
+      var str = '请输入';
 
-    if (id === 'admin' && pwd === '123') {
-      console.log('登录成功');
-      wx.showModal({
-        title: '提示',
-        content: '登录成功',
-        success: function success(res) {
-          if (res.confirm) {
-            console.log('用户点击确定');
-          } else if (res.cancel) {
-            console.log('用户点击取消');
-          }
-        }
-      });
-      Object(remax_one__WEBPACK_IMPORTED_MODULE_2__["navigateTo"])({
-        url: '/pages/index/index'
-      });
-    } else {
-      console.log('登录失败');
-      setPwd('');
-      formReset(e);
-      /* console.log(password);
-      setPassword(''); */
+      if (!e.target.value.Lost_where) {
+        str += '失物地点';
+        str += '、';
+      }
 
-      wx.showModal({
-        /* title: '提示', */
-        content: '登录失败',
-        success: function success(res) {
-          if (res.confirm) {
-            console.log('用户点击确定');
-          } else if (res.cancel) {
-            console.log('用户点击取消');
-          }
-        }
-      });
-      console.log('form发生了submit事件，携带数据为：', e.target);
+      if (!e.target.value.Lost_content) {
+        str += '失物内容';
+        str += '、';
+      }
+
+      var editedText = str.slice(0, str.length - 1) + '！';
+      console.log(editedText);
+
+      if (str !== '请输入') {
+        wx.showToast({
+          title: editedText,
+          icon: 'none',
+          duration: 2000
+        });
+      }
+    }
+
+    if (isModalVisible === '招领') {
+      var str = '请输入';
+
+      if (!e.target.value.Rec_where) {
+        str += '拾物地点';
+        str += '、';
+      }
+
+      if (!e.target.value.Rec_content) {
+        str += '拾物内容';
+        str += '、';
+      }
+
+      var _editedText = str.slice(0, str.length - 1) + '！';
+
+      console.log(_editedText);
+
+      if (str !== '请输入') {
+        wx.showToast({
+          title: _editedText,
+          icon: 'none',
+          duration: 2000
+        });
+      }
     }
   };
 
@@ -300,6 +310,18 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
   }, "\u53D1\u5E03")));
 });
 
+/***/ }),
+
+/***/ 7:
+/*!******************************************************!*\
+  !*** multi ./src/pages/index/release/index.entry.js ***!
+  \******************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__(/*! D:\福建工程学院\毕设\代码\lost_screen\src\pages\index\release\index.entry.js */"./src/pages/index/release/index.entry.js");
+
+
 /***/ })
 
-},[["./src/pages/index/release/index.entry.js","runtime","remax-vendors"]]]);
+},[[7,"runtime","remax-vendors"]]]);

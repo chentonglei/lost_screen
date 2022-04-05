@@ -35,43 +35,45 @@ export default () => {
     console.log('form发生了reset事件，携带数据为：', e.target)
   }
   const formSubmit = (e) => {
-    console.log('form发生了submit事件，携带数据为：', e.target)
-    const id = e.target.value.id
-    const pwd = e.target.value.psw
-    if (id === 'admin' && pwd === '123') {
-      console.log('登录成功')
-      wx.showModal({
-        title: '提示',
-        content: '登录成功',
-        success(res) {
-          if (res.confirm) {
-            console.log('用户点击确定')
-          } else if (res.cancel) {
-            console.log('用户点击取消')
-          }
-        },
-      })
-      navigateTo({
-        url: '/pages/index/index',
-      })
-    } else {
-      console.log('登录失败')
-      setPwd('')
-      formReset(e)
-      /* console.log(password);
-    setPassword(''); */
-      wx.showModal({
-        /* title: '提示', */
-        content: '登录失败',
-        success(res) {
-          if (res.confirm) {
-            console.log('用户点击确定')
-          } else if (res.cancel) {
-            console.log('用户点击取消')
-          }
-        },
-      })
-      console.log('form发生了submit事件，携带数据为：', e.target)
+    if (isModalVisible === '失物') {
+      var str = '请输入'
+      if (!e.target.value.Lost_where) {
+        str += '失物地点'
+        str += '、'
+      }
+      if (!e.target.value.Lost_content) {
+        str += '失物内容'
+        str += '、'
+      }
+      const editedText = str.slice(0, str.length - 1) + '！'
+      console.log(editedText)
+      if (str !== '请输入') {
+        wx.showToast({
+          title: editedText,
+          icon: 'none',
+          duration: 2000,
+        })
+      }
+    }
+    if (isModalVisible === '招领') {
+      var str = '请输入'
+      if (!e.target.value.Rec_where) {
+        str += '拾物地点'
+        str += '、'
+      }
+      if (!e.target.value.Rec_content) {
+        str += '拾物内容'
+        str += '、'
+      }
+      const editedText = str.slice(0, str.length - 1) + '！'
+      console.log(editedText)
+      if (str !== '请输入') {
+        wx.showToast({
+          title: editedText,
+          icon: 'none',
+          duration: 2000,
+        })
+      }
     }
   }
   const changeButton = (title) => {

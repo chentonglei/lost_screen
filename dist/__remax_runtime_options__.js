@@ -955,7 +955,11 @@ module.exports = {
   "pages/login/setting/index": [],
   "pages/index/release/index": [
     "onLoad"
-  ]
+  ],
+  "pages/index/school/index": [],
+  "pages/login/pwd/index": [],
+  "pages/login/register/index": [],
+  "pages/login/revise/index": []
 },
       appEvents: []
     }

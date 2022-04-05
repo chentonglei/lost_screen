@@ -149,53 +149,6 @@ var bottom = [{
   img: _help_png__WEBPACK_IMPORTED_MODULE_11__["default"]
 }];
 /* harmony default export */ __webpack_exports__["default"] = (function () {
-  var formReset = function formReset(e) {
-    console.log('form发生了reset事件，携带数据为：', e.target);
-  };
-
-  var formSubmit = function formSubmit(e) {
-    console.log('form发生了submit事件，携带数据为：', e.target);
-    var id = e.target.value.id;
-    var pwd = e.target.value.psw;
-
-    if (id === 'admin' && pwd === '123') {
-      console.log('登录成功');
-      wx.showModal({
-        title: '提示',
-        content: '登录成功',
-        success: function success(res) {
-          if (res.confirm) {
-            console.log('用户点击确定');
-          } else if (res.cancel) {
-            console.log('用户点击取消');
-          }
-        }
-      });
-      Object(remax_one__WEBPACK_IMPORTED_MODULE_1__["navigateTo"])({
-        url: '/pages/index/index'
-      });
-    } else {
-      console.log('登录失败');
-      setPwd('');
-      formReset(e);
-      /* console.log(password);
-      setPassword(''); */
-
-      wx.showModal({
-        /* title: '提示', */
-        content: '登录失败',
-        success: function success(res) {
-          if (res.confirm) {
-            console.log('用户点击确定');
-          } else if (res.cancel) {
-            console.log('用户点击取消');
-          }
-        }
-      });
-      console.log('form发生了submit事件，携带数据为：', e.target);
-    }
-  };
-
   var MidButton = function MidButton(item) {
     Object(remax_one__WEBPACK_IMPORTED_MODULE_1__["navigateTo"])({
       url: "/pages/login/release/index?title=".concat(item.name)
@@ -229,20 +182,8 @@ var bottom = [{
   };
 
   var login = function login() {
-    wx.login({
-      success: function success(res) {
-        if (res.code) {
-          //发起网络请求
-          wx.request({
-            url: 'https://example.com/onLogin',
-            data: {
-              code: res.code
-            }
-          });
-        } else {
-          console.log('登录失败！' + res.errMsg);
-        }
-      }
+    Object(remax_one__WEBPACK_IMPORTED_MODULE_1__["navigateTo"])({
+      url: "/pages/login/pwd/index"
     });
   };
 
@@ -429,7 +370,7 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ 1:
+/***/ 2:
 /*!**********************************************!*\
   !*** multi ./src/pages/login/index.entry.js ***!
   \**********************************************/
@@ -441,4 +382,4 @@ module.exports = __webpack_require__(/*! D:\福建工程学院\毕设\代码\los
 
 /***/ })
 
-},[[1,"runtime","remax-vendors"]]]);
+},[[2,"runtime","remax-vendors"]]]);

@@ -9,49 +9,50 @@ page{
   margin: auto;
 }
 .top {
-  height: 170px;
+  height: 170rpx;
   width: 100%;
-  font-size: 40px;
+  font-size: 40rpx;
   text-align: center;
   background:#FFFFFF;
 }
 .top_title{
-  padding-top: 90px;
+  padding-top: 90rpx;
 }
 .bottom{
-  margin-top: 30px;
+  margin-top: 30rpx;
   width: 100%;
 }
 .submit{
-  margin-top: 30px;
+  margin-top: 30rpx;
   background: #f4ea2a;
   width: 100%;
-  height: 100px;
+  height: 100rpx;
 }
 .bottom_one{
-  height: 140px;
-  border-bottom: 2px solid #474763;
+  height: 140rpx;
+  border-bottom: 2rpx solid #474763;
   display: flex;
   justify-content: space-between; 
   align-items: center;
 }
 .bottom_name{
-  width: 200px;
-  margin-left: 20px;
+  width: 200rpx;
+  margin-left: 20rpx;
 }
 .send{
-  margin-top: 30px;
+  margin-top: 30rpx;
   width: 100%;
-  height: 100px;
+  height: 100rpx;
 }
 .img{
-  margin: 10px auto;
+  margin: 10rpx auto;
   height: 100%;
-  width: 300px;
+  width: 300rpx;
 }
 .ps{
-  margin-top: 20px;
-  font-size: 30px;
+  float: right;
+  margin-top: 20rpx;
+  font-size: 30rpx;
   color: rgb(119, 116, 113);
 }
 .bottom_right_disable{
@@ -62,9 +63,4 @@ page{
 .bottom_right{
   width: 70%;
   text-align: center;
-}
-.register{
-  margin-top: 10px;
-  float:right;
-  text-decoration:underline
 }
