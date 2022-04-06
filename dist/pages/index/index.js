@@ -47,7 +47,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var remax__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! remax */ "./node_modules/remax/esm/index.js");
 /* harmony import */ var _png__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./加号.png */ "./src/pages/index/加号.png");
 /* harmony import */ var _png__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./位置.png */ "./src/pages/index/位置.png");
-/* harmony import */ var _login_school__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../login/school */ "./src/pages/login/school/index.js");
+/* harmony import */ var _png__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./评论.png */ "./src/pages/index/评论.png");
+/* harmony import */ var _login_school__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../login/school */ "./src/pages/login/school/index.js");
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -66,11 +67,36 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
+
 /* harmony default export */ __webpack_exports__["default"] = (function () {
   var _useState = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])('失物'),
       _useState2 = _slicedToArray(_useState, 2),
       isModalVisible = _useState2[0],
       setIsModalVisible = _useState2[1];
+
+  var data = [{
+    Lost_time: '2022-2-1',
+    Lost_status: '未找到',
+    Lost_where: '北区操场',
+    Lost_content: 'airpods耳机',
+    Lost_img: 'https://test-evideo-iot-file.oss-cn-shenzhen.aliyuncs.com/song-source/20210922/%E4%BA%8C%E7%BB%B4%E7%A0%81.png?uploads=',
+    Lost_people_id: '3181911220',
+    Lost_people_name: '陈彤磊',
+    Lost_people_phone: '18859144927',
+    Lost_send_time: '2022-2-2 15:30',
+    Re_school_name: '福建工程学院'
+  }, {
+    Lost_time: '2022-2-1',
+    Lost_status: '已找到',
+    Lost_where: '北区操场',
+    Lost_content: 'airpods耳机充电仓一个',
+    Lost_img: 'https://test-evideo-iot-file.oss-cn-shenzhen.aliyuncs.com/song-source/20210922/%E4%BA%8C%E7%BB%B4%E7%A0%81.png?uploads=',
+    Lost_people_id: '3181911220',
+    Lost_people_name: '陈彤磊',
+    Lost_people_phone: '18859144927',
+    Lost_send_time: '2022-2-2 15:30',
+    Re_school_name: '福建工程学院'
+  }];
 
   var changeButton = function changeButton(title) {
     setIsModalVisible(title);
@@ -126,8 +152,42 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
       return school();
     }
   }, "\u5168\u90E8\u5B66\u6821"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(remax_one__WEBPACK_IMPORTED_MODULE_1__["View"], {
-    className: "end"
-  }, "\u6682\u65E0\u6570\u636E...."));
+    className: "content"
+  }, data.map(function (item, index) {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(remax_one__WEBPACK_IMPORTED_MODULE_1__["View"], {
+      className: "content_one"
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(remax_one__WEBPACK_IMPORTED_MODULE_1__["View"], {
+      className: "content_one_top"
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(remax_one__WEBPACK_IMPORTED_MODULE_1__["View"], {
+      className: "content_one_name"
+    }, item.Lost_people_name, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(remax_one__WEBPACK_IMPORTED_MODULE_1__["View"], {
+      className: item.Lost_status === '未找到' ? 'status_nofind' : 'status_find'
+    }, item.Lost_status)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(remax_one__WEBPACK_IMPORTED_MODULE_1__["View"], {
+      className: "content_one_mid"
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(remax_one__WEBPACK_IMPORTED_MODULE_1__["View"], {
+      className: "content_one_time"
+    }, item.Lost_send_time), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(remax_one__WEBPACK_IMPORTED_MODULE_1__["View"], {
+      className: "content_one_school"
+    }, item.Re_school_name))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(remax_one__WEBPACK_IMPORTED_MODULE_1__["View"], {
+      className: "content_one_bottom"
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(remax_one__WEBPACK_IMPORTED_MODULE_1__["View"], {
+      className: "content_bottom_title"
+    }, "\u5931\u7269\u65F6\u95F4\uFF1A".concat(item.Lost_time)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(remax_one__WEBPACK_IMPORTED_MODULE_1__["View"], {
+      className: "content_bottom_title"
+    }, "\u5931\u7269\u5730\u70B9\uFF1A".concat(item.Lost_where)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(remax_one__WEBPACK_IMPORTED_MODULE_1__["View"], {
+      className: "content_bottom_title"
+    }, "\u5931\u7269\u56FE\u7247\uFF1A", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(remax_one__WEBPACK_IMPORTED_MODULE_1__["Text"], {
+      style: 'text-decoration:underline;color:#1296db'
+    }, "\u67E5\u770B\u56FE\u7247")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(remax_one__WEBPACK_IMPORTED_MODULE_1__["View"], {
+      className: "content_bottom_title"
+    }, "\u5931\u7269\u5185\u5BB9\uFF1A".concat(item.Lost_content))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(remax_one__WEBPACK_IMPORTED_MODULE_1__["View"], {
+      className: "comment"
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(remax_one__WEBPACK_IMPORTED_MODULE_1__["Image"], {
+      src: _png__WEBPACK_IMPORTED_MODULE_5__["default"],
+      mode: "widthFix",
+      className: "bottom_img"
+    })));
+  })));
 });
 
 /***/ }),
@@ -155,6 +215,19 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = (__webpack_require__.p + "771b1e49edb660e9652c7e50f917cfbd.png");
+
+/***/ }),
+
+/***/ "./src/pages/index/评论.png":
+/*!********************************!*\
+  !*** ./src/pages/index/评论.png ***!
+  \********************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony default export */ __webpack_exports__["default"] = (__webpack_require__.p + "fc26361ad112d8b4c7d70fd7fa5528dc.png");
 
 /***/ }),
 

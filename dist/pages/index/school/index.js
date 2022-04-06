@@ -123,6 +123,18 @@ __webpack_require__.r(__webpack_exports__);
   }))));
 });
 
+/***/ }),
+
+/***/ 8:
+/*!*****************************************************!*\
+  !*** multi ./src/pages/index/school/index.entry.js ***!
+  \*****************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__(/*! D:\福建工程学院\毕设\代码\lost_screen\src\pages\index\school\index.entry.js */"./src/pages/index/school/index.entry.js");
+
+
 /***/ })
 
-},[["./src/pages/index/school/index.entry.js","runtime","remax-vendors"]]]);
+},[[8,"runtime","remax-vendors"]]]);
