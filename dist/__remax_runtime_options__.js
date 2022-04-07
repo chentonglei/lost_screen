@@ -951,15 +951,18 @@ module.exports = {
     "onLoad"
   ],
   "pages/login/school/index": [],
+  "pages/login/revise/index": [],
   "pages/login/help/index": [],
   "pages/login/setting/index": [],
+  "pages/login/pwd/index": [],
+  "pages/login/register/index": [],
+  "pages/index/details/index": [
+    "onLoad"
+  ],
   "pages/index/release/index": [
     "onLoad"
   ],
-  "pages/index/school/index": [],
-  "pages/login/pwd/index": [],
-  "pages/login/register/index": [],
-  "pages/login/revise/index": []
+  "pages/index/school/index": []
 },
       appEvents: []
     }

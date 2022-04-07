@@ -79,7 +79,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
     Lost_status: '未找到',
     Lost_where: '北区操场',
     Lost_content: 'airpods耳机',
-    Lost_img: 'https://test-evideo-iot-file.oss-cn-shenzhen.aliyuncs.com/song-source/20210922/%E4%BA%8C%E7%BB%B4%E7%A0%81.png?uploads=',
+    Lost_img: 'https://gw.alipayobjects.com/zos/rmsportal/JiqGstEfoWAOHiTxclqi.png',
     Lost_people_id: '3181911220',
     Lost_people_name: '陈彤磊',
     Lost_people_phone: '18859144927',
@@ -90,7 +90,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
     Lost_status: '已找到',
     Lost_where: '北区操场',
     Lost_content: 'airpods耳机充电仓一个',
-    Lost_img: 'https://test-evideo-iot-file.oss-cn-shenzhen.aliyuncs.com/song-source/20210922/%E4%BA%8C%E7%BB%B4%E7%A0%81.png?uploads=',
+    Lost_img: 'https://gw.alipayobjects.com/zos/rmsportal/JiqGstEfoWAOHiTxclqi.png',
     Lost_people_id: '3181911220',
     Lost_people_name: '陈彤磊',
     Lost_people_phone: '18859144927',
@@ -111,6 +111,13 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
   var school = function school() {
     Object(remax_one__WEBPACK_IMPORTED_MODULE_1__["navigateTo"])({
       url: "/pages/index/school/index"
+    });
+  };
+
+  var details = function details(item) {
+    var str = JSON.stringify(item);
+    Object(remax_one__WEBPACK_IMPORTED_MODULE_1__["navigateTo"])({
+      url: '/pages/index/details/index?jsonStr=' + str
     });
   };
 
@@ -155,7 +162,12 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
     className: "content"
   }, data.map(function (item, index) {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(remax_one__WEBPACK_IMPORTED_MODULE_1__["View"], {
-      className: "content_one"
+      className: "content_one",
+      onClick: function onClick() {
+        return details(item);
+      },
+      key: index,
+      __key: index
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(remax_one__WEBPACK_IMPORTED_MODULE_1__["View"], {
       className: "content_one_top"
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(remax_one__WEBPACK_IMPORTED_MODULE_1__["View"], {

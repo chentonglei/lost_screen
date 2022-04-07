@@ -24,7 +24,7 @@ export default () => {
       Lost_where: '北区操场',
       Lost_content: 'airpods耳机',
       Lost_img:
-        'https://test-evideo-iot-file.oss-cn-shenzhen.aliyuncs.com/song-source/20210922/%E4%BA%8C%E7%BB%B4%E7%A0%81.png?uploads=',
+        'https://gw.alipayobjects.com/zos/rmsportal/JiqGstEfoWAOHiTxclqi.png',
       Lost_people_id: '3181911220',
       Lost_people_name: '陈彤磊',
       Lost_people_phone: '18859144927',
@@ -37,7 +37,7 @@ export default () => {
       Lost_where: '北区操场',
       Lost_content: 'airpods耳机充电仓一个',
       Lost_img:
-        'https://test-evideo-iot-file.oss-cn-shenzhen.aliyuncs.com/song-source/20210922/%E4%BA%8C%E7%BB%B4%E7%A0%81.png?uploads=',
+        'https://gw.alipayobjects.com/zos/rmsportal/JiqGstEfoWAOHiTxclqi.png',
       Lost_people_id: '3181911220',
       Lost_people_name: '陈彤磊',
       Lost_people_phone: '18859144927',
@@ -56,6 +56,12 @@ export default () => {
   const school = () => {
     navigateTo({
       url: `/pages/index/school/index`,
+    })
+  }
+  const details = (item) => {
+    let str = JSON.stringify(item)
+    navigateTo({
+      url: '/pages/index/details/index?jsonStr=' + str,
     })
   }
   return (
@@ -91,7 +97,11 @@ export default () => {
       </View>
       <View className="content">
         {data.map((item, index) => (
-          <View className="content_one">
+          <View
+            className="content_one"
+            onClick={() => details(item)}
+            key={index}
+          >
             <View className="content_one_top">
               <View className="content_one_name">
                 {item.Lost_people_name}

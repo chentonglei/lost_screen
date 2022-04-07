@@ -25,6 +25,10 @@ export default () => {
       str += '姓名'
       str += '、'
     }
+    if (!e.target.value.Re_telephone) {
+      str += '电话'
+      str += '、'
+    }
     if (!e.target.value.Re_password) {
       str += '密码'
       str += '、'
@@ -65,6 +69,10 @@ export default () => {
           <View className="bottom_one">
             <View className="bottom_name">姓名：</View>
             <Input name="Re_name" className="bottom_right"></Input>
+          </View>
+          <View className="bottom_one">
+            <View className="bottom_name">电话：</View>
+            <Input name="Re_telephone" className="bottom_right"></Input>
           </View>
           <View className="bottom_one">
             <View className="bottom_name">密码：</View>

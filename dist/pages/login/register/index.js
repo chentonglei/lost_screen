@@ -68,6 +68,11 @@ __webpack_require__.r(__webpack_exports__);
       str += '、';
     }
 
+    if (!e.target.value.Re_telephone) {
+      str += '电话';
+      str += '、';
+    }
+
     if (!e.target.value.Re_password) {
       str += '密码';
       str += '、';
@@ -127,6 +132,13 @@ __webpack_require__.r(__webpack_exports__);
     className: "bottom_one"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(remax_one__WEBPACK_IMPORTED_MODULE_1__["View"], {
     className: "bottom_name"
+  }, "\u7535\u8BDD\uFF1A"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(remax_one__WEBPACK_IMPORTED_MODULE_1__["Input"], {
+    name: "Re_telephone",
+    className: "bottom_right"
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(remax_one__WEBPACK_IMPORTED_MODULE_1__["View"], {
+    className: "bottom_one"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(remax_one__WEBPACK_IMPORTED_MODULE_1__["View"], {
+    className: "bottom_name"
   }, "\u5BC6\u7801\uFF1A"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(remax_one__WEBPACK_IMPORTED_MODULE_1__["Input"], {
     name: "Re_password",
     className: "bottom_right",
@@ -147,7 +159,7 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ 10:
+/***/ 9:
 /*!*******************************************************!*\
   !*** multi ./src/pages/login/register/index.entry.js ***!
   \*******************************************************/
@@ -159,4 +171,4 @@ module.exports = __webpack_require__(/*! D:\福建工程学院\毕设\代码\los
 
 /***/ })
 
-},[[10,"runtime","remax-vendors"]]]);
+},[[9,"runtime","remax-vendors"]]]);
