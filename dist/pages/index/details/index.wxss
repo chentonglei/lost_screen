@@ -42,9 +42,8 @@ page{
   border-bottom:1rpx solid #000000;
 }
 .content{
-  width:90%;
-  height: 100%;
-  margin: 10rpx auto;
+  width:100%;
+  margin: auto;
 }
 .bottom_left_img{
   margin-top: 95rpx;
@@ -65,7 +64,6 @@ page{
   width: 50rpx;
 }
 .content_one{
-  margin-top: 40rpx;
   background: #FFFFFF;
   border-radius: 25rpx;
   width: 100%;
@@ -140,4 +138,65 @@ float: right;
 }
 .submit{
   background: #f4ea2a;
+}
+.comment{
+  position: fixed;
+  left: 0px;
+  bottom: 0px;
+  width: 100%;
+  height: 100rpx;
+  background: #FFFFFF;
+}
+.comment_input{
+  float: left;
+  padding-left: 30rpx;
+  margin-top: 10rpx;
+  margin-left: 30rpx;
+  background:#F2F2F2;
+  height: 70%;
+  width: 70%;
+  border-radius: 25rpx;
+}
+.comment_send{
+  float: right;
+  margin-right: 10rpx;
+  width: 18%;
+  height: 70%;
+  margin-top: 10rpx;
+}
+.send_button{
+  height: 100%;
+  width: 100%;
+  background: #f4ea2a;
+}
+.comment_details{
+  background: #FFFFFF;
+  margin-top: 20rpx;
+  height: 100%;
+  width: 100%;
+}
+.placeholder{
+  padding-top: 10rpx;
+  text-align: center;
+  color: #8a8a8a;
+}
+.comment_one{
+  width: 90%;
+  margin: auto;
+}
+.comment_one_top{
+  float: left;
+  margin-top: 20rpx;
+  width: 100%;
+}
+.comment_top_left{
+  float: left;
+}
+.comment_top_right{
+  float: right;
+  color: #8a8a8a;
+}
+.comment_one_content{
+  margin-top: 10rpx;
+  float: left;
 }

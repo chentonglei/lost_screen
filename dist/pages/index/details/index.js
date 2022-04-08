@@ -63,22 +63,61 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 /* harmony default export */ __webpack_exports__["default"] = (function () {
+  var fo = {};
+
   var _useState = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])({}),
       _useState2 = _slicedToArray(_useState, 2),
       body = _useState2[0],
       setBody = _useState2[1];
 
-  var _useState3 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(''),
+  var _useState3 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])('说点什么吧..'),
       _useState4 = _slicedToArray(_useState3, 2),
-      telephone = _useState4[0],
-      setTelephone = _useState4[1];
+      buttonfocus = _useState4[0],
+      setButtonfocus = _useState4[1];
 
+  var _useState5 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(''),
+      _useState6 = _slicedToArray(_useState5, 2),
+      telephone = _useState6[0],
+      setTelephone = _useState6[1];
+
+  var data = [{
+    Comment_do_message: '体育馆有人偷东西的大家注意点',
+    Com_do_name: '陈彤磊',
+    Com_do_id: '3181911220',
+    Com_do_time: '2022-2-3 22:00',
+    Com_be_name: '',
+    Com_be_id: ''
+  }, {
+    Comment_do_message: '不会吧不会吧',
+    Com_do_name: '何思宏',
+    Com_do_id: '3181911224',
+    Com_do_time: '2022-2-3 22:11',
+    Com_be_name: '陈彤磊',
+    Com_be_id: '3181911220'
+  }];
   Object(_remax_runtime__WEBPACK_IMPORTED_MODULE_0__["usePageEvent"])('onLoad', function (options) {
     var object = JSON.parse(options.jsonStr);
     var tel = object.Lost_people_phone.slice(0, 3);
     setTelephone(tel + '********');
     setBody(object);
   });
+
+  var onbutton = function onbutton(item) {
+    setButtonfocus("\u56DE\u590D".concat(item.Com_do_name));
+  };
+
+  var deletecomment = function deletecomment(item) {
+    wx.showActionSheet({
+      itemList: ['删除'],
+      success: function success(res) {
+        console.log(res.tapIndex);
+      },
+      fail: function fail(res) {
+        console.log(res.errMsg);
+      }
+    });
+  };
+
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(remax_one__WEBPACK_IMPORTED_MODULE_2__["View"], {
     className: "app"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(remax_one__WEBPACK_IMPORTED_MODULE_2__["View"], {
@@ -121,7 +160,37 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
     className: "bottom_button"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(remax_one__WEBPACK_IMPORTED_MODULE_2__["Button"], {
     className: "submit"
-  }, "\u6211\u6361\u5230\u4E86")))));
+  }, "\u6211\u6361\u5230\u4E86")))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(remax_one__WEBPACK_IMPORTED_MODULE_2__["View"], {
+    className: "comment_details"
+  }, data.map(function (item, index) {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(remax_one__WEBPACK_IMPORTED_MODULE_2__["View"], {
+      className: "comment_one"
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(remax_one__WEBPACK_IMPORTED_MODULE_2__["View"], {
+      className: "comment_one_top"
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(remax_one__WEBPACK_IMPORTED_MODULE_2__["View"], {
+      className: "comment_top_left"
+    }, "".concat(item.Com_do_name, " => ").concat(item.Com_be_name ? item.Com_be_name : '楼主'), ' '), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(remax_one__WEBPACK_IMPORTED_MODULE_2__["View"], {
+      className: "comment_top_right"
+    }, item.Com_do_time)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(remax_one__WEBPACK_IMPORTED_MODULE_2__["View"], {
+      className: "comment_one_content",
+      onClick: function onClick() {
+        return onbutton(item);
+      },
+      onLongTap: function onLongTap() {
+        return deletecomment(item);
+      }
+    }, item.Comment_do_message));
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(remax_one__WEBPACK_IMPORTED_MODULE_2__["View"], {
+    className: "comment"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(remax_one__WEBPACK_IMPORTED_MODULE_2__["Input"], {
+    className: "comment_input",
+    placeholder: buttonfocus,
+    focus: buttonfocus !== '说点什么吧..' ? true : false
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(remax_one__WEBPACK_IMPORTED_MODULE_2__["View"], {
+    className: "comment_send"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(remax_one__WEBPACK_IMPORTED_MODULE_2__["Button"], {
+    className: "send_button"
+  }, "\u53D1\u9001"))));
 });
 
 /***/ }),

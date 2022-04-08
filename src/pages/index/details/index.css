@@ -42,9 +42,8 @@ page{
   border-bottom:1px solid #000000;
 }
 .content{
-  width:90%;
-  height: 100%;
-  margin: 10px auto;
+  width:100%;
+  margin: auto;
 }
 .bottom_left_img{
   margin-top: 95px;
@@ -65,7 +64,6 @@ page{
   width: 50px;
 }
 .content_one{
-  margin-top: 40px;
   background: #FFFFFF;
   border-radius: 25px;
   width: 100%;
@@ -140,4 +138,65 @@ float: right;
 }
 .submit{
   background: #f4ea2a;
+}
+.comment{
+  position: fixed;
+  left: 0px;
+  bottom: 0px;
+  width: 100%;
+  height: 100px;
+  background: #FFFFFF;
+}
+.comment_input{
+  float: left;
+  padding-left: 30px;
+  margin-top: 10px;
+  margin-left: 30px;
+  background:#F2F2F2;
+  height: 70%;
+  width: 70%;
+  border-radius: 25px;
+}
+.comment_send{
+  float: right;
+  margin-right: 10px;
+  width: 18%;
+  height: 70%;
+  margin-top: 10px;
+}
+.send_button{
+  height: 100%;
+  width: 100%;
+  background: #f4ea2a;
+}
+.comment_details{
+  background: #FFFFFF;
+  margin-top: 20px;
+  height: 100%;
+  width: 100%;
+}
+.placeholder{
+  padding-top: 10px;
+  text-align: center;
+  color: #8a8a8a;
+}
+.comment_one{
+  width: 90%;
+  margin: auto;
+}
+.comment_one_top{
+  float: left;
+  margin-top: 20px;
+  width: 100%;
+}
+.comment_top_left{
+  float: left;
+}
+.comment_top_right{
+  float: right;
+  color: #8a8a8a;
+}
+.comment_one_content{
+  margin-top: 10px;
+  float: left;
 }
