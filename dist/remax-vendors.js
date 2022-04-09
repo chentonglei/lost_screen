@@ -31464,7 +31464,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var AppContext = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createContext({});
 
 var App = function App(props) {
-  var _useState = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])({}),
+  var _useState = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(),
       _useState2 = _slicedToArray(_useState, 2),
       appData = _useState2[0],
       setAppData = _useState2[1];

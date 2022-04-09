@@ -14,11 +14,21 @@ page{
   width: 100%;
 }
 .top_left{
+  margin-top: 20rpx;
   float: left;
   display: block;
 }
 .top_title{
   font-size: 50rpx;
+}
+.top_school{
+  font-size: 40rpx;
+  margin-top: 20rpx;
+}
+.top_certification{
+  font-size: 40rpx;
+  margin-top: 20rpx;
+  color: #8a8a8a;
 }
 .top_button{
   font-size: 30rpx;
@@ -32,8 +42,8 @@ page{
 }
 .people_img{
   float: right;
-  width: 130rpx;
-  height: 130rpx;
+  width: 150rpx;
+  height: 150rpx;
 }
 .mid{
   margin-top: 10rpx;

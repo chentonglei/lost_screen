@@ -13,11 +13,21 @@ page{
   width: 100%;
 }
 .top_left{
+  margin-top: 20px;
   float: left;
   display: block;
 }
 .top_title{
   font-size: 50px;
+}
+.top_school{
+  font-size: 40px;
+  margin-top: 20px;
+}
+.top_certification{
+  font-size: 40px;
+  margin-top: 20px;
+  color: #8a8a8a;
 }
 .top_button{
   font-size: 30px;
@@ -31,8 +41,8 @@ page{
 }
 .people_img{
   float: right;
-  width: 130px;
-  height: 130px;
+  width: 150px;
+  height: 150px;
 }
 .mid{
   margin-top: 10px;

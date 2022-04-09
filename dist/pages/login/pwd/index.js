@@ -94,12 +94,14 @@ __webpack_require__.r(__webpack_exports__);
             wx.showToast({
               title: '登录成功',
               icon: 'success',
-              duration: 2000
+              duration: 2000,
+              success: function success() {
+                Object(remax_one__WEBPACK_IMPORTED_MODULE_1__["reLaunch"])({
+                  url: '/pages/login/index'
+                });
+              }
             });
             global.setAppData(res.data.user);
-            Object(remax_one__WEBPACK_IMPORTED_MODULE_1__["switchTab"])({
-              url: "/pages/login/index"
-            });
           } else {
             wx.showToast({
               title: '登录失败',

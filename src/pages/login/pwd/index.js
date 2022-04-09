@@ -8,6 +8,8 @@ import {
   Form,
   switchTab,
   navigateTo,
+  navigateBack,
+  reLaunch,
 } from 'remax/one'
 import { picker } from 'remax/wechat'
 import { useQuery, usePageInstance } from 'remax'
@@ -47,11 +49,13 @@ export default () => {
               title: '登录成功',
               icon: 'success',
               duration: 2000,
+              success() {
+                reLaunch({
+                  url: '/pages/login/index',
+                })
+              },
             })
             global.setAppData(res.data.user)
-            switchTab({
-              url: `/pages/login/index`,
-            })
           } else {
             wx.showToast({
               title: '登录失败',

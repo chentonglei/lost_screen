@@ -4,7 +4,7 @@ import './app.css'
 export const AppContext = React.createContext({})
 
 const App = (props) => {
-  const [appData, setAppData] = useState({})
+  const [appData, setAppData] = useState()
   return (
     <AppContext.Provider value={{ appData, setAppData }}>
       {props.children}

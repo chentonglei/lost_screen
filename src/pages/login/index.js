@@ -8,6 +8,7 @@ import {
   Form,
   switchTab,
   navigateTo,
+  reLaunch,
 } from 'remax/one'
 import { useQuery, usePageInstance } from 'remax'
 import index_people from './index_people.png'
@@ -38,10 +39,6 @@ const bottom = [
 ]
 export default () => {
   const global = useContext(AppContext)
-  usePageEvent('onShow', () => {
-    const data = global.appData
-    console.log(data)
-  })
   const MidButton = (item) => {
     navigateTo({
       url: `/pages/login/release/index?title=${item.name}`,
@@ -74,16 +71,34 @@ export default () => {
       url: `/pages/login/pwd/index`,
     })
   }
-  const exit = () => {}
+  const exit = () => {
+    global.setAppData()
+    reLaunch({
+      url: '/pages/login/index',
+    })
+  }
   return (
     <View className="app">
       <View className="top">
-        <View className="top_left">
-          <View className="top_title">探索未知~</View>
-          <Button className="top_button" onClick={() => login()}>
-            登录/注册
-          </Button>
-        </View>
+        {global.appData ? (
+          <View className="top_left">
+            <View className="top_title">{global.appData.Re_name}</View>
+            {global.appData.Re_school_name ? (
+              <View className="top_school">
+                {global.appData.Re_school_name}
+              </View>
+            ) : (
+              <View className="top_certification">点击去认证~</View>
+            )}
+          </View>
+        ) : (
+          <View className="top_left">
+            <View className="top_title">探索未知~</View>
+            <Button className="top_button" onClick={() => login()}>
+              登录/注册
+            </Button>
+          </View>
+        )}
         <View className="people">
           <Image src={index_people} mode="widthFix" className="people_img" />
         </View>
@@ -135,12 +150,16 @@ export default () => {
           </View>
         ))}
       </View>
-      <View key={'exit'} className="bottom_one" onClick={() => exit()}>
-        <View className="bottom_left">
-          <Image src={exit_img} mode="widthFix" className="bottom_left_img" />
-          <View className="exit_name">退出登录</View>
+      {global.appData ? (
+        <View key={'exit'} className="bottom_one" onClick={() => exit()}>
+          <View className="bottom_left">
+            <Image src={exit_img} mode="widthFix" className="bottom_left_img" />
+            <View className="exit_name">退出登录</View>
+          </View>
         </View>
-      </View>
+      ) : (
+        ''
+      )}
     </View>
   )
 }
