@@ -1,5 +1,6 @@
 require('./../../../runtime.js');
 require('./../../../remax-vendors.js');
+require('./../../../remax-styles.js');
 (wx["webpackJsonp"] = wx["webpackJsonp"] || []).push([["pages/login/pwd/index"],{
 
 /***/ "./src/pages/login/pwd/index.css":
@@ -46,17 +47,24 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var remax_one__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! remax/one */ "./node_modules/remax/one.js");
 /* harmony import */ var remax_wechat__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! remax/wechat */ "./node_modules/remax/wechat.js");
 /* harmony import */ var remax__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! remax */ "./node_modules/remax/esm/index.js");
+/* harmony import */ var _ip__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../ip */ "./src/pages/ip.js");
+/* harmony import */ var _app__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../../app */ "./src/app.js");
+
+
 
 
 
 
 /* harmony default export */ __webpack_exports__["default"] = (function () {
+  var global = Object(react__WEBPACK_IMPORTED_MODULE_0__["useContext"])(_app__WEBPACK_IMPORTED_MODULE_5__["AppContext"]);
+
   var formReset = function formReset(e) {
     console.log('form发生了reset事件，携带数据为：', e.target);
   };
 
   var formSubmit = function formSubmit(e) {
     var str = '请输入';
+    e.target.value.Re_power = 'user';
 
     if (!e.target.value.Re_id) {
       str += '账号';
@@ -69,7 +77,6 @@ __webpack_require__.r(__webpack_exports__);
     }
 
     var editedText = str.slice(0, str.length - 1) + '！';
-    console.log(editedText);
 
     if (str !== '请输入') {
       wx.showToast({
@@ -78,10 +85,29 @@ __webpack_require__.r(__webpack_exports__);
         duration: 2000
       });
     } else {
-      wx.showToast({
-        title: '上传成功',
-        icon: 'success',
-        duration: 2000
+      wx.request({
+        url: "".concat(_ip__WEBPACK_IMPORTED_MODULE_4__["default"], "/register/UserLogin"),
+        data: e.target.value,
+        method: 'POST',
+        success: function success(res) {
+          if (res.data.status === '登录成功') {
+            wx.showToast({
+              title: '登录成功',
+              icon: 'success',
+              duration: 2000
+            });
+            global.setAppData(res.data.user);
+            Object(remax_one__WEBPACK_IMPORTED_MODULE_1__["switchTab"])({
+              url: "/pages/login/index"
+            });
+          } else {
+            wx.showToast({
+              title: '登录失败',
+              icon: 'error',
+              duration: 2000
+            });
+          }
+        }
       });
     }
   };
@@ -143,4 +169,4 @@ module.exports = __webpack_require__(/*! D:\福建工程学院\毕设\代码\los
 
 /***/ })
 
-},[[8,"runtime","remax-vendors"]]]);
+},[[8,"runtime","remax-vendors","remax-styles"]]]);

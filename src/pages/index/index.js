@@ -15,6 +15,7 @@ import send from './加号.png'
 import address from './位置.png'
 import comment from './评论.png'
 import school from '../login/school'
+import ip from '../ip'
 export default () => {
   const [isModalVisible, setIsModalVisible] = useState('失物')
   const data = [

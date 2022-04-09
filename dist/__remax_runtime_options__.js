@@ -946,7 +946,9 @@ module.exports = {
 },
       pageEvents: {
   "pages/index/index": [],
-  "pages/login/index": [],
+  "pages/login/index": [
+    "onShow"
+  ],
   "pages/login/release/index": [
     "onLoad"
   ],

@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import {
   View,
   Text,
@@ -11,12 +11,16 @@ import {
 } from 'remax/one'
 import { picker } from 'remax/wechat'
 import { useQuery, usePageInstance } from 'remax'
+import ip from '../../ip'
+import { AppContext } from '../../../app'
 export default () => {
+  const global = useContext(AppContext)
   const formReset = (e) => {
     console.log('form发生了reset事件，携带数据为：', e.target)
   }
   const formSubmit = (e) => {
     var str = '请输入'
+    e.target.value.Re_power = 'user'
     if (!e.target.value.Re_id) {
       str += '账号'
       str += '、'
@@ -26,7 +30,6 @@ export default () => {
       str += '、'
     }
     const editedText = str.slice(0, str.length - 1) + '！'
-    console.log(editedText)
     if (str !== '请输入') {
       wx.showToast({
         title: editedText,
@@ -34,10 +37,29 @@ export default () => {
         duration: 2000,
       })
     } else {
-      wx.showToast({
-        title: '上传成功',
-        icon: 'success',
-        duration: 2000,
+      wx.request({
+        url: `${ip}/register/UserLogin`,
+        data: e.target.value,
+        method: 'POST',
+        success(res) {
+          if (res.data.status === '登录成功') {
+            wx.showToast({
+              title: '登录成功',
+              icon: 'success',
+              duration: 2000,
+            })
+            global.setAppData(res.data.user)
+            switchTab({
+              url: `/pages/login/index`,
+            })
+          } else {
+            wx.showToast({
+              title: '登录失败',
+              icon: 'error',
+              duration: 2000,
+            })
+          }
+        },
       })
     }
   }

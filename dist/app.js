@@ -1,5 +1,6 @@
 require('./runtime.js');
 require('./remax-vendors.js');
+require('./remax-styles.js');
 (wx["webpackJsonp"] = wx["webpackJsonp"] || []).push([["app"],{
 
 /***/ "./node_modules/@remax/apply-runtime-options.js":
@@ -13020,17 +13021,6 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./src/app.css":
-/*!*********************!*\
-  !*** ./src/app.css ***!
-  \*********************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-// extracted by mini-css-extract-plugin
-
-/***/ }),
-
 /***/ "./src/app.entry.js":
 /*!**************************!*\
   !*** ./src/app.entry.js ***!
@@ -13047,27 +13037,6 @@ __webpack_require__(/*! ./app.css */ "./src/app.css");
 
 
 App(Object(_remax_runtime__WEBPACK_IMPORTED_MODULE_0__["createAppConfig"])(_app_js__WEBPACK_IMPORTED_MODULE_1__["default"]));
-
-/***/ }),
-
-/***/ "./src/app.js":
-/*!********************!*\
-  !*** ./src/app.js ***!
-  \********************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _app_css__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./app.css */ "./src/app.css");
-/* harmony import */ var _app_css__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_app_css__WEBPACK_IMPORTED_MODULE_0__);
-
-
-var App = function App(props) {
-  return props.children;
-};
-
-/* harmony default export */ __webpack_exports__["default"] = (App);
 
 /***/ }),
 
@@ -13096,4 +13065,4 @@ module.exports = __webpack_require__(/*! D:\福建工程学院\毕设\代码\los
 
 /***/ })
 
-},[[0,"runtime","remax-vendors"]]]);
+},[[0,"runtime","remax-vendors","remax-styles"]]]);

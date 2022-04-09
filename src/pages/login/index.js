@@ -1,4 +1,4 @@
-import * as React from 'react'
+import React, { useState, useContext } from 'react'
 import {
   View,
   Text,
@@ -21,6 +21,9 @@ import exit_img from './exit.png'
 import help from './help.png'
 import people from './people.png'
 import right_point from './right_point.png'
+import ip from '../ip'
+import { usePageEvent } from 'remax/macro'
+import { AppContext } from '../../app'
 const body = [
   { name: '失物', img: lost },
   { name: '招领', img: recruit },
@@ -34,6 +37,11 @@ const bottom = [
   { name: '帮助与反馈', img: help },
 ]
 export default () => {
+  const global = useContext(AppContext)
+  usePageEvent('onShow', () => {
+    const data = global.appData
+    console.log(data)
+  })
   const MidButton = (item) => {
     navigateTo({
       url: `/pages/login/release/index?title=${item.name}`,

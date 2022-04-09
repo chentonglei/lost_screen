@@ -1,5 +1,15 @@
-import './app.css';
+import React, { useState } from 'react'
+import './app.css'
 
-const App = props => props.children;
+export const AppContext = React.createContext({})
 
-export default App;
+const App = (props) => {
+  const [appData, setAppData] = useState({})
+  return (
+    <AppContext.Provider value={{ appData, setAppData }}>
+      {props.children}
+    </AppContext.Provider>
+  )
+}
+
+export default App

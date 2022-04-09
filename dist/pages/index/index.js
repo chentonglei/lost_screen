@@ -49,6 +49,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _png__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./位置.png */ "./src/pages/index/位置.png");
 /* harmony import */ var _png__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./评论.png */ "./src/pages/index/评论.png");
 /* harmony import */ var _login_school__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../login/school */ "./src/pages/login/school/index.js");
+/* harmony import */ var _ip__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../ip */ "./src/pages/ip.js");
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -60,6 +61,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]; if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
 
 
 
