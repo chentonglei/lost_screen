@@ -38,7 +38,7 @@ const bottom = [
   { name: '帮助与反馈', img: help },
 ]
 export default () => {
-  const global = useContext(AppContext)
+  const global = useContext(AppContext) //全局变量
   const MidButton = (item) => {
     navigateTo({
       url: `/pages/login/release/index?title=${item.name}`,
@@ -61,9 +61,17 @@ export default () => {
       })
     }
     if (item.name === '个人中心') {
-      navigateTo({
-        url: `/pages/login/setting/index`,
-      })
+      if (global.appData) {
+        navigateTo({
+          url: `/pages/login/setting/index`,
+        })
+      } else {
+        wx.showToast({
+          title: '请先登录',
+          icon: 'error',
+          duration: 2000,
+        })
+      }
     }
   }
   const login = () => {

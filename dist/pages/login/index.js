@@ -154,7 +154,7 @@ var bottom = [{
   img: _help_png__WEBPACK_IMPORTED_MODULE_11__["default"]
 }];
 /* harmony default export */ __webpack_exports__["default"] = (function () {
-  var global = Object(react__WEBPACK_IMPORTED_MODULE_0__["useContext"])(_app__WEBPACK_IMPORTED_MODULE_15__["AppContext"]);
+  var global = Object(react__WEBPACK_IMPORTED_MODULE_0__["useContext"])(_app__WEBPACK_IMPORTED_MODULE_15__["AppContext"]); //全局变量
 
   var MidButton = function MidButton(item) {
     Object(remax_one__WEBPACK_IMPORTED_MODULE_1__["navigateTo"])({
@@ -182,9 +182,17 @@ var bottom = [{
     }
 
     if (item.name === '个人中心') {
-      Object(remax_one__WEBPACK_IMPORTED_MODULE_1__["navigateTo"])({
-        url: "/pages/login/setting/index"
-      });
+      if (global.appData) {
+        Object(remax_one__WEBPACK_IMPORTED_MODULE_1__["navigateTo"])({
+          url: "/pages/login/setting/index"
+        });
+      } else {
+        wx.showToast({
+          title: '请先登录',
+          icon: 'error',
+          duration: 2000
+        });
+      }
     }
   };
 

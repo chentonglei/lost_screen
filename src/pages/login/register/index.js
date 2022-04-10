@@ -8,9 +8,12 @@ import {
   Form,
   switchTab,
   navigateTo,
+  navigateBack,
+  reLaunch,
 } from 'remax/one'
 import { picker } from 'remax/wechat'
 import { useQuery, usePageInstance } from 'remax'
+import ip from '../../ip'
 export default () => {
   const formReset = (e) => {
     console.log('form发生了reset事件，携带数据为：', e.target)
@@ -51,6 +54,32 @@ export default () => {
           title: '两次密码不一致',
           icon: 'error',
           duration: 2000,
+        })
+      } else {
+        wx.request({
+          url: `${ip}/register/UserAdd`,
+          data: e.target.value,
+          method: 'POST',
+          success(res) {
+            if (res.data.result === 'true') {
+              wx.showToast({
+                title: '注册成功',
+                icon: 'success',
+                duration: 2000,
+                success() {
+                  reLaunch({
+                    url: '/pages/login/pwd/index',
+                  })
+                },
+              })
+            } else {
+              wx.showToast({
+                title: '账号重复',
+                icon: 'error',
+                duration: 2000,
+              })
+            }
+          },
         })
       }
     }

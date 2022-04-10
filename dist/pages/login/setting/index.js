@@ -1,5 +1,6 @@
 require('./../../../runtime.js');
 require('./../../../remax-vendors.js');
+require('./../../../remax-styles.js');
 (wx["webpackJsonp"] = wx["webpackJsonp"] || []).push([["pages/login/setting/index"],{
 
 /***/ "./src/pages/login/setting/index.css":
@@ -46,6 +47,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var remax_one__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! remax/one */ "./node_modules/remax/one.js");
 /* harmony import */ var remax_wechat__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! remax/wechat */ "./node_modules/remax/wechat.js");
 /* harmony import */ var remax__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! remax */ "./node_modules/remax/esm/index.js");
+/* harmony import */ var _app__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../app */ "./src/app.js");
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -62,22 +64,25 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
+
 /* harmony default export */ __webpack_exports__["default"] = (function () {
   var _useState = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(0),
       _useState2 = _slicedToArray(_useState, 2),
       index = _useState2[0],
       setIndex = _useState2[1];
 
+  var global = Object(react__WEBPACK_IMPORTED_MODULE_0__["useContext"])(_app__WEBPACK_IMPORTED_MODULE_4__["AppContext"]); //全局变量
+
   var array = ['男', '女'];
-  var data = {
+  /*   const data = {
     Re_id: '123',
     Re_name: '陈彤磊',
     Re_email: '382023278@qq.com',
     Re_sex: '男',
     Re_age: '1999-11-20',
     Re_telephone: '18859144927',
-    Re_school_name: '福建工程学院'
-  };
+    Re_school_name: '福建工程学院',
+  } */
 
   var formReset = function formReset(e) {
     console.log('form发生了reset事件，携带数据为：', e.target);
@@ -181,7 +186,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
     name: "Re_id",
     className: "bottom_right_disable",
     disabled: true,
-    value: data.Re_id
+    value: global.appData.Re_id
   })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(remax_one__WEBPACK_IMPORTED_MODULE_1__["View"], {
     className: "bottom_one"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(remax_one__WEBPACK_IMPORTED_MODULE_1__["View"], {
@@ -190,14 +195,14 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
     name: "Re_name",
     className: "bottom_right_disable",
     disabled: true,
-    value: data.Re_name
+    value: global.appData.Re_name
   })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(remax_one__WEBPACK_IMPORTED_MODULE_1__["View"], {
     className: "bottom_one"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(remax_one__WEBPACK_IMPORTED_MODULE_1__["View"], {
     className: "bottom_name"
   }, "\u90AE\u7BB1\uFF1A"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(remax_one__WEBPACK_IMPORTED_MODULE_1__["Input"], {
     name: "Re_email",
-    value: data.Re_email,
+    value: global.appData.Re_email,
     className: "bottom_right"
   })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(remax_one__WEBPACK_IMPORTED_MODULE_1__["View"], {
     className: "bottom_one"
@@ -210,13 +215,13 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
     className: "bottom_right"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(remax_one__WEBPACK_IMPORTED_MODULE_1__["View"], {
     class: "picker"
-  }, array[index]))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(remax_one__WEBPACK_IMPORTED_MODULE_1__["View"], {
+  }, global.appData.Re_sex))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(remax_one__WEBPACK_IMPORTED_MODULE_1__["View"], {
     className: "bottom_one"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(remax_one__WEBPACK_IMPORTED_MODULE_1__["View"], {
     className: "bottom_name"
   }, "\u7535\u8BDD\uFF1A"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(remax_one__WEBPACK_IMPORTED_MODULE_1__["Input"], {
     name: "Re_telephone",
-    value: data.Re_telephone,
+    value: global.appData.Re_telephone,
     className: "bottom_right"
   })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(remax_one__WEBPACK_IMPORTED_MODULE_1__["View"], {
     className: "bottom_one"
@@ -224,7 +229,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
     className: "bottom_name"
   }, "\u751F\u65E5"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("picker", {
     mode: "date",
-    value: data.Re_age,
+    value: global.appData.Re_age,
     start: "1990-01-01",
     end: getNowFormatDate(),
     fields: "day",
@@ -232,7 +237,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
     bindchange: bindDateChange
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(remax_one__WEBPACK_IMPORTED_MODULE_1__["View"], {
     class: "picker"
-  }, data.Re_age))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(remax_one__WEBPACK_IMPORTED_MODULE_1__["View"], {
+  }, global.appData.Re_age))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(remax_one__WEBPACK_IMPORTED_MODULE_1__["View"], {
     className: "bottom_one"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(remax_one__WEBPACK_IMPORTED_MODULE_1__["View"], {
     className: "bottom_name"
@@ -240,7 +245,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
     name: "Re_school_name",
     className: "bottom_right_disable",
     disabled: true,
-    value: data.Re_school_name
+    value: global.appData.Re_school_name
   })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(remax_one__WEBPACK_IMPORTED_MODULE_1__["Button"], {
     className: "submit",
     type: "submit"
@@ -268,4 +273,4 @@ module.exports = __webpack_require__(/*! D:\福建工程学院\毕设\代码\los
 
 /***/ })
 
-},[[7,"runtime","remax-vendors"]]]);
+},[[7,"runtime","remax-vendors","remax-styles"]]]);

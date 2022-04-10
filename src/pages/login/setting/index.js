@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import {
   View,
   Text,
@@ -11,10 +11,12 @@ import {
 } from 'remax/one'
 import { picker } from 'remax/wechat'
 import { useQuery, usePageInstance } from 'remax'
+import { AppContext } from '../../../app'
 export default () => {
   const [index, setIndex] = useState(0)
+  const global = useContext(AppContext) //全局变量
   const array = ['男', '女']
-  const data = {
+  /*   const data = {
     Re_id: '123',
     Re_name: '陈彤磊',
     Re_email: '382023278@qq.com',
@@ -22,7 +24,7 @@ export default () => {
     Re_age: '1999-11-20',
     Re_telephone: '18859144927',
     Re_school_name: '福建工程学院',
-  }
+  } */
   const formReset = (e) => {
     console.log('form发生了reset事件，携带数据为：', e.target)
   }
@@ -108,7 +110,7 @@ export default () => {
               name="Re_id"
               className="bottom_right_disable"
               disabled
-              value={data.Re_id}
+              value={global.appData.Re_id}
             ></Input>
           </View>
           <View className="bottom_one">
@@ -117,14 +119,14 @@ export default () => {
               name="Re_name"
               className="bottom_right_disable"
               disabled
-              value={data.Re_name}
+              value={global.appData.Re_name}
             ></Input>
           </View>
           <View className="bottom_one">
             <View className="bottom_name">邮箱：</View>
             <Input
               name="Re_email"
-              value={data.Re_email}
+              value={global.appData.Re_email}
               className="bottom_right"
             ></Input>
           </View>
@@ -136,14 +138,14 @@ export default () => {
               bindchange={bindPickerChange}
               className="bottom_right"
             >
-              <View class="picker">{array[index]}</View>
+              <View class="picker">{global.appData.Re_sex}</View>
             </picker>
           </View>
           <View className="bottom_one">
             <View className="bottom_name">电话：</View>
             <Input
               name="Re_telephone"
-              value={data.Re_telephone}
+              value={global.appData.Re_telephone}
               className="bottom_right"
             ></Input>
           </View>
@@ -151,14 +153,14 @@ export default () => {
             <View className="bottom_name">生日</View>
             <picker
               mode="date"
-              value={data.Re_age}
+              value={global.appData.Re_age}
               start="1990-01-01"
               end={getNowFormatDate()}
               fields="day"
               className="bottom_right"
               bindchange={bindDateChange}
             >
-              <View class="picker">{data.Re_age}</View>
+              <View class="picker">{global.appData.Re_age}</View>
             </picker>
           </View>
           <View className="bottom_one">
@@ -167,7 +169,7 @@ export default () => {
               name="Re_school_name"
               className="bottom_right_disable"
               disabled
-              value={data.Re_school_name}
+              value={global.appData.Re_school_name}
             ></Input>
           </View>
           <Button className="submit" type="submit">

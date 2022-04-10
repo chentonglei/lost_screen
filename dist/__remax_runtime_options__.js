@@ -952,7 +952,9 @@ module.exports = {
   ],
   "pages/login/school/index": [],
   "pages/login/revise/index": [],
-  "pages/login/help/index": [],
+  "pages/login/help/index": [
+    "onLoad"
+  ],
   "pages/login/setting/index": [],
   "pages/login/pwd/index": [],
   "pages/login/register/index": [],
