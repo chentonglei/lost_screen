@@ -41,15 +41,23 @@ Page(Object(_remax_runtime__WEBPACK_IMPORTED_MODULE_0__["createPageConfig"])(_in
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var remax_one__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! remax/one */ "./node_modules/remax/one.js");
-/* harmony import */ var remax__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! remax */ "./node_modules/remax/esm/index.js");
-/* harmony import */ var _png__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./加号.png */ "./src/pages/index/加号.png");
-/* harmony import */ var _png__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./位置.png */ "./src/pages/index/位置.png");
-/* harmony import */ var _png__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./评论.png */ "./src/pages/index/评论.png");
-/* harmony import */ var _login_school__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../login/school */ "./src/pages/login/school/index.js");
-/* harmony import */ var _ip__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../ip */ "./src/pages/ip.js");
+/* harmony import */ var regenerator_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! regenerator-runtime */ "./node_modules/regenerator-runtime/runtime.js");
+/* harmony import */ var regenerator_runtime__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(regenerator_runtime__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var remax_one__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! remax/one */ "./node_modules/remax/one.js");
+/* harmony import */ var remax__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! remax */ "./node_modules/remax/esm/index.js");
+/* harmony import */ var _png__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./加号.png */ "./src/pages/index/加号.png");
+/* harmony import */ var _png__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./位置.png */ "./src/pages/index/位置.png");
+/* harmony import */ var _png__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./评论.png */ "./src/pages/index/评论.png");
+/* harmony import */ var _login_school__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../login/school */ "./src/pages/login/school/index.js");
+/* harmony import */ var _ip__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../ip */ "./src/pages/ip.js");
+
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -71,133 +79,201 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 /* harmony default export */ __webpack_exports__["default"] = (function () {
-  var _useState = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])('失物'),
+  var _useState = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])('失物'),
       _useState2 = _slicedToArray(_useState, 2),
       isModalVisible = _useState2[0],
       setIsModalVisible = _useState2[1];
 
-  var data = [{
-    Lost_time: '2022-2-1',
-    Lost_status: '未找到',
-    Lost_where: '北区操场',
-    Lost_content: 'airpods耳机',
-    Lost_img: 'https://gw.alipayobjects.com/zos/rmsportal/JiqGstEfoWAOHiTxclqi.png',
-    Lost_people_id: '3181911220',
-    Lost_people_name: '陈彤磊',
-    Lost_people_phone: '18859144927',
-    Lost_send_time: '2022-2-2 15:30',
-    Re_school_name: '福建工程学院'
-  }, {
-    Lost_time: '2022-2-1',
-    Lost_status: '已找到',
-    Lost_where: '北区操场',
-    Lost_content: 'airpods耳机充电仓一个',
-    Lost_img: 'https://gw.alipayobjects.com/zos/rmsportal/JiqGstEfoWAOHiTxclqi.png',
-    Lost_people_id: '3181911220',
-    Lost_people_name: '陈彤磊',
-    Lost_people_phone: '18859144927',
-    Lost_send_time: '2022-2-2 15:30',
-    Re_school_name: '福建工程学院'
-  }];
+  var _useState3 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
+      _useState4 = _slicedToArray(_useState3, 2),
+      data = _useState4[0],
+      setData = _useState4[1];
+
+  Object(react__WEBPACK_IMPORTED_MODULE_1__["useEffect"])(function () {
+    var fetchData = /*#__PURE__*/function () {
+      var _ref = _asyncToGenerator( /*#__PURE__*/regenerator_runtime__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
+        return regenerator_runtime__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                if (!(isModalVisible === '失物')) {
+                  _context.next = 3;
+                  break;
+                }
+
+                _context.next = 3;
+                return wx.request({
+                  url: "".concat(_ip__WEBPACK_IMPORTED_MODULE_8__["default"], "/lost/UserShow"),
+                  method: 'POST',
+                  success: function success(res) {
+                    if (res.data.data) {
+                      setData(res.data.data);
+                    }
+                  }
+                });
+
+              case 3:
+                if (!(isModalVisible === '招领')) {
+                  _context.next = 6;
+                  break;
+                }
+
+                _context.next = 6;
+                return wx.request({
+                  url: "".concat(_ip__WEBPACK_IMPORTED_MODULE_8__["default"], "/recruit/UserShow"),
+                  method: 'POST',
+                  success: function success(res) {
+                    if (res.data.data) {
+                      setData(res.data.data);
+                    }
+                  }
+                });
+
+              case 6:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee);
+      }));
+
+      return function fetchData() {
+        return _ref.apply(this, arguments);
+      };
+    }();
+
+    fetchData();
+  }, [isModalVisible]);
+  /* const data = [
+    {
+      Lost_time: '2022-2-1',
+      Lost_status: '未找到',
+      Lost_where: '北区操场',
+      Lost_content: 'airpods耳机',
+      Lost_img:
+        'https://gw.alipayobjects.com/zos/rmsportal/JiqGstEfoWAOHiTxclqi.png',
+      Lost_people_id: '3181911220',
+      Lost_people_name: '陈彤磊',
+      Lost_people_phone: '18859144927',
+      Lost_send_time: '2022-2-2 15:30',
+      Re_school_name: '福建工程学院',
+    },
+    {
+      Lost_time: '2022-2-1',
+      Lost_status: '已找到',
+      Lost_where: '北区操场',
+      Lost_content: 'airpods耳机充电仓一个',
+      Lost_img:
+        'https://gw.alipayobjects.com/zos/rmsportal/JiqGstEfoWAOHiTxclqi.png',
+      Lost_people_id: '3181911220',
+      Lost_people_name: '陈彤磊',
+      Lost_people_phone: '18859144927',
+      Lost_send_time: '2022-2-2 15:30',
+      Re_school_name: '福建工程学院',
+    },
+  ] */
 
   var changeButton = function changeButton(title) {
     setIsModalVisible(title);
   };
 
   var release = function release() {
-    Object(remax_one__WEBPACK_IMPORTED_MODULE_1__["navigateTo"])({
+    Object(remax_one__WEBPACK_IMPORTED_MODULE_2__["navigateTo"])({
       url: "/pages/index/release/index"
     });
   };
 
   var school = function school() {
-    Object(remax_one__WEBPACK_IMPORTED_MODULE_1__["navigateTo"])({
+    Object(remax_one__WEBPACK_IMPORTED_MODULE_2__["navigateTo"])({
       url: "/pages/index/school/index"
     });
   };
 
   var details = function details(item) {
+    item.isModalVisible = isModalVisible;
     var str = JSON.stringify(item);
-    Object(remax_one__WEBPACK_IMPORTED_MODULE_1__["navigateTo"])({
+    Object(remax_one__WEBPACK_IMPORTED_MODULE_2__["navigateTo"])({
       url: '/pages/index/details/index?jsonStr=' + str
     });
   };
 
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(remax_one__WEBPACK_IMPORTED_MODULE_1__["View"], {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(remax_one__WEBPACK_IMPORTED_MODULE_2__["View"], {
     className: "app"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(remax_one__WEBPACK_IMPORTED_MODULE_1__["View"], {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(remax_one__WEBPACK_IMPORTED_MODULE_2__["View"], {
     className: "top"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(remax_one__WEBPACK_IMPORTED_MODULE_1__["Image"], {
-    src: _png__WEBPACK_IMPORTED_MODULE_3__["default"],
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(remax_one__WEBPACK_IMPORTED_MODULE_2__["Image"], {
+    src: _png__WEBPACK_IMPORTED_MODULE_4__["default"],
     mode: "widthFix",
     className: "bottom_left_img",
     onClick: function onClick() {
       return release();
     }
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(remax_one__WEBPACK_IMPORTED_MODULE_1__["View"], {
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(remax_one__WEBPACK_IMPORTED_MODULE_2__["View"], {
     className: "top_title"
-  }, "\u5931\u7269\u62DB\u9886")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(remax_one__WEBPACK_IMPORTED_MODULE_1__["View"], {
+  }, "\u5931\u7269\u62DB\u9886")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(remax_one__WEBPACK_IMPORTED_MODULE_2__["View"], {
     className: "mid"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(remax_one__WEBPACK_IMPORTED_MODULE_1__["View"], {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(remax_one__WEBPACK_IMPORTED_MODULE_2__["View"], {
     className: "mid_left"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(remax_one__WEBPACK_IMPORTED_MODULE_1__["View"], {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(remax_one__WEBPACK_IMPORTED_MODULE_2__["View"], {
     className: isModalVisible === '失物' ? 'mid_one_on' : 'mid_one_off',
     onClick: function onClick() {
       return changeButton('失物');
     }
-  }, "\u5931\u7269"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(remax_one__WEBPACK_IMPORTED_MODULE_1__["View"], {
+  }, "\u5931\u7269"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(remax_one__WEBPACK_IMPORTED_MODULE_2__["View"], {
     className: isModalVisible === '招领' ? 'mid_one_on' : 'mid_one_off',
     onClick: function onClick() {
       return changeButton('招领');
     }
-  }, "\u62DB\u9886")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(remax_one__WEBPACK_IMPORTED_MODULE_1__["View"], {
+  }, "\u62DB\u9886")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(remax_one__WEBPACK_IMPORTED_MODULE_2__["View"], {
     className: "mid_right"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(remax_one__WEBPACK_IMPORTED_MODULE_1__["Image"], {
-    src: _png__WEBPACK_IMPORTED_MODULE_4__["default"],
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(remax_one__WEBPACK_IMPORTED_MODULE_2__["Image"], {
+    src: _png__WEBPACK_IMPORTED_MODULE_5__["default"],
     mode: "widthFix",
     className: "address_img"
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(remax_one__WEBPACK_IMPORTED_MODULE_1__["View"], {
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(remax_one__WEBPACK_IMPORTED_MODULE_2__["View"], {
     onClick: function onClick() {
       return school();
     }
-  }, "\u5168\u90E8\u5B66\u6821"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(remax_one__WEBPACK_IMPORTED_MODULE_1__["View"], {
+  }, "\u5168\u90E8\u5B66\u6821"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(remax_one__WEBPACK_IMPORTED_MODULE_2__["View"], {
     className: "content"
   }, data.map(function (item, index) {
-    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(remax_one__WEBPACK_IMPORTED_MODULE_1__["View"], {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(remax_one__WEBPACK_IMPORTED_MODULE_2__["View"], {
       className: "content_one",
       onClick: function onClick() {
         return details(item);
       },
       key: index,
       __key: index
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(remax_one__WEBPACK_IMPORTED_MODULE_1__["View"], {
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(remax_one__WEBPACK_IMPORTED_MODULE_2__["View"], {
       className: "content_one_top"
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(remax_one__WEBPACK_IMPORTED_MODULE_1__["View"], {
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(remax_one__WEBPACK_IMPORTED_MODULE_2__["View"], {
       className: "content_one_name"
-    }, item.Lost_people_name, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(remax_one__WEBPACK_IMPORTED_MODULE_1__["View"], {
+    }, isModalVisible === '失物' ? item.Lost_people_name : item.Rec_people_name, isModalVisible === '失物' ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(remax_one__WEBPACK_IMPORTED_MODULE_2__["View"], {
       className: item.Lost_status === '未找到' ? 'status_nofind' : 'status_find'
-    }, item.Lost_status)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(remax_one__WEBPACK_IMPORTED_MODULE_1__["View"], {
+    }, item.Lost_status) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(remax_one__WEBPACK_IMPORTED_MODULE_2__["View"], {
+      className: item.Rec_status === '未归还' ? 'status_nofind' : 'status_find'
+    }, item.Rec_status)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(remax_one__WEBPACK_IMPORTED_MODULE_2__["View"], {
       className: "content_one_mid"
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(remax_one__WEBPACK_IMPORTED_MODULE_1__["View"], {
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(remax_one__WEBPACK_IMPORTED_MODULE_2__["View"], {
       className: "content_one_time"
-    }, item.Lost_send_time), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(remax_one__WEBPACK_IMPORTED_MODULE_1__["View"], {
+    }, isModalVisible === '失物' ? item.Lost_send_time : item.Rec_send_time), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(remax_one__WEBPACK_IMPORTED_MODULE_2__["View"], {
       className: "content_one_school"
-    }, item.Re_school_name))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(remax_one__WEBPACK_IMPORTED_MODULE_1__["View"], {
+    }, item.Re_school_name))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(remax_one__WEBPACK_IMPORTED_MODULE_2__["View"], {
       className: "content_one_bottom"
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(remax_one__WEBPACK_IMPORTED_MODULE_1__["View"], {
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(remax_one__WEBPACK_IMPORTED_MODULE_2__["View"], {
       className: "content_bottom_title"
-    }, "\u5931\u7269\u65F6\u95F4\uFF1A".concat(item.Lost_time)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(remax_one__WEBPACK_IMPORTED_MODULE_1__["View"], {
+    }, "".concat(isModalVisible === '失物' ? '失物时间' : '拾物时间', "\uFF1A").concat(isModalVisible === '失物' ? item.Lost_time : item.Rec_time)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(remax_one__WEBPACK_IMPORTED_MODULE_2__["View"], {
       className: "content_bottom_title"
-    }, "\u5931\u7269\u5730\u70B9\uFF1A".concat(item.Lost_where)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(remax_one__WEBPACK_IMPORTED_MODULE_1__["View"], {
+    }, "".concat(isModalVisible === '失物' ? '失物地点' : '拾物地点', "\uFF1A").concat(isModalVisible === '失物' ? item.Lost_where : item.Rec_where)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(remax_one__WEBPACK_IMPORTED_MODULE_2__["View"], {
       className: "content_bottom_title"
-    }, "\u5931\u7269\u56FE\u7247\uFF1A", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(remax_one__WEBPACK_IMPORTED_MODULE_1__["Text"], {
+    }, "".concat(isModalVisible === '失物' ? '失物图片' : '拾物图片', "\uFF1A"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(remax_one__WEBPACK_IMPORTED_MODULE_2__["Text"], {
       style: 'text-decoration:underline;color:#1296db'
-    }, "\u67E5\u770B\u56FE\u7247")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(remax_one__WEBPACK_IMPORTED_MODULE_1__["View"], {
+    }, "\u67E5\u770B\u56FE\u7247")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(remax_one__WEBPACK_IMPORTED_MODULE_2__["View"], {
       className: "content_bottom_title"
-    }, "\u5931\u7269\u5185\u5BB9\uFF1A".concat(item.Lost_content))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(remax_one__WEBPACK_IMPORTED_MODULE_1__["View"], {
+    }, "".concat(isModalVisible === '失物' ? '失物内容' : '拾物内容', "\uFF1A").concat(isModalVisible === '失物' ? item.Lost_content : item.Rec_content))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(remax_one__WEBPACK_IMPORTED_MODULE_2__["View"], {
       className: "comment"
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(remax_one__WEBPACK_IMPORTED_MODULE_1__["Image"], {
-      src: _png__WEBPACK_IMPORTED_MODULE_5__["default"],
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(remax_one__WEBPACK_IMPORTED_MODULE_2__["Image"], {
+      src: _png__WEBPACK_IMPORTED_MODULE_6__["default"],
       mode: "widthFix",
       className: "bottom_img"
     })));

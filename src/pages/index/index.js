@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import {
   View,
   Text,
@@ -18,7 +18,33 @@ import school from '../login/school'
 import ip from '../ip'
 export default () => {
   const [isModalVisible, setIsModalVisible] = useState('失物')
-  const data = [
+  const [data, setData] = useState([])
+  useEffect(() => {
+    const fetchData = async () => {
+      if (isModalVisible === '失物')
+        await wx.request({
+          url: `${ip}/lost/UserShow`,
+          method: 'POST',
+          success(res) {
+            if (res.data.data) {
+              setData(res.data.data)
+            }
+          },
+        })
+      if (isModalVisible === '招领')
+        await wx.request({
+          url: `${ip}/recruit/UserShow`,
+          method: 'POST',
+          success(res) {
+            if (res.data.data) {
+              setData(res.data.data)
+            }
+          },
+        })
+    }
+    fetchData()
+  }, [isModalVisible])
+  /* const data = [
     {
       Lost_time: '2022-2-1',
       Lost_status: '未找到',
@@ -45,7 +71,7 @@ export default () => {
       Lost_send_time: '2022-2-2 15:30',
       Re_school_name: '福建工程学院',
     },
-  ]
+  ] */
   const changeButton = (title) => {
     setIsModalVisible(title)
   }
@@ -60,6 +86,7 @@ export default () => {
     })
   }
   const details = (item) => {
+    item.isModalVisible = isModalVisible
     let str = JSON.stringify(item)
     navigateTo({
       url: '/pages/index/details/index?jsonStr=' + str,
@@ -105,34 +132,64 @@ export default () => {
           >
             <View className="content_one_top">
               <View className="content_one_name">
-                {item.Lost_people_name}
-                <View
-                  className={
-                    item.Lost_status === '未找到'
-                      ? 'status_nofind'
-                      : 'status_find'
-                  }
-                >
-                  {item.Lost_status}
-                </View>
+                {isModalVisible === '失物'
+                  ? item.Lost_people_name
+                  : item.Rec_people_name}
+                {isModalVisible === '失物' ? (
+                  <View
+                    className={
+                      item.Lost_status === '未找到'
+                        ? 'status_nofind'
+                        : 'status_find'
+                    }
+                  >
+                    {item.Lost_status}
+                  </View>
+                ) : (
+                  <View
+                    className={
+                      item.Rec_status === '未归还'
+                        ? 'status_nofind'
+                        : 'status_find'
+                    }
+                  >
+                    {item.Rec_status}
+                  </View>
+                )}
               </View>
               <View className="content_one_mid">
-                <View className="content_one_time">{item.Lost_send_time}</View>
+                <View className="content_one_time">
+                  {isModalVisible === '失物'
+                    ? item.Lost_send_time
+                    : item.Rec_send_time}
+                </View>
                 <View className="content_one_school">
                   {item.Re_school_name}
                 </View>
               </View>
             </View>
             <View className="content_one_bottom">
-              <View className="content_bottom_title">{`失物时间：${item.Lost_time}`}</View>
-              <View className="content_bottom_title">{`失物地点：${item.Lost_where}`}</View>
+              <View className="content_bottom_title">{`${
+                isModalVisible === '失物' ? '失物时间' : '拾物时间'
+              }：${
+                isModalVisible === '失物' ? item.Lost_time : item.Rec_time
+              }`}</View>
+              <View className="content_bottom_title">{`${
+                isModalVisible === '失物' ? '失物地点' : '拾物地点'
+              }：${
+                isModalVisible === '失物' ? item.Lost_where : item.Rec_where
+              }`}</View>
               <View className="content_bottom_title">
-                {`失物图片：`}
+                {`${isModalVisible === '失物' ? '失物图片' : '拾物图片'}：`}
                 <Text style={'text-decoration:underline;color:#1296db'}>
                   查看图片
                 </Text>
               </View>
-              <View className="content_bottom_title">{`失物内容：${item.Lost_content}`}</View>
+              <View className="content_bottom_title">{`${
+                isModalVisible === '失物' ? '失物内容' : '拾物内容'
+              }：${
+                isModalVisible === '失物' ? item.Lost_content : item.Rec_content
+              }`}</View>
             </View>
             <View className="comment">
               <Image src={comment} mode="widthFix" className="bottom_img" />

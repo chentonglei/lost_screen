@@ -964,7 +964,9 @@ module.exports = {
   "pages/index/release/index": [
     "onLoad"
   ],
-  "pages/index/school/index": []
+  "pages/index/school/index": [
+    "onLoad"
+  ]
 },
       appEvents: []
     }

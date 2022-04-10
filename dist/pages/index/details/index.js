@@ -63,8 +63,6 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 /* harmony default export */ __webpack_exports__["default"] = (function () {
-  var fo = {};
-
   var _useState = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])({}),
       _useState2 = _slicedToArray(_useState, 2),
       body = _useState2[0],
@@ -97,7 +95,8 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
   }];
   Object(_remax_runtime__WEBPACK_IMPORTED_MODULE_0__["usePageEvent"])('onLoad', function (options) {
     var object = JSON.parse(options.jsonStr);
-    var tel = object.Lost_people_phone.slice(0, 3);
+    var tel;
+    if (object.isModalVisible === '失物') tel = object.Lost_people_phone.slice(0, 3);else tel = object.Rec_people_phone.slice(0, 3);
     setTelephone(tel + '********');
     setBody(object);
   });
@@ -132,31 +131,33 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
     className: "content_one_top"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(remax_one__WEBPACK_IMPORTED_MODULE_2__["View"], {
     className: "content_one_name"
-  }, "".concat(body.Lost_people_name, "  ").concat(telephone), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(remax_one__WEBPACK_IMPORTED_MODULE_2__["View"], {
+  }, "".concat(body.isModalVisible === '失物' ? body.Lost_people_name : body.Rec_people_name, "  ").concat(telephone), body.isModalVisible === '失物' ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(remax_one__WEBPACK_IMPORTED_MODULE_2__["View"], {
     className: body.Lost_status === '未找到' ? 'status_nofind' : 'status_find'
-  }, body.Lost_status)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(remax_one__WEBPACK_IMPORTED_MODULE_2__["View"], {
+  }, body.Lost_status) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(remax_one__WEBPACK_IMPORTED_MODULE_2__["View"], {
+    className: body.Rec_status === '未归还' ? 'status_nofind' : 'status_find'
+  }, body.Rec_status)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(remax_one__WEBPACK_IMPORTED_MODULE_2__["View"], {
     className: "content_one_mid"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(remax_one__WEBPACK_IMPORTED_MODULE_2__["View"], {
     className: "content_one_time"
-  }, body.Lost_send_time), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(remax_one__WEBPACK_IMPORTED_MODULE_2__["View"], {
+  }, body.isModalVisible === '失物' ? body.Lost_send_time : body.Rec_send_time), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(remax_one__WEBPACK_IMPORTED_MODULE_2__["View"], {
     className: "content_one_school"
-  }, body.Re_school_name))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(remax_one__WEBPACK_IMPORTED_MODULE_2__["View"], {
+  }, body.isModalVisible === '失物' ? body.Lost_school_name : body.Rec_school_name))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(remax_one__WEBPACK_IMPORTED_MODULE_2__["View"], {
     className: "content_one_bottom"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(remax_one__WEBPACK_IMPORTED_MODULE_2__["View"], {
     className: "content_bottom_title"
-  }, "\u5931\u7269\u65F6\u95F4\uFF1A".concat(body.Lost_time)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(remax_one__WEBPACK_IMPORTED_MODULE_2__["View"], {
+  }, "\u5931\u7269\u65F6\u95F4\uFF1A".concat(body.isModalVisible === '失物' ? body.Lost_time : body.Rec_time)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(remax_one__WEBPACK_IMPORTED_MODULE_2__["View"], {
     className: "content_bottom_title"
-  }, "\u5931\u7269\u5730\u70B9\uFF1A".concat(body.Lost_where)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(remax_one__WEBPACK_IMPORTED_MODULE_2__["View"], {
+  }, "\u5931\u7269\u5730\u70B9\uFF1A".concat(body.isModalVisible === '失物' ? body.Lost_where : body.Rec_where)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(remax_one__WEBPACK_IMPORTED_MODULE_2__["View"], {
     className: "content_bottom_title"
-  }, "\u5931\u7269\u5185\u5BB9\uFF1A".concat(body.Lost_content)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(remax_one__WEBPACK_IMPORTED_MODULE_2__["View"], {
+  }, "\u5931\u7269\u5185\u5BB9\uFF1A".concat(body.isModalVisible === '失物' ? body.Lost_content : body.Rec_content)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(remax_one__WEBPACK_IMPORTED_MODULE_2__["View"], {
     className: "content_bottom_title"
-  }, "\u5931\u7269\u56FE\u7247\uFF1A"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(remax_one__WEBPACK_IMPORTED_MODULE_2__["View"], {
+  }, "\u5931\u7269\u56FE\u7247\uFF1A".concat(body.Lost_img ? '' : '无')), body.Lost_img ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(remax_one__WEBPACK_IMPORTED_MODULE_2__["View"], {
     className: "bottom_img_div"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(remax_one__WEBPACK_IMPORTED_MODULE_2__["Image"], {
     src: body.Lost_img,
     mode: "widthFix",
     className: "bottom_img"
-  }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(remax_one__WEBPACK_IMPORTED_MODULE_2__["View"], {
+  })) : ''), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(remax_one__WEBPACK_IMPORTED_MODULE_2__["View"], {
     className: "bottom_button"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(remax_one__WEBPACK_IMPORTED_MODULE_2__["Button"], {
     className: "submit"

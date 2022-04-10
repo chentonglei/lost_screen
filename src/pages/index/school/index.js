@@ -11,49 +11,21 @@ import {
 } from 'remax/one'
 import { picker } from 'remax/wechat'
 import { useQuery, usePageInstance } from 'remax'
+import { usePageEvent } from 'remax/macro'
+import ip from '../../ip'
 export default () => {
-  const data = [
-    '全部学校',
-    '福州大学',
-    '福建工程学院',
-    '闽江学院',
-    '福建师范大学',
-    '江夏学院',
-  ]
-  const formReset = (e) => {
-    console.log('form发生了reset事件，携带数据为：', e.target)
-  }
-  const formSubmit = (e) => {
-    var str = '请输入'
-    if (!e.target.value.Re_id) {
-      str += '账号'
-      str += '、'
-    }
-    if (!e.target.value.Re_password) {
-      str += '密码'
-      str += '、'
-    }
-    const editedText = str.slice(0, str.length - 1) + '！'
-    console.log(editedText)
-    if (str !== '请输入') {
-      wx.showToast({
-        title: editedText,
-        icon: 'none',
-        duration: 2000,
-      })
-    } else {
-      wx.showToast({
-        title: '上传成功',
-        icon: 'success',
-        duration: 2000,
-      })
-    }
-  }
-  const register = () => {
-    navigateTo({
-      url: `/pages/login/register/index`,
+  const [data, setData] = useState([])
+  usePageEvent('onLoad', () => {
+    wx.request({
+      url: `${ip}/school/UserShow`,
+      method: 'POST',
+      success(res) {
+        if (res.data.data) {
+          setData(res.data.data)
+        }
+      },
     })
-  }
+  })
   return (
     <View className="app">
       <View className="top">
@@ -71,7 +43,7 @@ export default () => {
               className="mid_content_one"
               onClick={() => MidButton(item)}
             >
-              {item}
+              {item.Sch_name}
             </View>
           ))}
         </View>

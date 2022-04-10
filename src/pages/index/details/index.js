@@ -12,7 +12,6 @@ import {
 import { useQuery, usePageInstance } from 'remax'
 import { usePageEvent } from 'remax/macro'
 export default () => {
-  const fo = {}
   const [body, setBody] = useState({})
   const [buttonfocus, setButtonfocus] = useState('说点什么吧..')
   const [telephone, setTelephone] = useState('')
@@ -36,7 +35,10 @@ export default () => {
   ]
   usePageEvent('onLoad', (options) => {
     let object = JSON.parse(options.jsonStr)
-    let tel = object.Lost_people_phone.slice(0, 3)
+    var tel
+    if (object.isModalVisible === '失物')
+      tel = object.Lost_people_phone.slice(0, 3)
+    else tel = object.Rec_people_phone.slice(0, 3)
     setTelephone(tel + '********')
     setBody(object)
   })
@@ -63,34 +65,72 @@ export default () => {
         <View className="content_one">
           <View className="content_one_top">
             <View className="content_one_name">
-              {`${body.Lost_people_name}  ${telephone}`}
-              <View
-                className={
-                  body.Lost_status === '未找到'
-                    ? 'status_nofind'
-                    : 'status_find'
-                }
-              >
-                {body.Lost_status}
-              </View>
+              {`${
+                body.isModalVisible === '失物'
+                  ? body.Lost_people_name
+                  : body.Rec_people_name
+              }  ${telephone}`}
+              {body.isModalVisible === '失物' ? (
+                <View
+                  className={
+                    body.Lost_status === '未找到'
+                      ? 'status_nofind'
+                      : 'status_find'
+                  }
+                >
+                  {body.Lost_status}
+                </View>
+              ) : (
+                <View
+                  className={
+                    body.Rec_status === '未归还'
+                      ? 'status_nofind'
+                      : 'status_find'
+                  }
+                >
+                  {body.Rec_status}
+                </View>
+              )}
             </View>
             <View className="content_one_mid">
-              <View className="content_one_time">{body.Lost_send_time}</View>
-              <View className="content_one_school">{body.Re_school_name}</View>
+              <View className="content_one_time">
+                {body.isModalVisible === '失物'
+                  ? body.Lost_send_time
+                  : body.Rec_send_time}
+              </View>
+              <View className="content_one_school">
+                {body.isModalVisible === '失物'
+                  ? body.Lost_school_name
+                  : body.Rec_school_name}
+              </View>
             </View>
           </View>
           <View className="content_one_bottom">
-            <View className="content_bottom_title">{`失物时间：${body.Lost_time}`}</View>
-            <View className="content_bottom_title">{`失物地点：${body.Lost_where}`}</View>
-            <View className="content_bottom_title">{`失物内容：${body.Lost_content}`}</View>
-            <View className="content_bottom_title">{`失物图片：`}</View>
-            <View className="bottom_img_div">
-              <Image
-                src={body.Lost_img}
-                mode="widthFix"
-                className="bottom_img"
-              />
-            </View>
+            <View className="content_bottom_title">{`失物时间：${
+              body.isModalVisible === '失物' ? body.Lost_time : body.Rec_time
+            }`}</View>
+            <View className="content_bottom_title">{`失物地点：${
+              body.isModalVisible === '失物' ? body.Lost_where : body.Rec_where
+            }`}</View>
+            <View className="content_bottom_title">{`失物内容：${
+              body.isModalVisible === '失物'
+                ? body.Lost_content
+                : body.Rec_content
+            }`}</View>
+            <View className="content_bottom_title">{`失物图片：${
+              body.Lost_img ? '' : '无'
+            }`}</View>
+            {body.Lost_img ? (
+              <View className="bottom_img_div">
+                <Image
+                  src={body.Lost_img}
+                  mode="widthFix"
+                  className="bottom_img"
+                />
+              </View>
+            ) : (
+              ''
+            )}
           </View>
           <View className="bottom_button">
             <Button className="submit">我捡到了</Button>
