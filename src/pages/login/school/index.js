@@ -64,7 +64,7 @@ export default () => {
     }
   }
   const sendImg = () => {
-    wx.chooseMedia({
+    /*  wx.chooseMedia({
       count: 1,
       mediaType: ['image'],
       sourceType: ['album', 'camera'],
@@ -72,8 +72,28 @@ export default () => {
       success(res) {
         console.log(res)
         setImg(res.tempFiles[0].tempFilePath)
+
         console.log(res.tempFiles.tempFilePath)
         console.log(res.tempFiles.size)
+      },
+    }) */
+    wx.chooseMedia({
+      count: 1,
+      mediaType: ['image'],
+      sourceType: ['album', 'camera'],
+      camera: 'back',
+      success: function (res) {
+        console.log(res)
+        var tempImagePath = res.tempFiles
+        var imgType = tempImagePath[0].tempFilePath
+        var fsm = wx.getFileSystemManager()
+        var base64img =
+          'data:image/' +
+          imgType +
+          ';base64,' +
+          fsm.readFileSync(tempImagePath[0].tempFilePath, 'base64')
+        console.log(base64img)
+        setImg(base64img)
       },
     })
   }

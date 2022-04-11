@@ -32332,6 +32332,18 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
   };
 
   var sendImg = function sendImg() {
+    /*  wx.chooseMedia({
+      count: 1,
+      mediaType: ['image'],
+      sourceType: ['album', 'camera'],
+      camera: 'back',
+      success(res) {
+        console.log(res)
+        setImg(res.tempFiles[0].tempFilePath)
+         console.log(res.tempFiles.tempFilePath)
+        console.log(res.tempFiles.size)
+      },
+    }) */
     wx.chooseMedia({
       count: 1,
       mediaType: ['image'],
@@ -32339,9 +32351,12 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
       camera: 'back',
       success: function success(res) {
         console.log(res);
-        setImg(res.tempFiles[0].tempFilePath);
-        console.log(res.tempFiles.tempFilePath);
-        console.log(res.tempFiles.size);
+        var tempImagePath = res.tempFiles;
+        var imgType = tempImagePath[0].tempFilePath;
+        var fsm = wx.getFileSystemManager();
+        var base64img = 'data:image/' + imgType + ';base64,' + fsm.readFileSync(tempImagePath[0].tempFilePath, 'base64');
+        console.log(base64img);
+        setImg(base64img);
       }
     });
   };
