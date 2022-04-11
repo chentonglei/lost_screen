@@ -32204,10 +32204,17 @@ var App = function App(props) {
       appData = _useState2[0],
       setAppData = _useState2[1];
 
+  var _useState3 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])('全部学校'),
+      _useState4 = _slicedToArray(_useState3, 2),
+      school = _useState4[0],
+      setSchool = _useState4[1];
+
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(AppContext.Provider, {
     value: {
       appData: appData,
-      setAppData: setAppData
+      setAppData: setAppData,
+      school: school,
+      setSchool: setSchool
     }
   }, props.children);
 };
@@ -32243,6 +32250,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var remax_one__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! remax/one */ "./node_modules/remax/one.js");
 /* harmony import */ var remax__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! remax */ "./node_modules/remax/esm/index.js");
+/* harmony import */ var _app__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../app */ "./src/app.js");
+/* harmony import */ var _ip__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../ip */ "./src/pages/ip.js");
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -32258,11 +32267,15 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
+
+
 /* harmony default export */ __webpack_exports__["default"] = (function () {
   var _useState = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(''),
       _useState2 = _slicedToArray(_useState, 2),
       img = _useState2[0],
       setImg = _useState2[1];
+
+  var global = Object(react__WEBPACK_IMPORTED_MODULE_0__["useContext"])(_app__WEBPACK_IMPORTED_MODULE_3__["AppContext"]); //全局变量
 
   var formReset = function formReset(e) {
     console.log('form发生了reset事件，携带数据为：', e.target);
@@ -32291,24 +32304,34 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
         duration: 2000
       });
     } else {
-      wx.showToast({
-        title: '上传成功',
-        icon: 'success',
-        duration: 2000
+      e.target.value.Sch_documents = img;
+      e.target.value.Sch_applicant_id = global.appData.Re_id;
+      e.target.value.Sch_applicant_name = global.appData.Re_name;
+      console.log(e.target.value);
+      wx.request({
+        url: "".concat(_ip__WEBPACK_IMPORTED_MODULE_4__["default"], "/school/add"),
+        data: e.target.value,
+        method: 'POST',
+        success: function success(res) {
+          if (res.data.result === 'true') {
+            wx.showToast({
+              title: '申请成功',
+              icon: 'success',
+              duration: 2000
+            });
+          } else {
+            wx.showToast({
+              title: '申请失败',
+              icon: 'success',
+              duration: 2000
+            });
+          }
+        }
       });
     }
   };
 
   var sendImg = function sendImg() {
-    /*  wx.chooseImage({
-      count: 1,
-      sizeType: ['original', 'compressed'],
-      sourceType: ['album', 'camera'],
-      success(res) {
-        // tempFilePath可以作为img标签的src属性显示图片/
-        setImg(res.tempFilePaths)
-      },
-    }) */
     wx.chooseMedia({
       count: 1,
       mediaType: ['image'],

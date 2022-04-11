@@ -1,5 +1,6 @@
 require('./../../../runtime.js');
 require('./../../../remax-vendors.js');
+require('./../../../remax-styles.js');
 (wx["webpackJsonp"] = wx["webpackJsonp"] || []).push([["pages/index/school/index"],{
 
 /***/ "./src/pages/index/school/index.css":
@@ -48,6 +49,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var remax_wechat__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! remax/wechat */ "./node_modules/remax/wechat.js");
 /* harmony import */ var remax__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! remax */ "./node_modules/remax/esm/index.js");
 /* harmony import */ var _ip__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../ip */ "./src/pages/ip.js");
+/* harmony import */ var _app__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../../app */ "./src/app.js");
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
+
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter); }
+
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
+
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -66,7 +76,10 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
+
 /* harmony default export */ __webpack_exports__["default"] = (function () {
+  var global = Object(react__WEBPACK_IMPORTED_MODULE_1__["useContext"])(_app__WEBPACK_IMPORTED_MODULE_6__["AppContext"]); //全局变量
+
   var _useState = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
       _useState2 = _slicedToArray(_useState, 2),
       data = _useState2[0],
@@ -78,11 +91,21 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
       method: 'POST',
       success: function success(res) {
         if (res.data.data) {
-          setData(res.data.data);
+          var school_one = {
+            Sch_name: '全部学校'
+          };
+          var allschool = [school_one].concat(_toConsumableArray(res.data.data));
+          setData(allschool);
         }
       }
     });
   });
+
+  var MidButton = function MidButton(item) {
+    global.setSchool(item.Sch_name);
+    Object(remax_one__WEBPACK_IMPORTED_MODULE_2__["navigateBack"])();
+  };
+
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(remax_one__WEBPACK_IMPORTED_MODULE_2__["View"], {
     className: "app"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(remax_one__WEBPACK_IMPORTED_MODULE_2__["View"], {
@@ -126,4 +149,4 @@ module.exports = __webpack_require__(/*! D:\福建工程学院\毕设\代码\los
 
 /***/ })
 
-},[[12,"runtime","remax-vendors"]]]);
+},[[12,"runtime","remax-vendors","remax-styles"]]]);

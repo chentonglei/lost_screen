@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import {
   View,
   Text,
@@ -10,8 +10,11 @@ import {
   navigateTo,
 } from 'remax/one'
 import { useQuery, usePageInstance } from 'remax'
+import { AppContext } from '../../../app'
+import ip from '../../ip'
 export default () => {
   const [img, setImg] = useState('')
+  const global = useContext(AppContext) //全局变量
   const formReset = (e) => {
     console.log('form发生了reset事件，携带数据为：', e.target)
   }
@@ -34,23 +37,33 @@ export default () => {
         duration: 2000,
       })
     } else {
-      wx.showToast({
-        title: '上传成功',
-        icon: 'success',
-        duration: 2000,
+      e.target.value.Sch_documents = img
+      e.target.value.Sch_applicant_id = global.appData.Re_id
+      e.target.value.Sch_applicant_name = global.appData.Re_name
+      console.log(e.target.value)
+      wx.request({
+        url: `${ip}/school/add`,
+        data: e.target.value,
+        method: 'POST',
+        success(res) {
+          if (res.data.result === 'true') {
+            wx.showToast({
+              title: '申请成功',
+              icon: 'success',
+              duration: 2000,
+            })
+          } else {
+            wx.showToast({
+              title: '申请失败',
+              icon: 'success',
+              duration: 2000,
+            })
+          }
+        },
       })
     }
   }
   const sendImg = () => {
-    /*  wx.chooseImage({
-      count: 1,
-      sizeType: ['original', 'compressed'],
-      sourceType: ['album', 'camera'],
-      success(res) {
-        // tempFilePath可以作为img标签的src属性显示图片/
-        setImg(res.tempFilePaths)
-      },
-    }) */
     wx.chooseMedia({
       count: 1,
       mediaType: ['image'],

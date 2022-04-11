@@ -59,7 +59,7 @@ page{
   display: flex;
   align-items: center;
   height: 100%;
-  width: 30%;
+  margin-right: 30px;
 }
 .address_img{
   height: 50px;

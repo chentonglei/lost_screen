@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import {
   View,
   Text,
@@ -8,12 +8,15 @@ import {
   Form,
   switchTab,
   navigateTo,
+  navigateBack,
 } from 'remax/one'
 import { picker } from 'remax/wechat'
 import { useQuery, usePageInstance } from 'remax'
 import { usePageEvent } from 'remax/macro'
 import ip from '../../ip'
+import { AppContext } from '../../../app'
 export default () => {
+  const global = useContext(AppContext) //全局变量
   const [data, setData] = useState([])
   usePageEvent('onLoad', () => {
     wx.request({
@@ -21,11 +24,17 @@ export default () => {
       method: 'POST',
       success(res) {
         if (res.data.data) {
-          setData(res.data.data)
+          let school_one = { Sch_name: '全部学校' }
+          let allschool = [school_one, ...res.data.data]
+          setData(allschool)
         }
       },
     })
   })
+  const MidButton = (item) => {
+    global.setSchool(item.Sch_name)
+    navigateBack()
+  }
   return (
     <View className="app">
       <View className="top">

@@ -1,5 +1,6 @@
 require('./../../runtime.js');
 require('./../../remax-vendors.js');
+require('./../../remax-styles.js');
 (wx["webpackJsonp"] = wx["webpackJsonp"] || []).push([["pages/index/index"],{
 
 /***/ "./src/pages/index/index.css":
@@ -52,6 +53,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _png__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./评论.png */ "./src/pages/index/评论.png");
 /* harmony import */ var _login_school__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../login/school */ "./src/pages/login/school/index.js");
 /* harmony import */ var _ip__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../ip */ "./src/pages/ip.js");
+/* harmony import */ var _app__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../../app */ "./src/app.js");
 
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
@@ -78,6 +80,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
+
 /* harmony default export */ __webpack_exports__["default"] = (function () {
   var _useState = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])('失物'),
       _useState2 = _slicedToArray(_useState, 2),
@@ -89,7 +92,21 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
       data = _useState4[0],
       setData = _useState4[1];
 
+  var _useState5 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(false),
+      _useState6 = _slicedToArray(_useState5, 2),
+      loading = _useState6[0],
+      setLoading = _useState6[1];
+
+  var global = Object(react__WEBPACK_IMPORTED_MODULE_1__["useContext"])(_app__WEBPACK_IMPORTED_MODULE_9__["AppContext"]); //全局变量
+
   Object(react__WEBPACK_IMPORTED_MODULE_1__["useEffect"])(function () {
+    wx.showLoading({
+      title: '加载中...',
+      success: function success() {
+        setLoading(true);
+      }
+    });
+
     var fetchData = /*#__PURE__*/function () {
       var _ref = _asyncToGenerator( /*#__PURE__*/regenerator_runtime__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
         return regenerator_runtime__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
@@ -143,35 +160,14 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
     }();
 
     fetchData();
+    setTimeout(function () {
+      wx.hideLoading({
+        success: function success() {
+          setLoading(false);
+        }
+      });
+    }, 1000);
   }, [isModalVisible]);
-  /* const data = [
-    {
-      Lost_time: '2022-2-1',
-      Lost_status: '未找到',
-      Lost_where: '北区操场',
-      Lost_content: 'airpods耳机',
-      Lost_img:
-        'https://gw.alipayobjects.com/zos/rmsportal/JiqGstEfoWAOHiTxclqi.png',
-      Lost_people_id: '3181911220',
-      Lost_people_name: '陈彤磊',
-      Lost_people_phone: '18859144927',
-      Lost_send_time: '2022-2-2 15:30',
-      Re_school_name: '福建工程学院',
-    },
-    {
-      Lost_time: '2022-2-1',
-      Lost_status: '已找到',
-      Lost_where: '北区操场',
-      Lost_content: 'airpods耳机充电仓一个',
-      Lost_img:
-        'https://gw.alipayobjects.com/zos/rmsportal/JiqGstEfoWAOHiTxclqi.png',
-      Lost_people_id: '3181911220',
-      Lost_people_name: '陈彤磊',
-      Lost_people_phone: '18859144927',
-      Lost_send_time: '2022-2-2 15:30',
-      Re_school_name: '福建工程学院',
-    },
-  ] */
 
   var changeButton = function changeButton(title) {
     setIsModalVisible(title);
@@ -234,7 +230,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
     onClick: function onClick() {
       return school();
     }
-  }, "\u5168\u90E8\u5B66\u6821"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(remax_one__WEBPACK_IMPORTED_MODULE_2__["View"], {
+  }, global.school))), loading === true ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(remax_one__WEBPACK_IMPORTED_MODULE_2__["View"], null) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(remax_one__WEBPACK_IMPORTED_MODULE_2__["View"], {
     className: "content"
   }, data.map(function (item, index) {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(remax_one__WEBPACK_IMPORTED_MODULE_2__["View"], {
@@ -258,7 +254,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
       className: "content_one_time"
     }, isModalVisible === '失物' ? item.Lost_send_time : item.Rec_send_time), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(remax_one__WEBPACK_IMPORTED_MODULE_2__["View"], {
       className: "content_one_school"
-    }, item.Re_school_name))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(remax_one__WEBPACK_IMPORTED_MODULE_2__["View"], {
+    }, item.Sch_name))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(remax_one__WEBPACK_IMPORTED_MODULE_2__["View"], {
       className: "content_one_bottom"
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(remax_one__WEBPACK_IMPORTED_MODULE_2__["View"], {
       className: "content_bottom_title"
@@ -333,4 +329,4 @@ module.exports = __webpack_require__(/*! D:\福建工程学院\毕设\代码\los
 
 /***/ })
 
-},[[1,"runtime","remax-vendors"]]]);
+},[[1,"runtime","remax-vendors","remax-styles"]]]);

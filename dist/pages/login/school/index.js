@@ -1,5 +1,6 @@
 require('./../../../runtime.js');
 require('./../../../remax-vendors.js');
+require('./../../../remax-styles.js');
 (wx["webpackJsonp"] = wx["webpackJsonp"] || []).push([["pages/login/school/index"],{
 
 /***/ "./src/pages/login/school/index.css":
@@ -44,4 +45,4 @@ module.exports = __webpack_require__(/*! D:\福建工程学院\毕设\代码\los
 
 /***/ })
 
-},[[4,"runtime","remax-vendors"]]]);
+},[[4,"runtime","remax-vendors","remax-styles"]]]);

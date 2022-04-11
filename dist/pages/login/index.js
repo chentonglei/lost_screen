@@ -170,9 +170,17 @@ var bottom = [{
 
   var BottomButton = function BottomButton(item) {
     if (item.name === '学校入住') {
-      Object(remax_one__WEBPACK_IMPORTED_MODULE_1__["navigateTo"])({
-        url: "/pages/login/school/index"
-      });
+      if (global.appData) {
+        Object(remax_one__WEBPACK_IMPORTED_MODULE_1__["navigateTo"])({
+          url: "/pages/login/school/index"
+        });
+      } else {
+        wx.showToast({
+          title: '请先登录',
+          icon: 'error',
+          duration: 2000
+        });
+      }
     }
 
     if (item.name === '帮助与反馈') {
