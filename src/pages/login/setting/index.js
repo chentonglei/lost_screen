@@ -9,12 +9,15 @@ import {
   switchTab,
   navigateTo,
 } from 'remax/one'
-import { picker } from 'remax/wechat'
+import { clearStorage, picker } from 'remax/wechat'
 import { useQuery, usePageInstance } from 'remax'
 import { AppContext } from '../../../app'
+import ip from '../../ip'
 export default () => {
-  const [index, setIndex] = useState(0)
   const global = useContext(AppContext) //全局变量
+  const [index, setIndex] = useState(0)
+  const [sex, setSex] = useState(global.appData.Re_sex)
+  const [age, setAge] = useState(global.appData.Re_age)
   const array = ['男', '女']
   /*   const data = {
     Re_id: '123',
@@ -29,52 +32,47 @@ export default () => {
     console.log('form发生了reset事件，携带数据为：', e.target)
   }
   const formSubmit = (e) => {
-    console.log('form发生了submit事件，携带数据为：', e.target)
-    const id = e.target.value.id
-    const pwd = e.target.value.psw
-    if (id === 'admin' && pwd === '123') {
-      console.log('登录成功')
-      wx.showModal({
-        title: '提示',
-        content: '登录成功',
-        success(res) {
-          if (res.confirm) {
-            console.log('用户点击确定')
-          } else if (res.cancel) {
-            console.log('用户点击取消')
-          }
-        },
-      })
-      navigateTo({
-        url: '/pages/index/index',
-      })
-    } else {
-      console.log('登录失败')
-      setPwd('')
-      formReset(e)
-      /* console.log(password);
-    setPassword(''); */
-      wx.showModal({
-        /* title: '提示', */
-        content: '登录失败',
-        success(res) {
-          if (res.confirm) {
-            console.log('用户点击确定')
-          } else if (res.cancel) {
-            console.log('用户点击取消')
-          }
-        },
-      })
-      console.log('form发生了submit事件，携带数据为：', e.target)
-    }
+    e.target.value.Re_power = 'user'
+    e.target.value.Re_sex = sex
+    e.target.value.Re_age = age
+    wx.request({
+      url: `${ip}/register/update`,
+      data: e.target.value,
+      method: 'POST',
+      success(res) {
+        if (res.data.result === 'true') {
+          wx.showToast({
+            title: '修改成功',
+            icon: 'success',
+            duration: 2000,
+          })
+          wx.request({
+            url: `${ip}/register/userInfo`,
+            data: {
+              Re_id: global.appData.Re_id,
+              Re_power: 'user',
+            },
+            method: 'POST',
+            success(res) {
+              if (res.data.result === 'true') {
+                global.setAppData(res.data.user)
+              }
+            },
+          })
+        }
+      },
+    })
   }
   const bindPickerChange = (e) => {
-    setIndex(e.detail.value)
+    console.log(e)
+    if (e.detail.value === '0') {
+      setSex('男')
+    } else {
+      setSex('女')
+    }
   }
   const bindDateChange = (e) => {
-    const day = new Date()
-    console.log(day)
-    console.log(e.detail.value)
+    setAge(e.detail.value)
   }
   const getNowFormatDate = () => {
     //获得当前时间 为生日的末时间
@@ -138,7 +136,7 @@ export default () => {
               bindchange={bindPickerChange}
               className="bottom_right"
             >
-              <View class="picker">{global.appData.Re_sex}</View>
+              <View class="picker">{sex}</View>
             </picker>
           </View>
           <View className="bottom_one">
@@ -153,14 +151,14 @@ export default () => {
             <View className="bottom_name">生日</View>
             <picker
               mode="date"
-              value={global.appData.Re_age}
+              value={age}
               start="1990-01-01"
               end={getNowFormatDate()}
               fields="day"
               className="bottom_right"
               bindchange={bindDateChange}
             >
-              <View class="picker">{global.appData.Re_age}</View>
+              <View class="picker">{age}</View>
             </picker>
           </View>
           <View className="bottom_one">

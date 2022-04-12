@@ -174,9 +174,17 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
   };
 
   var release = function release() {
-    Object(remax_one__WEBPACK_IMPORTED_MODULE_2__["navigateTo"])({
-      url: "/pages/index/release/index"
-    });
+    if (global.appData) {
+      Object(remax_one__WEBPACK_IMPORTED_MODULE_2__["navigateTo"])({
+        url: "/pages/index/release/index"
+      });
+    } else {
+      wx.showToast({
+        title: '请先登录',
+        icon: 'error',
+        duration: 2000
+      });
+    }
   };
 
   var school = function school() {

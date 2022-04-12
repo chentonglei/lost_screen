@@ -99,10 +99,6 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
     setTodaydate(currentdate);
   });
 
-  var formReset = function formReset(e) {
-    console.log('form发生了reset事件，携带数据为：', e.target);
-  };
-
   var formSubmit = function formSubmit(e) {
     if (isModalVisible === '失物') {
       var str = '请输入';
@@ -200,9 +196,12 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
       camera: 'back',
       success: function success(res) {
         console.log(res);
-        setImg(res.tempFiles[0].tempFilePath);
-        console.log(res.tempFiles.tempFilePath);
-        console.log(res.tempFiles.size);
+        var tempImagePath = res.tempFiles;
+        var imgType = tempImagePath[0].tempFilePath;
+        var fsm = wx.getFileSystemManager();
+        var base64img = 'data:image/' + imgType + ';base64,' + fsm.readFileSync(tempImagePath[0].tempFilePath, 'base64');
+        console.log(base64img);
+        setImg(base64img);
       }
     });
   };
@@ -226,8 +225,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
       return changeButton('招领');
     }
   }, "\u62DB\u9886")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(remax_one__WEBPACK_IMPORTED_MODULE_2__["Form"], {
-    onSubmit: formSubmit,
-    onReset: formReset
+    onSubmit: formSubmit
   }, isModalVisible === '失物' ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(remax_one__WEBPACK_IMPORTED_MODULE_2__["View"], {
     className: "bottom"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(remax_one__WEBPACK_IMPORTED_MODULE_2__["View"], {

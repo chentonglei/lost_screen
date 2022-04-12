@@ -31,9 +31,6 @@ export default () => {
     var currentdate = year + seperator1 + month + seperator1 + strDate
     setTodaydate(currentdate)
   })
-  const formReset = (e) => {
-    console.log('form发生了reset事件，携带数据为：', e.target)
-  }
   const formSubmit = (e) => {
     if (isModalVisible === '失物') {
       var str = '请输入'
@@ -112,11 +109,18 @@ export default () => {
       mediaType: ['image'],
       sourceType: ['album', 'camera'],
       camera: 'back',
-      success(res) {
+      success: function (res) {
         console.log(res)
-        setImg(res.tempFiles[0].tempFilePath)
-        console.log(res.tempFiles.tempFilePath)
-        console.log(res.tempFiles.size)
+        var tempImagePath = res.tempFiles
+        var imgType = tempImagePath[0].tempFilePath
+        var fsm = wx.getFileSystemManager()
+        var base64img =
+          'data:image/' +
+          imgType +
+          ';base64,' +
+          fsm.readFileSync(tempImagePath[0].tempFilePath, 'base64')
+        console.log(base64img)
+        setImg(base64img)
       },
     })
   }
@@ -139,7 +143,7 @@ export default () => {
           招领
         </View>
       </View>
-      <Form onSubmit={formSubmit} onReset={formReset}>
+      <Form onSubmit={formSubmit}>
         {isModalVisible === '失物' ? (
           <View className="bottom">
             <View className="bottom_one">

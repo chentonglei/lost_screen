@@ -48,6 +48,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var remax_wechat__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! remax/wechat */ "./node_modules/remax/wechat.js");
 /* harmony import */ var remax__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! remax */ "./node_modules/remax/esm/index.js");
 /* harmony import */ var _app__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../app */ "./src/app.js");
+/* harmony import */ var _ip__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../ip */ "./src/pages/ip.js");
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -65,13 +66,24 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
+
 /* harmony default export */ __webpack_exports__["default"] = (function () {
+  var global = Object(react__WEBPACK_IMPORTED_MODULE_0__["useContext"])(_app__WEBPACK_IMPORTED_MODULE_4__["AppContext"]); //全局变量
+
   var _useState = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(0),
       _useState2 = _slicedToArray(_useState, 2),
       index = _useState2[0],
       setIndex = _useState2[1];
 
-  var global = Object(react__WEBPACK_IMPORTED_MODULE_0__["useContext"])(_app__WEBPACK_IMPORTED_MODULE_4__["AppContext"]); //全局变量
+  var _useState3 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(global.appData.Re_sex),
+      _useState4 = _slicedToArray(_useState3, 2),
+      sex = _useState4[0],
+      setSex = _useState4[1];
+
+  var _useState5 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(global.appData.Re_age),
+      _useState6 = _slicedToArray(_useState5, 2),
+      age = _useState6[0],
+      setAge = _useState6[1];
 
   var array = ['男', '女'];
   /*   const data = {
@@ -89,56 +101,50 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
   };
 
   var formSubmit = function formSubmit(e) {
-    console.log('form发生了submit事件，携带数据为：', e.target);
-    var id = e.target.value.id;
-    var pwd = e.target.value.psw;
-
-    if (id === 'admin' && pwd === '123') {
-      console.log('登录成功');
-      wx.showModal({
-        title: '提示',
-        content: '登录成功',
-        success: function success(res) {
-          if (res.confirm) {
-            console.log('用户点击确定');
-          } else if (res.cancel) {
-            console.log('用户点击取消');
-          }
+    e.target.value.Re_power = 'user';
+    e.target.value.Re_sex = sex;
+    e.target.value.Re_age = age;
+    wx.request({
+      url: "".concat(_ip__WEBPACK_IMPORTED_MODULE_5__["default"], "/register/update"),
+      data: e.target.value,
+      method: 'POST',
+      success: function success(res) {
+        if (res.data.result === 'true') {
+          wx.showToast({
+            title: '修改成功',
+            icon: 'success',
+            duration: 2000
+          });
+          wx.request({
+            url: "".concat(_ip__WEBPACK_IMPORTED_MODULE_5__["default"], "/register/userInfo"),
+            data: {
+              Re_id: global.appData.Re_id,
+              Re_power: 'user'
+            },
+            method: 'POST',
+            success: function success(res) {
+              if (res.data.result === 'true') {
+                global.setAppData(res.data.user);
+              }
+            }
+          });
         }
-      });
-      Object(remax_one__WEBPACK_IMPORTED_MODULE_1__["navigateTo"])({
-        url: '/pages/index/index'
-      });
-    } else {
-      console.log('登录失败');
-      setPwd('');
-      formReset(e);
-      /* console.log(password);
-      setPassword(''); */
-
-      wx.showModal({
-        /* title: '提示', */
-        content: '登录失败',
-        success: function success(res) {
-          if (res.confirm) {
-            console.log('用户点击确定');
-          } else if (res.cancel) {
-            console.log('用户点击取消');
-          }
-        }
-      });
-      console.log('form发生了submit事件，携带数据为：', e.target);
-    }
+      }
+    });
   };
 
   var bindPickerChange = function bindPickerChange(e) {
-    setIndex(e.detail.value);
+    console.log(e);
+
+    if (e.detail.value === '0') {
+      setSex('男');
+    } else {
+      setSex('女');
+    }
   };
 
   var bindDateChange = function bindDateChange(e) {
-    var day = new Date();
-    console.log(day);
-    console.log(e.detail.value);
+    setAge(e.detail.value);
   };
 
   var getNowFormatDate = function getNowFormatDate() {
@@ -215,7 +221,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
     className: "bottom_right"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(remax_one__WEBPACK_IMPORTED_MODULE_1__["View"], {
     class: "picker"
-  }, global.appData.Re_sex))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(remax_one__WEBPACK_IMPORTED_MODULE_1__["View"], {
+  }, sex))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(remax_one__WEBPACK_IMPORTED_MODULE_1__["View"], {
     className: "bottom_one"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(remax_one__WEBPACK_IMPORTED_MODULE_1__["View"], {
     className: "bottom_name"
@@ -229,7 +235,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
     className: "bottom_name"
   }, "\u751F\u65E5"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("picker", {
     mode: "date",
-    value: global.appData.Re_age,
+    value: age,
     start: "1990-01-01",
     end: getNowFormatDate(),
     fields: "day",
@@ -237,7 +243,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
     bindchange: bindDateChange
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(remax_one__WEBPACK_IMPORTED_MODULE_1__["View"], {
     class: "picker"
-  }, global.appData.Re_age))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(remax_one__WEBPACK_IMPORTED_MODULE_1__["View"], {
+  }, age))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(remax_one__WEBPACK_IMPORTED_MODULE_1__["View"], {
     className: "bottom_one"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(remax_one__WEBPACK_IMPORTED_MODULE_1__["View"], {
     className: "bottom_name"

@@ -64,9 +64,17 @@ export default () => {
     setIsModalVisible(title)
   }
   const release = () => {
-    navigateTo({
-      url: `/pages/index/release/index`,
-    })
+    if (global.appData) {
+      navigateTo({
+        url: `/pages/index/release/index`,
+      })
+    } else {
+      wx.showToast({
+        title: '请先登录',
+        icon: 'error',
+        duration: 2000,
+      })
+    }
   }
   const school = () => {
     navigateTo({
