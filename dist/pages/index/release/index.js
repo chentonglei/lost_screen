@@ -1,5 +1,6 @@
 require('./../../../runtime.js');
 require('./../../../remax-vendors.js');
+require('./../../../remax-styles.js');
 (wx["webpackJsonp"] = wx["webpackJsonp"] || []).push([["pages/index/release/index"],{
 
 /***/ "./src/pages/index/release/index.css":
@@ -47,6 +48,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var remax_one__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! remax/one */ "./node_modules/remax/one.js");
 /* harmony import */ var remax__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! remax */ "./node_modules/remax/esm/index.js");
 /* harmony import */ var remax_wechat__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! remax/wechat */ "./node_modules/remax/wechat.js");
+/* harmony import */ var _app__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../../app */ "./src/app.js");
+/* harmony import */ var _ip__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../ip */ "./src/pages/ip.js");
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -64,7 +67,11 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
+
+
 /* harmony default export */ __webpack_exports__["default"] = (function () {
+  var global = Object(react__WEBPACK_IMPORTED_MODULE_1__["useContext"])(_app__WEBPACK_IMPORTED_MODULE_5__["AppContext"]); //全局变量
+
   var _useState = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(''),
       _useState2 = _slicedToArray(_useState, 2),
       img = _useState2[0],
@@ -122,10 +129,31 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
           icon: 'none',
           duration: 2000
         });
+      } else {
+        e.target.value.Lost_time = todaydate;
+        e.target.value.Lost_status = '未找到';
+        e.target.value.Lost_img = img;
+        e.target.value.Lost_people_id = global.appData.Re_id;
+        e.target.value.Lost_people_name = global.appData.Re_name;
+        e.target.value.Lost_people_phone = global.appData.Re_telephone;
+        e.target.value.Sch_name = global.appData.Re_school_name;
+        e.target.value.Sch_id = global.appData.Re_school_id;
+        wx.request({
+          url: "".concat(_ip__WEBPACK_IMPORTED_MODULE_6__["default"], "/lost/send"),
+          data: e.target.value,
+          method: 'POST',
+          success: function success(res) {
+            if (res.data.result === 'true') {
+              wx.showToast({
+                title: '发布成功',
+                icon: 'success',
+                duration: 2000
+              });
+            }
+          }
+        });
       }
-    }
-
-    if (isModalVisible === '招领') {
+    } else {
       var str = '请输入';
 
       if (!e.target.value.Rec_where) {
@@ -148,11 +176,36 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
           icon: 'none',
           duration: 2000
         });
+      } else {
+        console.log('进入');
+        e.target.value.Rec_time = todaydate;
+        e.target.value.Rec_status = '未归还';
+        e.target.value.Rec_img = img;
+        e.target.value.Rec_people_id = global.appData.Re_id;
+        e.target.value.Rec_people_name = global.appData.Re_name;
+        e.target.value.Rec_people_phone = global.appData.Re_telephone;
+        e.target.value.Sch_name = global.appData.Re_school_name;
+        e.target.value.Sch_id = global.appData.Re_school_id;
+        wx.request({
+          url: "".concat(_ip__WEBPACK_IMPORTED_MODULE_6__["default"], "/recruit/send"),
+          data: e.target.value,
+          method: 'POST',
+          success: function success(res) {
+            if (res.data.result === 'true') {
+              wx.showToast({
+                title: '发布成功',
+                icon: 'success',
+                duration: 2000
+              });
+            }
+          }
+        });
       }
     }
   };
 
   var changeButton = function changeButton(title) {
+    console.log(title);
     setIsModalVisible(title);
   };
 
@@ -322,4 +375,4 @@ module.exports = __webpack_require__(/*! D:\福建工程学院\毕设\代码\los
 
 /***/ })
 
-},[[11,"runtime","remax-vendors"]]]);
+},[[11,"runtime","remax-vendors","remax-styles"]]]);

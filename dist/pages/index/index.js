@@ -82,6 +82,8 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 /* harmony default export */ __webpack_exports__["default"] = (function () {
+  var global = Object(react__WEBPACK_IMPORTED_MODULE_1__["useContext"])(_app__WEBPACK_IMPORTED_MODULE_9__["AppContext"]); //全局变量
+
   var _useState = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])('失物'),
       _useState2 = _slicedToArray(_useState, 2),
       isModalVisible = _useState2[0],
@@ -96,8 +98,6 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
       _useState6 = _slicedToArray(_useState5, 2),
       loading = _useState6[0],
       setLoading = _useState6[1];
-
-  var global = Object(react__WEBPACK_IMPORTED_MODULE_1__["useContext"])(_app__WEBPACK_IMPORTED_MODULE_9__["AppContext"]); //全局变量
 
   Object(react__WEBPACK_IMPORTED_MODULE_1__["useEffect"])(function () {
     wx.showLoading({
@@ -121,6 +121,9 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
                 _context.next = 3;
                 return wx.request({
                   url: "".concat(_ip__WEBPACK_IMPORTED_MODULE_8__["default"], "/lost/UserShow"),
+                  data: {
+                    Sch_name: global.school
+                  },
                   method: 'POST',
                   success: function success(res) {
                     if (res.data.data) {
@@ -138,6 +141,9 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
                 _context.next = 6;
                 return wx.request({
                   url: "".concat(_ip__WEBPACK_IMPORTED_MODULE_8__["default"], "/recruit/UserShow"),
+                  data: {
+                    Sch_name: global.school
+                  },
                   method: 'POST',
                   success: function success(res) {
                     if (res.data.data) {
@@ -197,7 +203,8 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
     item.isModalVisible = isModalVisible;
     var str = JSON.stringify(item);
     Object(remax_one__WEBPACK_IMPORTED_MODULE_2__["navigateTo"])({
-      url: '/pages/index/details/index?jsonStr=' + str
+      url: '/pages/index/details/index?jsonStr=' + str //传base64报错
+
     });
   };
 

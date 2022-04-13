@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import {
   View,
   Text,
@@ -12,7 +12,10 @@ import {
 import { useQuery, usePageInstance } from 'remax'
 import { picker } from 'remax/wechat'
 import { usePageEvent } from 'remax/macro'
+import { AppContext } from '../../../app'
+import ip from '../../ip'
 export default () => {
+  const global = useContext(AppContext) //全局变量
   const [img, setImg] = useState('')
   const [isModalVisible, setIsModalVisible] = useState('失物')
   const [todaydate, setTodaydate] = useState()
@@ -50,9 +53,31 @@ export default () => {
           icon: 'none',
           duration: 2000,
         })
+      } else {
+        e.target.value.Lost_time = todaydate
+        e.target.value.Lost_status = '未找到'
+        e.target.value.Lost_img = img
+        e.target.value.Lost_people_id = global.appData.Re_id
+        e.target.value.Lost_people_name = global.appData.Re_name
+        e.target.value.Lost_people_phone = global.appData.Re_telephone
+        e.target.value.Sch_name = global.appData.Re_school_name
+        e.target.value.Sch_id = global.appData.Re_school_id
+        wx.request({
+          url: `${ip}/lost/send`,
+          data: e.target.value,
+          method: 'POST',
+          success(res) {
+            if (res.data.result === 'true') {
+              wx.showToast({
+                title: '发布成功',
+                icon: 'success',
+                duration: 2000,
+              })
+            }
+          },
+        })
       }
-    }
-    if (isModalVisible === '招领') {
+    } else {
       var str = '请输入'
       if (!e.target.value.Rec_where) {
         str += '拾物地点'
@@ -70,10 +95,35 @@ export default () => {
           icon: 'none',
           duration: 2000,
         })
+      } else {
+        console.log('进入')
+        e.target.value.Rec_time = todaydate
+        e.target.value.Rec_status = '未归还'
+        e.target.value.Rec_img = img
+        e.target.value.Rec_people_id = global.appData.Re_id
+        e.target.value.Rec_people_name = global.appData.Re_name
+        e.target.value.Rec_people_phone = global.appData.Re_telephone
+        e.target.value.Sch_name = global.appData.Re_school_name
+        e.target.value.Sch_id = global.appData.Re_school_id
+        wx.request({
+          url: `${ip}/recruit/send`,
+          data: e.target.value,
+          method: 'POST',
+          success(res) {
+            if (res.data.result === 'true') {
+              wx.showToast({
+                title: '发布成功',
+                icon: 'success',
+                duration: 2000,
+              })
+            }
+          },
+        })
       }
     }
   }
   const changeButton = (title) => {
+    console.log(title)
     setIsModalVisible(title)
   }
   const bindDateChange = (e) => {

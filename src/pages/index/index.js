@@ -18,10 +18,10 @@ import school from '../login/school'
 import ip from '../ip'
 import { AppContext } from '../../app'
 export default () => {
+  const global = useContext(AppContext) //全局变量
   const [isModalVisible, setIsModalVisible] = useState('失物')
   const [data, setData] = useState([])
   const [loading, setLoading] = useState(false)
-  const global = useContext(AppContext) //全局变量
   useEffect(() => {
     wx.showLoading({
       title: '加载中...',
@@ -33,6 +33,7 @@ export default () => {
       if (isModalVisible === '失物')
         await wx.request({
           url: `${ip}/lost/UserShow`,
+          data: { Sch_name: global.school },
           method: 'POST',
           success(res) {
             if (res.data.data) {
@@ -43,6 +44,7 @@ export default () => {
       if (isModalVisible === '招领')
         await wx.request({
           url: `${ip}/recruit/UserShow`,
+          data: { Sch_name: global.school },
           method: 'POST',
           success(res) {
             if (res.data.data) {
@@ -85,7 +87,7 @@ export default () => {
     item.isModalVisible = isModalVisible
     let str = JSON.stringify(item)
     navigateTo({
-      url: '/pages/index/details/index?jsonStr=' + str,
+      url: '/pages/index/details/index?jsonStr=' + str, //传base64报错
     })
   }
   return (

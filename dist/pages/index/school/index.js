@@ -103,7 +103,9 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
   var MidButton = function MidButton(item) {
     global.setSchool(item.Sch_name);
-    Object(remax_one__WEBPACK_IMPORTED_MODULE_2__["navigateBack"])();
+    Object(remax_one__WEBPACK_IMPORTED_MODULE_2__["reLaunch"])({
+      url: '/pages/index/index'
+    });
   };
 
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(remax_one__WEBPACK_IMPORTED_MODULE_2__["View"], {

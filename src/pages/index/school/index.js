@@ -9,6 +9,7 @@ import {
   switchTab,
   navigateTo,
   navigateBack,
+  reLaunch,
 } from 'remax/one'
 import { picker } from 'remax/wechat'
 import { useQuery, usePageInstance } from 'remax'
@@ -33,7 +34,9 @@ export default () => {
   })
   const MidButton = (item) => {
     global.setSchool(item.Sch_name)
-    navigateBack()
+    reLaunch({
+      url: '/pages/index/index',
+    })
   }
   return (
     <View className="app">
