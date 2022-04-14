@@ -50,12 +50,6 @@ export default () => {
         >
           归还
         </View>
-        <View
-          className={isModalVisible === '取消' ? 'mid_one_on' : 'mid_one_off'}
-          onClick={() => changeButton('取消')}
-        >
-          取消
-        </View>
       </View>
       <View className="end">暂无数据....</View>
     </View>

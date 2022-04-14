@@ -30,7 +30,6 @@ const body = [
   { name: '招领', img: recruit },
   { name: '评论', img: comment },
   { name: '归还', img: lost_return },
-  { name: '取消', img: cancel },
 ]
 const bottom = [
   { name: '个人中心', img: people },
@@ -40,14 +39,30 @@ const bottom = [
 export default () => {
   const global = useContext(AppContext) //全局变量
   const MidButton = (item) => {
-    navigateTo({
-      url: `/pages/login/release/index?title=${item.name}`,
-    })
+    if (global.appData) {
+      navigateTo({
+        url: `/pages/login/release/index?title=${item.name}`,
+      })
+    } else {
+      wx.showToast({
+        title: '请先登录',
+        icon: 'error',
+        duration: 2000,
+      })
+    }
   }
   const MidButtonAll = () => {
-    navigateTo({
-      url: `/pages/login/release/index?title=失物`,
-    })
+    if (global.appData) {
+      navigateTo({
+        url: `/pages/login/release/index?title=失物`,
+      })
+    } else {
+      wx.showToast({
+        title: '请先登录',
+        icon: 'error',
+        duration: 2000,
+      })
+    }
   }
   const BottomButton = (item) => {
     if (item.name === '学校入住') {

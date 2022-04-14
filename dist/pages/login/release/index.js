@@ -105,12 +105,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
     onClick: function onClick() {
       return changeButton('归还');
     }
-  }, "\u5F52\u8FD8"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(remax_one__WEBPACK_IMPORTED_MODULE_2__["View"], {
-    className: isModalVisible === '取消' ? 'mid_one_on' : 'mid_one_off',
-    onClick: function onClick() {
-      return changeButton('取消');
-    }
-  }, "\u53D6\u6D88")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(remax_one__WEBPACK_IMPORTED_MODULE_2__["View"], {
+  }, "\u5F52\u8FD8")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(remax_one__WEBPACK_IMPORTED_MODULE_2__["View"], {
     className: "end"
   }, "\u6682\u65E0\u6570\u636E...."));
 });

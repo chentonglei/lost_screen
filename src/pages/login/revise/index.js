@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import {
   View,
   Text,
@@ -11,10 +11,10 @@ import {
 } from 'remax/one'
 import { picker } from 'remax/wechat'
 import { useQuery, usePageInstance } from 'remax'
+import ip from '../../ip'
+import { AppContext } from '../../../app'
 export default () => {
-  const formReset = (e) => {
-    console.log('form发生了reset事件，携带数据为：', e.target)
-  }
+  const global = useContext(AppContext) //全局变量
   const formSubmit = (e) => {
     var str = '请输入'
     if (!e.target.value.old_password) {
@@ -44,6 +44,27 @@ export default () => {
           icon: 'error',
           duration: 2000,
         })
+      } else {
+        wx.request({
+          url: `${ip}/register/UserPassword`,
+          data: e.target.value,
+          method: 'POST',
+          success(res) {
+            if (res.data.result === 'false') {
+              wx.showToast({
+                title: res.data.message,
+                icon: 'error',
+                duration: 2000,
+              })
+            } else {
+              wx.showToast({
+                title: res.data.message,
+                icon: 'error',
+                duration: 2000,
+              })
+            }
+          },
+        })
       }
     }
   }
@@ -52,11 +73,15 @@ export default () => {
       <View className="top">
         <View className="top_title">密码修改</View>
       </View>
-      <Form onSubmit={formSubmit} onReset={formReset}>
+      <Form onSubmit={formSubmit}>
         <View className="bottom">
           <View className="bottom_one">
             <View className="bottom_name">账号：</View>
-            <Input name="Re_id" className="bottom_right" value="123456"></Input>
+            <Input
+              name="Re_id"
+              className="bottom_right"
+              value={global.appData.Re_id}
+            ></Input>
           </View>
           <View className="bottom_one">
             <View className="bottom_name">旧密码：</View>

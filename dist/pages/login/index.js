@@ -139,9 +139,6 @@ var body = [{
 }, {
   name: '归还',
   img: _return_png__WEBPACK_IMPORTED_MODULE_4__["default"]
-}, {
-  name: '取消',
-  img: _cancel_png__WEBPACK_IMPORTED_MODULE_8__["default"]
 }];
 var bottom = [{
   name: '个人中心',
@@ -157,15 +154,31 @@ var bottom = [{
   var global = Object(react__WEBPACK_IMPORTED_MODULE_0__["useContext"])(_app__WEBPACK_IMPORTED_MODULE_15__["AppContext"]); //全局变量
 
   var MidButton = function MidButton(item) {
-    Object(remax_one__WEBPACK_IMPORTED_MODULE_1__["navigateTo"])({
-      url: "/pages/login/release/index?title=".concat(item.name)
-    });
+    if (global.appData) {
+      Object(remax_one__WEBPACK_IMPORTED_MODULE_1__["navigateTo"])({
+        url: "/pages/login/release/index?title=".concat(item.name)
+      });
+    } else {
+      wx.showToast({
+        title: '请先登录',
+        icon: 'error',
+        duration: 2000
+      });
+    }
   };
 
   var MidButtonAll = function MidButtonAll() {
-    Object(remax_one__WEBPACK_IMPORTED_MODULE_1__["navigateTo"])({
-      url: "/pages/login/release/index?title=\u5931\u7269"
-    });
+    if (global.appData) {
+      Object(remax_one__WEBPACK_IMPORTED_MODULE_1__["navigateTo"])({
+        url: "/pages/login/release/index?title=\u5931\u7269"
+      });
+    } else {
+      wx.showToast({
+        title: '请先登录',
+        icon: 'error',
+        duration: 2000
+      });
+    }
   };
 
   var BottomButton = function BottomButton(item) {

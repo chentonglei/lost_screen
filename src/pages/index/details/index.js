@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import {
   View,
   Text,
@@ -11,7 +11,10 @@ import {
 } from 'remax/one'
 import { useQuery, usePageInstance } from 'remax'
 import { usePageEvent } from 'remax/macro'
+import { AppContext } from '../../../app'
+import ip from '../../ip'
 export default () => {
+  const global = useContext(AppContext) //全局变量
   const [body, setBody] = useState({})
   const [buttonfocus, setButtonfocus] = useState('说点什么吧..')
   const [telephone, setTelephone] = useState('')
@@ -36,11 +39,39 @@ export default () => {
   usePageEvent('onLoad', (options) => {
     let object = JSON.parse(options.jsonStr)
     var tel
-    if (object.isModalVisible === '失物')
-      tel = object.Lost_people_phone.slice(0, 3)
-    else tel = object.Rec_people_phone.slice(0, 3)
-    setTelephone(tel + '********')
-    setBody(object)
+    const fetchData = async () => {
+      if (object.item.isModalVisible === '失物') {
+        await wx.request({
+          url: `${ip}/lost/info`,
+          data: { Lost_id: object.item.Lost_id },
+          method: 'POST',
+          success(res) {
+            if (res.data.data) {
+              res.data.data.isModalVisible = '失物'
+              console.log(res.data.data)
+              setBody(res.data.data)
+              tel = res.data.data.Lost_people_phone.slice(0, 3)
+              setTelephone(tel + '********')
+            }
+          },
+        })
+      } else {
+        await wx.request({
+          url: `${ip}/recruit/info`,
+          data: { Rec_id: object.item.Rec_id },
+          method: 'POST',
+          success(res) {
+            if (res.data.data) {
+              res.data.data.isModalVisible = '招领'
+              setBody(res.data.data)
+              tel = res.data.data.Rec_people_phone.slice(0, 3)
+              setTelephone(tel + '********')
+            }
+          },
+        })
+      }
+    }
+    fetchData()
   })
   const onbutton = (item) => {
     setButtonfocus(`回复${item.Com_do_name}`)
@@ -61,6 +92,7 @@ export default () => {
       <View className="top">
         <View className="top_title">详情</View>
       </View>
+
       <View className="content">
         <View className="content_one">
           <View className="content_one_top">
@@ -132,9 +164,26 @@ export default () => {
               ''
             )}
           </View>
-          <View className="bottom_button">
-            <Button className="submit">我捡到了</Button>
-          </View>
+          {global.appData.Re_id ===
+            (body.Lost_people_id
+              ? body.Lost_people_id
+              : body.Rec_people_id) && (
+            <View className="bottom_button">
+              <Button className="submit">删除</Button>
+            </View>
+          )}
+          {body.Lost_status === '未找到' &&
+            global.appData.Re_id !== body.Lost_people_id && (
+              <View className="bottom_button">
+                <Button className="submit">我捡到了</Button>
+              </View>
+            )}
+          {body.Rec_status === '未归还' &&
+            global.appData.Re_id !== body.Rec_people_id && (
+              <View className="bottom_button">
+                <Button className="submit">我遗失的</Button>
+              </View>
+            )}
         </View>
       </View>
       <View className="comment_details">

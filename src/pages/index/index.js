@@ -84,11 +84,21 @@ export default () => {
     })
   }
   const details = (item) => {
-    item.isModalVisible = isModalVisible
-    let str = JSON.stringify(item)
-    navigateTo({
-      url: '/pages/index/details/index?jsonStr=' + str, //传base64报错
-    })
+    if (global.appData) {
+      item.isModalVisible = isModalVisible
+      if (isModalVisible === '失物') delete item.Lost_img
+      else delete item.Rec_img
+      let str = JSON.stringify({ item })
+      navigateTo({
+        url: '/pages/index/details/index?jsonStr=' + str, //传base64报错
+      })
+    } else {
+      wx.showToast({
+        title: '请先登录',
+        icon: 'error',
+        duration: 2000,
+      })
+    }
   }
   return (
     <View className="app">

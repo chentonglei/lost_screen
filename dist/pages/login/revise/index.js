@@ -1,5 +1,6 @@
 require('./../../../runtime.js');
 require('./../../../remax-vendors.js');
+require('./../../../remax-styles.js');
 (wx["webpackJsonp"] = wx["webpackJsonp"] || []).push([["pages/login/revise/index"],{
 
 /***/ "./src/pages/login/revise/index.css":
@@ -46,14 +47,16 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var remax_one__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! remax/one */ "./node_modules/remax/one.js");
 /* harmony import */ var remax_wechat__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! remax/wechat */ "./node_modules/remax/wechat.js");
 /* harmony import */ var remax__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! remax */ "./node_modules/remax/esm/index.js");
+/* harmony import */ var _ip__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../ip */ "./src/pages/ip.js");
+/* harmony import */ var _app__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../../app */ "./src/app.js");
+
+
 
 
 
 
 /* harmony default export */ __webpack_exports__["default"] = (function () {
-  var formReset = function formReset(e) {
-    console.log('form发生了reset事件，携带数据为：', e.target);
-  };
+  var global = Object(react__WEBPACK_IMPORTED_MODULE_0__["useContext"])(_app__WEBPACK_IMPORTED_MODULE_5__["AppContext"]); //全局变量
 
   var formSubmit = function formSubmit(e) {
     var str = '请输入';
@@ -89,6 +92,27 @@ __webpack_require__.r(__webpack_exports__);
           icon: 'error',
           duration: 2000
         });
+      } else {
+        wx.request({
+          url: "".concat(_ip__WEBPACK_IMPORTED_MODULE_4__["default"], "/register/UserPassword"),
+          data: e.target.value,
+          method: 'POST',
+          success: function success(res) {
+            if (res.data.result === 'false') {
+              wx.showToast({
+                title: res.data.message,
+                icon: 'error',
+                duration: 2000
+              });
+            } else {
+              wx.showToast({
+                title: res.data.message,
+                icon: 'error',
+                duration: 2000
+              });
+            }
+          }
+        });
       }
     }
   };
@@ -100,8 +124,7 @@ __webpack_require__.r(__webpack_exports__);
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(remax_one__WEBPACK_IMPORTED_MODULE_1__["View"], {
     className: "top_title"
   }, "\u5BC6\u7801\u4FEE\u6539")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(remax_one__WEBPACK_IMPORTED_MODULE_1__["Form"], {
-    onSubmit: formSubmit,
-    onReset: formReset
+    onSubmit: formSubmit
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(remax_one__WEBPACK_IMPORTED_MODULE_1__["View"], {
     className: "bottom"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(remax_one__WEBPACK_IMPORTED_MODULE_1__["View"], {
@@ -111,7 +134,7 @@ __webpack_require__.r(__webpack_exports__);
   }, "\u8D26\u53F7\uFF1A"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(remax_one__WEBPACK_IMPORTED_MODULE_1__["Input"], {
     name: "Re_id",
     className: "bottom_right",
-    value: "123456"
+    value: global.appData.Re_id
   })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(remax_one__WEBPACK_IMPORTED_MODULE_1__["View"], {
     className: "bottom_one"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(remax_one__WEBPACK_IMPORTED_MODULE_1__["View"], {
@@ -156,4 +179,4 @@ module.exports = __webpack_require__(/*! D:\福建工程学院\毕设\代码\los
 
 /***/ })
 
-},[[5,"runtime","remax-vendors"]]]);
+},[[5,"runtime","remax-vendors","remax-styles"]]]);

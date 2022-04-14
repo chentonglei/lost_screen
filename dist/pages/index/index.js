@@ -200,12 +200,23 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
   };
 
   var details = function details(item) {
-    item.isModalVisible = isModalVisible;
-    var str = JSON.stringify(item);
-    Object(remax_one__WEBPACK_IMPORTED_MODULE_2__["navigateTo"])({
-      url: '/pages/index/details/index?jsonStr=' + str //传base64报错
+    if (global.appData) {
+      item.isModalVisible = isModalVisible;
+      if (isModalVisible === '失物') delete item.Lost_img;else delete item.Rec_img;
+      var str = JSON.stringify({
+        item: item
+      });
+      Object(remax_one__WEBPACK_IMPORTED_MODULE_2__["navigateTo"])({
+        url: '/pages/index/details/index?jsonStr=' + str //传base64报错
 
-    });
+      });
+    } else {
+      wx.showToast({
+        title: '请先登录',
+        icon: 'error',
+        duration: 2000
+      });
+    }
   };
 
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(remax_one__WEBPACK_IMPORTED_MODULE_2__["View"], {
