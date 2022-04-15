@@ -135,78 +135,82 @@ export default () => {
         <View></View>
       ) : (
         <View className="content">
-          {data.map((item, index) => (
-            <View
-              className="content_one"
-              onClick={() => details(item)}
-              key={index}
-            >
-              <View className="content_one_top">
-                <View className="content_one_name">
-                  {isModalVisible === '失物'
-                    ? item.Lost_people_name
-                    : item.Rec_people_name}
-                  {isModalVisible === '失物' ? (
-                    <View
-                      className={
-                        item.Lost_status === '未找到'
-                          ? 'status_nofind'
-                          : 'status_find'
-                      }
-                    >
-                      {item.Lost_status}
-                    </View>
-                  ) : (
-                    <View
-                      className={
-                        item.Rec_status === '未归还'
-                          ? 'status_nofind'
-                          : 'status_find'
-                      }
-                    >
-                      {item.Rec_status}
-                    </View>
-                  )}
-                </View>
-                <View className="content_one_mid">
-                  <View className="content_one_time">
+          {data.length === 0 ? (
+            <View className="nothing">暂无</View>
+          ) : (
+            data.map((item, index) => (
+              <View
+                className="content_one"
+                onClick={() => details(item)}
+                key={index}
+              >
+                <View className="content_one_top">
+                  <View className="content_one_name">
                     {isModalVisible === '失物'
-                      ? item.Lost_send_time
-                      : item.Rec_send_time}
+                      ? item.Lost_people_name
+                      : item.Rec_people_name}
+                    {isModalVisible === '失物' ? (
+                      <View
+                        className={
+                          item.Lost_status === '未找到'
+                            ? 'status_nofind'
+                            : 'status_find'
+                        }
+                      >
+                        {item.Lost_status}
+                      </View>
+                    ) : (
+                      <View
+                        className={
+                          item.Rec_status === '未归还'
+                            ? 'status_nofind'
+                            : 'status_find'
+                        }
+                      >
+                        {item.Rec_status}
+                      </View>
+                    )}
                   </View>
-                  <View className="content_one_school">{item.Sch_name}</View>
+                  <View className="content_one_mid">
+                    <View className="content_one_time">
+                      {isModalVisible === '失物'
+                        ? item.Lost_send_time
+                        : item.Rec_send_time}
+                    </View>
+                    <View className="content_one_school">{item.Sch_name}</View>
+                  </View>
+                </View>
+                <View className="content_one_bottom">
+                  <View className="content_bottom_title">{`${
+                    isModalVisible === '失物' ? '失物时间' : '拾物时间'
+                  }：${
+                    isModalVisible === '失物' ? item.Lost_time : item.Rec_time
+                  }`}</View>
+                  <View className="content_bottom_title">{`${
+                    isModalVisible === '失物' ? '失物地点' : '拾物地点'
+                  }：${
+                    isModalVisible === '失物' ? item.Lost_where : item.Rec_where
+                  }`}</View>
+                  <View className="content_bottom_title">
+                    {`${isModalVisible === '失物' ? '失物图片' : '拾物图片'}：`}
+                    <Text style={'text-decoration:underline;color:#1296db'}>
+                      查看图片
+                    </Text>
+                  </View>
+                  <View className="content_bottom_title">{`${
+                    isModalVisible === '失物' ? '失物内容' : '拾物内容'
+                  }：${
+                    isModalVisible === '失物'
+                      ? item.Lost_content
+                      : item.Rec_content
+                  }`}</View>
+                </View>
+                <View className="comment">
+                  <Image src={comment} mode="widthFix" className="bottom_img" />
                 </View>
               </View>
-              <View className="content_one_bottom">
-                <View className="content_bottom_title">{`${
-                  isModalVisible === '失物' ? '失物时间' : '拾物时间'
-                }：${
-                  isModalVisible === '失物' ? item.Lost_time : item.Rec_time
-                }`}</View>
-                <View className="content_bottom_title">{`${
-                  isModalVisible === '失物' ? '失物地点' : '拾物地点'
-                }：${
-                  isModalVisible === '失物' ? item.Lost_where : item.Rec_where
-                }`}</View>
-                <View className="content_bottom_title">
-                  {`${isModalVisible === '失物' ? '失物图片' : '拾物图片'}：`}
-                  <Text style={'text-decoration:underline;color:#1296db'}>
-                    查看图片
-                  </Text>
-                </View>
-                <View className="content_bottom_title">{`${
-                  isModalVisible === '失物' ? '失物内容' : '拾物内容'
-                }：${
-                  isModalVisible === '失物'
-                    ? item.Lost_content
-                    : item.Rec_content
-                }`}</View>
-              </View>
-              <View className="comment">
-                <Image src={comment} mode="widthFix" className="bottom_img" />
-              </View>
-            </View>
-          ))}
+            ))
+          )}
         </View>
       )}
     </View>

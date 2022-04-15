@@ -83,31 +83,21 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
       body = _useState2[0],
       setBody = _useState2[1];
 
-  var _useState3 = Object(react__WEBPACK_IMPORTED_MODULE_2__["useState"])('说点什么吧..'),
+  var _useState3 = Object(react__WEBPACK_IMPORTED_MODULE_2__["useState"])([]),
       _useState4 = _slicedToArray(_useState3, 2),
-      buttonfocus = _useState4[0],
-      setButtonfocus = _useState4[1];
+      data = _useState4[0],
+      setData = _useState4[1];
 
-  var _useState5 = Object(react__WEBPACK_IMPORTED_MODULE_2__["useState"])(''),
+  var _useState5 = Object(react__WEBPACK_IMPORTED_MODULE_2__["useState"])('说点什么吧..'),
       _useState6 = _slicedToArray(_useState5, 2),
-      telephone = _useState6[0],
-      setTelephone = _useState6[1];
+      buttonfocus = _useState6[0],
+      setButtonfocus = _useState6[1];
 
-  var data = [{
-    Comment_do_message: '体育馆有人偷东西的大家注意点',
-    Com_do_name: '陈彤磊',
-    Com_do_id: '3181911220',
-    Com_do_time: '2022-2-3 22:00',
-    Com_be_name: '',
-    Com_be_id: ''
-  }, {
-    Comment_do_message: '不会吧不会吧',
-    Com_do_name: '何思宏',
-    Com_do_id: '3181911224',
-    Com_do_time: '2022-2-3 22:11',
-    Com_be_name: '陈彤磊',
-    Com_be_id: '3181911220'
-  }];
+  var _useState7 = Object(react__WEBPACK_IMPORTED_MODULE_2__["useState"])(''),
+      _useState8 = _slicedToArray(_useState7, 2),
+      telephone = _useState8[0],
+      setTelephone = _useState8[1];
+
   Object(_remax_runtime__WEBPACK_IMPORTED_MODULE_1__["usePageEvent"])('onLoad', function (options) {
     var object = JSON.parse(options.jsonStr);
     var tel;
@@ -176,7 +166,39 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
       };
     }();
 
+    var fetchData2 = /*#__PURE__*/function () {
+      var _ref2 = _asyncToGenerator( /*#__PURE__*/regenerator_runtime__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2() {
+        return regenerator_runtime__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
+          while (1) {
+            switch (_context2.prev = _context2.next) {
+              case 0:
+                _context2.next = 2;
+                return wx.request({
+                  url: "".concat(_ip__WEBPACK_IMPORTED_MODULE_6__["default"], "/comment/usershow"),
+                  data: object.item,
+                  method: 'POST',
+                  success: function success(res) {
+                    if (res.data.data) {
+                      setData(res.data.data);
+                    }
+                  }
+                });
+
+              case 2:
+              case "end":
+                return _context2.stop();
+            }
+          }
+        }, _callee2);
+      }));
+
+      return function fetchData2() {
+        return _ref2.apply(this, arguments);
+      };
+    }();
+
     fetchData();
+    fetchData2();
   });
 
   var onbutton = function onbutton(item) {
@@ -195,6 +217,126 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
     });
   };
 
+  var iget = function iget() {
+    wx.showModal({
+      content: '是否确认捡到',
+      success: function success(res) {
+        if (res.confirm) {
+          if (body.isModalVisible === '失物') {
+            wx.request({
+              url: "".concat(_ip__WEBPACK_IMPORTED_MODULE_6__["default"], "/lost/get"),
+              data: {
+                Return_message_id: body.Lost_id,
+                Return_people_id: global.appData.Re_id,
+                Return_people_name: global.appData.Re_name,
+                Return_people_phone: global.appData.Re_telephone
+              },
+              method: 'POST',
+              success: function success(res) {
+                console.log('success');
+
+                if (res.data.result === 'true') {
+                  wx.showToast({
+                    title: '成功',
+                    icon: 'success',
+                    duration: 2000
+                  });
+                  setTimeout(function () {
+                    delete body.Lost_img;
+                    var str = JSON.stringify({
+                      item: body
+                    });
+                    Object(remax_one__WEBPACK_IMPORTED_MODULE_3__["reLaunch"])({
+                      url: '/pages/index/details/index?jsonStr=' + str //传base64报错
+
+                    });
+                  }, 2000);
+                } else {
+                  wx.showToast({
+                    title: '失败',
+                    icon: 'error',
+                    duration: 2000
+                  });
+                }
+              }
+            });
+          }
+        } else if (res.cancel) {
+          console.log('用户点击取消');
+        }
+      }
+    });
+  };
+
+  var deleteLost = function deleteLost() {
+    wx.showModal({
+      content: '是否确认删除',
+      success: function success(res) {
+        if (res.confirm) {
+          if (body.isModalVisible === '失物') {
+            wx.request({
+              url: "".concat(_ip__WEBPACK_IMPORTED_MODULE_6__["default"], "/lost/delete"),
+              data: {
+                array: [body.Lost_id]
+              },
+              method: 'POST',
+              success: function success(res) {
+                if (res.data.result === 'true') {
+                  wx.showToast({
+                    title: '删除成功',
+                    icon: 'success',
+                    duration: 2000
+                  });
+                  setTimeout(function () {
+                    Object(remax_one__WEBPACK_IMPORTED_MODULE_3__["reLaunch"])({
+                      url: '/pages/index/index'
+                    });
+                  }, 2000);
+                } else {
+                  wx.showToast({
+                    title: '删除失败',
+                    icon: 'error',
+                    duration: 2000
+                  });
+                }
+              }
+            });
+          } else {
+            wx.request({
+              url: "".concat(_ip__WEBPACK_IMPORTED_MODULE_6__["default"], "/recruit/delete"),
+              data: {
+                array: [body.Rec_id]
+              },
+              method: 'POST',
+              success: function success(res) {
+                if (res.data.result === 'true') {
+                  wx.showToast({
+                    title: '删除成功',
+                    icon: 'success',
+                    duration: 2000
+                  });
+                  setTimeout(function () {
+                    Object(remax_one__WEBPACK_IMPORTED_MODULE_3__["reLaunch"])({
+                      url: '/pages/index/index'
+                    });
+                  }, 2000);
+                } else {
+                  wx.showToast({
+                    title: '删除失败',
+                    icon: 'error',
+                    duration: 2000
+                  });
+                }
+              }
+            });
+          }
+        } else if (res.cancel) {
+          console.log('用户点击取消');
+        }
+      }
+    });
+  };
+
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(remax_one__WEBPACK_IMPORTED_MODULE_3__["View"], {
     className: "app"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(remax_one__WEBPACK_IMPORTED_MODULE_3__["View"], {
@@ -209,7 +351,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
     className: "content_one_top"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(remax_one__WEBPACK_IMPORTED_MODULE_3__["View"], {
     className: "content_one_name"
-  }, "".concat(body.isModalVisible === '失物' ? body.Lost_people_name : body.Rec_people_name, "  ").concat(telephone), body.isModalVisible === '失物' ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(remax_one__WEBPACK_IMPORTED_MODULE_3__["View"], {
+  }, "".concat(body.isModalVisible === '失物' ? body.Lost_people_name : body.Rec_people_name, "  ").concat(body.isModalVisible === '失物' ? body.Lost_status === '未找到' ? telephone : body.Lost_people_phone : body.Rec_status === '未归还' ? telephone : body.Lost_people_phone), body.isModalVisible === '失物' ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(remax_one__WEBPACK_IMPORTED_MODULE_3__["View"], {
     className: body.Lost_status === '未找到' ? 'status_nofind' : 'status_find'
   }, body.Lost_status) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(remax_one__WEBPACK_IMPORTED_MODULE_3__["View"], {
     className: body.Rec_status === '未归还' ? 'status_nofind' : 'status_find'
@@ -238,25 +380,33 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
   })) : ''), global.appData.Re_id === (body.Lost_people_id ? body.Lost_people_id : body.Rec_people_id) && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(remax_one__WEBPACK_IMPORTED_MODULE_3__["View"], {
     className: "bottom_button"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(remax_one__WEBPACK_IMPORTED_MODULE_3__["Button"], {
-    className: "submit"
+    className: "submit",
+    onClick: function onClick() {
+      return deleteLost();
+    }
   }, "\u5220\u9664")), body.Lost_status === '未找到' && global.appData.Re_id !== body.Lost_people_id && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(remax_one__WEBPACK_IMPORTED_MODULE_3__["View"], {
     className: "bottom_button"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(remax_one__WEBPACK_IMPORTED_MODULE_3__["Button"], {
-    className: "submit"
+    className: "submit",
+    onClick: function onClick() {
+      return iget();
+    }
   }, "\u6211\u6361\u5230\u4E86")), body.Rec_status === '未归还' && global.appData.Re_id !== body.Rec_people_id && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(remax_one__WEBPACK_IMPORTED_MODULE_3__["View"], {
     className: "bottom_button"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(remax_one__WEBPACK_IMPORTED_MODULE_3__["Button"], {
     className: "submit"
   }, "\u6211\u9057\u5931\u7684")))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(remax_one__WEBPACK_IMPORTED_MODULE_3__["View"], {
     className: "comment_details"
-  }, data.map(function (item, index) {
+  }, data.length === 0 ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(remax_one__WEBPACK_IMPORTED_MODULE_3__["View"], {
+    className: "placeholder"
+  }, "\u5FEB\u5199\u4E0B\u4F60\u7684\u8BC4\u8BBA\u5427~") : data.map(function (item, index) {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(remax_one__WEBPACK_IMPORTED_MODULE_3__["View"], {
       className: "comment_one"
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(remax_one__WEBPACK_IMPORTED_MODULE_3__["View"], {
       className: "comment_one_top"
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(remax_one__WEBPACK_IMPORTED_MODULE_3__["View"], {
       className: "comment_top_left"
-    }, "".concat(item.Com_do_name, " => ").concat(item.Com_be_name ? item.Com_be_name : '楼主'), ' '), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(remax_one__WEBPACK_IMPORTED_MODULE_3__["View"], {
+    }, item.Com_do_name, ' ', item.Com_be_name ? "=> ".concat(item.Com_be_name) : ''), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(remax_one__WEBPACK_IMPORTED_MODULE_3__["View"], {
       className: "comment_top_right"
     }, item.Com_do_time)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(remax_one__WEBPACK_IMPORTED_MODULE_3__["View"], {
       className: "comment_one_content",
@@ -266,7 +416,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
       onLongTap: function onLongTap() {
         return deletecomment(item);
       }
-    }, item.Comment_do_message));
+    }, item.Com_do_message));
   })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(remax_one__WEBPACK_IMPORTED_MODULE_3__["View"], {
     className: "comment"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(remax_one__WEBPACK_IMPORTED_MODULE_3__["Input"], {

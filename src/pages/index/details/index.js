@@ -8,6 +8,7 @@ import {
   Form,
   switchTab,
   navigateTo,
+  reLaunch,
 } from 'remax/one'
 import { useQuery, usePageInstance } from 'remax'
 import { usePageEvent } from 'remax/macro'
@@ -16,26 +17,9 @@ import ip from '../../ip'
 export default () => {
   const global = useContext(AppContext) //全局变量
   const [body, setBody] = useState({})
+  const [data, setData] = useState([])
   const [buttonfocus, setButtonfocus] = useState('说点什么吧..')
   const [telephone, setTelephone] = useState('')
-  const data = [
-    {
-      Comment_do_message: '体育馆有人偷东西的大家注意点',
-      Com_do_name: '陈彤磊',
-      Com_do_id: '3181911220',
-      Com_do_time: '2022-2-3 22:00',
-      Com_be_name: '',
-      Com_be_id: '',
-    },
-    {
-      Comment_do_message: '不会吧不会吧',
-      Com_do_name: '何思宏',
-      Com_do_id: '3181911224',
-      Com_do_time: '2022-2-3 22:11',
-      Com_be_name: '陈彤磊',
-      Com_be_id: '3181911220',
-    },
-  ]
   usePageEvent('onLoad', (options) => {
     let object = JSON.parse(options.jsonStr)
     var tel
@@ -71,7 +55,20 @@ export default () => {
         })
       }
     }
+    const fetchData2 = async () => {
+      await wx.request({
+        url: `${ip}/comment/usershow`,
+        data: object.item,
+        method: 'POST',
+        success(res) {
+          if (res.data.data) {
+            setData(res.data.data)
+          }
+        },
+      })
+    }
     fetchData()
+    fetchData2()
   })
   const onbutton = (item) => {
     setButtonfocus(`回复${item.Com_do_name}`)
@@ -84,6 +81,116 @@ export default () => {
       },
       fail: function (res) {
         console.log(res.errMsg)
+      },
+    })
+  }
+  const iget = () => {
+    wx.showModal({
+      content: '是否确认捡到',
+      success: function (res) {
+        if (res.confirm) {
+          if (body.isModalVisible === '失物') {
+            wx.request({
+              url: `${ip}/lost/get`,
+              data: {
+                Return_message_id: body.Lost_id,
+                Return_people_id: global.appData.Re_id,
+                Return_people_name: global.appData.Re_name,
+                Return_people_phone: global.appData.Re_telephone,
+              },
+              method: 'POST',
+              success(res) {
+                console.log('success')
+                if (res.data.result === 'true') {
+                  wx.showToast({
+                    title: '成功',
+                    icon: 'success',
+                    duration: 2000,
+                  })
+                  setTimeout(function () {
+                    delete body.Lost_img
+                    let str = JSON.stringify({ item: body })
+                    reLaunch({
+                      url: '/pages/index/details/index?jsonStr=' + str, //传base64报错
+                    })
+                  }, 2000)
+                } else {
+                  wx.showToast({
+                    title: '失败',
+                    icon: 'error',
+                    duration: 2000,
+                  })
+                }
+              },
+            })
+          }
+        } else if (res.cancel) {
+          console.log('用户点击取消')
+        }
+      },
+    })
+  }
+  const deleteLost = () => {
+    wx.showModal({
+      content: '是否确认删除',
+      success: function (res) {
+        if (res.confirm) {
+          if (body.isModalVisible === '失物') {
+            wx.request({
+              url: `${ip}/lost/delete`,
+              data: { array: [body.Lost_id] },
+              method: 'POST',
+              success(res) {
+                if (res.data.result === 'true') {
+                  wx.showToast({
+                    title: '删除成功',
+                    icon: 'success',
+                    duration: 2000,
+                  })
+                  setTimeout(function () {
+                    reLaunch({
+                      url: '/pages/index/index',
+                    })
+                  }, 2000)
+                } else {
+                  wx.showToast({
+                    title: '删除失败',
+                    icon: 'error',
+                    duration: 2000,
+                  })
+                }
+              },
+            })
+          } else {
+            wx.request({
+              url: `${ip}/recruit/delete`,
+              data: { array: [body.Rec_id] },
+              method: 'POST',
+              success(res) {
+                if (res.data.result === 'true') {
+                  wx.showToast({
+                    title: '删除成功',
+                    icon: 'success',
+                    duration: 2000,
+                  })
+                  setTimeout(function () {
+                    reLaunch({
+                      url: '/pages/index/index',
+                    })
+                  }, 2000)
+                } else {
+                  wx.showToast({
+                    title: '删除失败',
+                    icon: 'error',
+                    duration: 2000,
+                  })
+                }
+              },
+            })
+          }
+        } else if (res.cancel) {
+          console.log('用户点击取消')
+        }
       },
     })
   }
@@ -101,7 +208,15 @@ export default () => {
                 body.isModalVisible === '失物'
                   ? body.Lost_people_name
                   : body.Rec_people_name
-              }  ${telephone}`}
+              }  ${
+                body.isModalVisible === '失物'
+                  ? body.Lost_status === '未找到'
+                    ? telephone
+                    : body.Lost_people_phone
+                  : body.Rec_status === '未归还'
+                  ? telephone
+                  : body.Lost_people_phone
+              }`}
               {body.isModalVisible === '失物' ? (
                 <View
                   className={
@@ -169,13 +284,17 @@ export default () => {
               ? body.Lost_people_id
               : body.Rec_people_id) && (
             <View className="bottom_button">
-              <Button className="submit">删除</Button>
+              <Button className="submit" onClick={() => deleteLost()}>
+                删除
+              </Button>
             </View>
           )}
           {body.Lost_status === '未找到' &&
             global.appData.Re_id !== body.Lost_people_id && (
               <View className="bottom_button">
-                <Button className="submit">我捡到了</Button>
+                <Button className="submit" onClick={() => iget()}>
+                  我捡到了
+                </Button>
               </View>
             )}
           {body.Rec_status === '未归还' &&
@@ -187,26 +306,28 @@ export default () => {
         </View>
       </View>
       <View className="comment_details">
-        {/* <View className="placeholder">快写下你的评论吧~</View> */}
-        {data.map((item, index) => (
-          <View className="comment_one">
-            <View className="comment_one_top">
-              <View className="comment_top_left">
-                {`${item.Com_do_name} => ${
-                  item.Com_be_name ? item.Com_be_name : '楼主'
-                }`}{' '}
+        {data.length === 0 ? (
+          <View className="placeholder">快写下你的评论吧~</View>
+        ) : (
+          data.map((item, index) => (
+            <View className="comment_one">
+              <View className="comment_one_top">
+                <View className="comment_top_left">
+                  {item.Com_do_name}{' '}
+                  {item.Com_be_name ? `=> ${item.Com_be_name}` : ''}
+                </View>
+                <View className="comment_top_right">{item.Com_do_time}</View>
               </View>
-              <View className="comment_top_right">{item.Com_do_time}</View>
+              <View
+                className="comment_one_content"
+                onClick={() => onbutton(item)}
+                onLongTap={() => deletecomment(item)}
+              >
+                {item.Com_do_message}
+              </View>
             </View>
-            <View
-              className="comment_one_content"
-              onClick={() => onbutton(item)}
-              onLongTap={() => deletecomment(item)}
-            >
-              {item.Comment_do_message}
-            </View>
-          </View>
-        ))}
+          ))
+        )}
       </View>
       <View className="comment">
         <Input

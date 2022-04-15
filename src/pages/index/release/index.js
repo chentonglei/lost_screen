@@ -8,6 +8,7 @@ import {
   Form,
   switchTab,
   navigateTo,
+  reLaunch,
 } from 'remax/one'
 import { useQuery, usePageInstance } from 'remax'
 import { picker } from 'remax/wechat'
@@ -73,6 +74,11 @@ export default () => {
                 icon: 'success',
                 duration: 2000,
               })
+              setTimeout(function () {
+                reLaunch({
+                  url: '/pages/index/index',
+                })
+              }, 2000)
             }
           },
         })
@@ -116,6 +122,11 @@ export default () => {
                 icon: 'success',
                 duration: 2000,
               })
+              setTimeout(function () {
+                reLaunch({
+                  url: '/pages/index/index',
+                })
+              }, 2000)
             }
           },
         })

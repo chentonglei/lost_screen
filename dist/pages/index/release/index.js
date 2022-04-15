@@ -149,6 +149,11 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
                 icon: 'success',
                 duration: 2000
               });
+              setTimeout(function () {
+                Object(remax_one__WEBPACK_IMPORTED_MODULE_2__["reLaunch"])({
+                  url: '/pages/index/index'
+                });
+              }, 2000);
             }
           }
         });
@@ -197,6 +202,11 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
                 icon: 'success',
                 duration: 2000
               });
+              setTimeout(function () {
+                Object(remax_one__WEBPACK_IMPORTED_MODULE_2__["reLaunch"])({
+                  url: '/pages/index/index'
+                });
+              }, 2000);
             }
           }
         });

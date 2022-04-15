@@ -134,3 +134,7 @@ float: right;
   margin:auto;
   padding-top: 8rpx;
 }
+.nothing{
+  margin: 20rpx auto;
+  text-align: center;
+}
