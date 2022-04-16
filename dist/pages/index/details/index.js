@@ -145,6 +145,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
                   method: 'POST',
                   success: function success(res) {
                     if (res.data.data) {
+                      console.log(res.data.data);
                       res.data.data.isModalVisible = '招领';
                       setBody(res.data.data);
                       tel = res.data.data.Rec_people_phone.slice(0, 3);
@@ -218,6 +219,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
   };
 
   var iget = function iget() {
+    //我捡到的 失物
     wx.showModal({
       content: '是否确认捡到',
       success: function success(res) {
@@ -243,6 +245,58 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
                   });
                   setTimeout(function () {
                     delete body.Lost_img;
+                    var str = JSON.stringify({
+                      item: body
+                    });
+                    Object(remax_one__WEBPACK_IMPORTED_MODULE_3__["reLaunch"])({
+                      url: '/pages/index/details/index?jsonStr=' + str //传base64报错
+
+                    });
+                  }, 2000);
+                } else {
+                  wx.showToast({
+                    title: '失败',
+                    icon: 'error',
+                    duration: 2000
+                  });
+                }
+              }
+            });
+          }
+        } else if (res.cancel) {
+          console.log('用户点击取消');
+        }
+      }
+    });
+  };
+
+  var youget = function youget() {
+    //我遗失的 招领
+    wx.showModal({
+      content: '是否确认是你的',
+      success: function success(res) {
+        if (res.confirm) {
+          if (body.isModalVisible === '招领') {
+            wx.request({
+              url: "".concat(_ip__WEBPACK_IMPORTED_MODULE_6__["default"], "/recruit/get"),
+              data: {
+                Return_message_id: body.Rec_id,
+                Return_people_id: global.appData.Re_id,
+                Return_people_name: global.appData.Re_name,
+                Return_people_phone: global.appData.Re_telephone
+              },
+              method: 'POST',
+              success: function success(res) {
+                console.log('success');
+
+                if (res.data.result === 'true') {
+                  wx.showToast({
+                    title: '成功',
+                    icon: 'success',
+                    duration: 2000
+                  });
+                  setTimeout(function () {
+                    delete body.Rec_img;
                     var str = JSON.stringify({
                       item: body
                     });
@@ -351,7 +405,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
     className: "content_one_top"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(remax_one__WEBPACK_IMPORTED_MODULE_3__["View"], {
     className: "content_one_name"
-  }, "".concat(body.isModalVisible === '失物' ? body.Lost_people_name : body.Rec_people_name, "  ").concat(body.isModalVisible === '失物' ? body.Lost_status === '未找到' ? telephone : body.Lost_people_phone : body.Rec_status === '未归还' ? telephone : body.Lost_people_phone), body.isModalVisible === '失物' ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(remax_one__WEBPACK_IMPORTED_MODULE_3__["View"], {
+  }, "".concat(body.isModalVisible === '失物' ? body.Lost_people_name : body.Rec_people_name, "  ").concat(body.isModalVisible === '失物' ? body.Lost_status === '未找到' ? telephone : body.Lost_people_phone : body.Rec_status === '未归还' ? telephone : body.Rec_people_phone), body.isModalVisible === '失物' ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(remax_one__WEBPACK_IMPORTED_MODULE_3__["View"], {
     className: body.Lost_status === '未找到' ? 'status_nofind' : 'status_find'
   }, body.Lost_status) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(remax_one__WEBPACK_IMPORTED_MODULE_3__["View"], {
     className: body.Rec_status === '未归还' ? 'status_nofind' : 'status_find'
@@ -365,16 +419,22 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
     className: "content_one_bottom"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(remax_one__WEBPACK_IMPORTED_MODULE_3__["View"], {
     className: "content_bottom_title"
-  }, "\u5931\u7269\u65F6\u95F4\uFF1A".concat(body.isModalVisible === '失物' ? body.Lost_time : body.Rec_time)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(remax_one__WEBPACK_IMPORTED_MODULE_3__["View"], {
+  }, "".concat(body.isModalVisible === '失物' ? '失物时间：' : '拾物时间', " ").concat(body.isModalVisible === '失物' ? body.Lost_time : body.Rec_time)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(remax_one__WEBPACK_IMPORTED_MODULE_3__["View"], {
     className: "content_bottom_title"
-  }, "\u5931\u7269\u5730\u70B9\uFF1A".concat(body.isModalVisible === '失物' ? body.Lost_where : body.Rec_where)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(remax_one__WEBPACK_IMPORTED_MODULE_3__["View"], {
+  }, "".concat(body.isModalVisible === '失物' ? '失物地点：' : '拾物地点：', " ").concat(body.isModalVisible === '失物' ? body.Lost_where : body.Rec_where)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(remax_one__WEBPACK_IMPORTED_MODULE_3__["View"], {
     className: "content_bottom_title"
-  }, "\u5931\u7269\u5185\u5BB9\uFF1A".concat(body.isModalVisible === '失物' ? body.Lost_content : body.Rec_content)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(remax_one__WEBPACK_IMPORTED_MODULE_3__["View"], {
+  }, "".concat(body.isModalVisible === '失物' ? '失物内容：' : '拾物内容：', " ").concat(body.isModalVisible === '失物' ? body.Lost_content : body.Rec_content)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(remax_one__WEBPACK_IMPORTED_MODULE_3__["View"], {
     className: "content_bottom_title"
-  }, "\u5931\u7269\u56FE\u7247\uFF1A".concat(body.Lost_img ? '' : '无')), body.Lost_img ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(remax_one__WEBPACK_IMPORTED_MODULE_3__["View"], {
+  }, body.isModalVisible === '失物' ? '失物图片：' : '拾物图片：', body.isModalVisible === '失物' ? body.Lost_img ? '' : '无' : body.Rec_img ? '' : '无'), body.isModalVisible === '失物' ? body.Lost_img ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(remax_one__WEBPACK_IMPORTED_MODULE_3__["View"], {
     className: "bottom_img_div"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(remax_one__WEBPACK_IMPORTED_MODULE_3__["Image"], {
     src: body.Lost_img,
+    mode: "widthFix",
+    className: "bottom_img"
+  })) : '' : body.Rec_img ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(remax_one__WEBPACK_IMPORTED_MODULE_3__["View"], {
+    className: "bottom_img_div"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(remax_one__WEBPACK_IMPORTED_MODULE_3__["Image"], {
+    src: body.Rec_img,
     mode: "widthFix",
     className: "bottom_img"
   })) : ''), global.appData.Re_id === (body.Lost_people_id ? body.Lost_people_id : body.Rec_people_id) && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(remax_one__WEBPACK_IMPORTED_MODULE_3__["View"], {
@@ -394,7 +454,10 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
   }, "\u6211\u6361\u5230\u4E86")), body.Rec_status === '未归还' && global.appData.Re_id !== body.Rec_people_id && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(remax_one__WEBPACK_IMPORTED_MODULE_3__["View"], {
     className: "bottom_button"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(remax_one__WEBPACK_IMPORTED_MODULE_3__["Button"], {
-    className: "submit"
+    className: "submit",
+    onClick: function onClick() {
+      return youget();
+    }
   }, "\u6211\u9057\u5931\u7684")))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(remax_one__WEBPACK_IMPORTED_MODULE_3__["View"], {
     className: "comment_details"
   }, data.length === 0 ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(remax_one__WEBPACK_IMPORTED_MODULE_3__["View"], {
