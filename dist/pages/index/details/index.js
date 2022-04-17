@@ -51,6 +51,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var remax__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! remax */ "./node_modules/remax/esm/index.js");
 /* harmony import */ var _app__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../../app */ "./src/app.js");
 /* harmony import */ var _ip__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../ip */ "./src/pages/ip.js");
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
@@ -93,10 +99,18 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
       buttonfocus = _useState6[0],
       setButtonfocus = _useState6[1];
 
-  var _useState7 = Object(react__WEBPACK_IMPORTED_MODULE_2__["useState"])(''),
+  var _useState7 = Object(react__WEBPACK_IMPORTED_MODULE_2__["useState"])({
+    Com_be_name: '',
+    Com_be_id: ''
+  }),
       _useState8 = _slicedToArray(_useState7, 2),
-      telephone = _useState8[0],
-      setTelephone = _useState8[1];
+      be = _useState8[0],
+      setBe = _useState8[1];
+
+  var _useState9 = Object(react__WEBPACK_IMPORTED_MODULE_2__["useState"])(''),
+      _useState10 = _slicedToArray(_useState9, 2),
+      telephone = _useState10[0],
+      setTelephone = _useState10[1];
 
   Object(_remax_runtime__WEBPACK_IMPORTED_MODULE_1__["usePageEvent"])('onLoad', function (options) {
     var object = JSON.parse(options.jsonStr);
@@ -203,19 +217,50 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
   });
 
   var onbutton = function onbutton(item) {
+    setBe({
+      Com_be_id: item.Com_do_id,
+      Com_be_name: item.Com_do_name
+    });
     setButtonfocus("\u56DE\u590D".concat(item.Com_do_name));
   };
 
   var deletecomment = function deletecomment(item) {
-    wx.showActionSheet({
-      itemList: ['删除'],
-      success: function success(res) {
-        console.log(res.tapIndex);
-      },
-      fail: function fail(res) {
-        console.log(res.errMsg);
-      }
-    });
+    if (global.appData.Re_id === item.Com_do_id) {
+      wx.showActionSheet({
+        itemList: ['删除'],
+        success: function success(res) {
+          wx.request({
+            url: "".concat(_ip__WEBPACK_IMPORTED_MODULE_6__["default"], "/comment/delete"),
+            data: {
+              array: [item.Com_id]
+            },
+            method: 'POST',
+            success: function success(res) {
+              if (res.data.result = 'true') {
+                wx.showToast({
+                  title: '删除成功',
+                  icon: 'success',
+                  duration: 2000
+                });
+                setTimeout(function () {
+                  delete body.Rec_img ? body.Rec_img : body.Lost_img;
+                  var str = JSON.stringify({
+                    item: body
+                  });
+                  Object(remax_one__WEBPACK_IMPORTED_MODULE_3__["redirectTo"])({
+                    url: '/pages/index/details/index?jsonStr=' + str //传base64报错
+
+                  });
+                }, 2000);
+              }
+            }
+          });
+        },
+        fail: function fail(res) {
+          console.log(res.errMsg);
+        }
+      });
+    }
   };
 
   var iget = function iget() {
@@ -248,7 +293,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
                     var str = JSON.stringify({
                       item: body
                     });
-                    Object(remax_one__WEBPACK_IMPORTED_MODULE_3__["reLaunch"])({
+                    Object(remax_one__WEBPACK_IMPORTED_MODULE_3__["redirectTo"])({
                       url: '/pages/index/details/index?jsonStr=' + str //传base64报错
 
                     });
@@ -300,7 +345,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
                     var str = JSON.stringify({
                       item: body
                     });
-                    Object(remax_one__WEBPACK_IMPORTED_MODULE_3__["reLaunch"])({
+                    Object(remax_one__WEBPACK_IMPORTED_MODULE_3__["redirectTo"])({
                       url: '/pages/index/details/index?jsonStr=' + str //传base64报错
 
                     });
@@ -342,7 +387,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
                     duration: 2000
                   });
                   setTimeout(function () {
-                    Object(remax_one__WEBPACK_IMPORTED_MODULE_3__["reLaunch"])({
+                    Object(remax_one__WEBPACK_IMPORTED_MODULE_3__["redirectTo"])({
                       url: '/pages/index/index'
                     });
                   }, 2000);
@@ -370,7 +415,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
                     duration: 2000
                   });
                   setTimeout(function () {
-                    Object(remax_one__WEBPACK_IMPORTED_MODULE_3__["reLaunch"])({
+                    Object(remax_one__WEBPACK_IMPORTED_MODULE_3__["redirectTo"])({
                       url: '/pages/index/index'
                     });
                   }, 2000);
@@ -389,6 +434,53 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
         }
       }
     });
+  };
+
+  var sendComment = function sendComment(item) {
+    if (item.target.value.Com_do_message !== '') {
+      wx.request({
+        url: "".concat(_ip__WEBPACK_IMPORTED_MODULE_6__["default"], "/comment/add"),
+        data: _objectSpread(_objectSpread({}, be), {}, {
+          Com_do_message: item.target.value.Com_do_message,
+          Com_do_name: global.appData.Re_name,
+          Com_do_id: global.appData.Re_id,
+          Com_type: body.isModalVisible,
+          Com_type_id: body.Lost_id ? body.Lost_id : body.Rec_id
+        }),
+        method: 'POST',
+        success: function success(res) {
+          if (res.data.result === 'true') {
+            wx.showToast({
+              title: '评论成功',
+              icon: 'success',
+              duration: 2000
+            });
+            setTimeout(function () {
+              delete body.Rec_img ? body.Rec_img : body.Lost_img;
+              var str = JSON.stringify({
+                item: body
+              });
+              Object(remax_one__WEBPACK_IMPORTED_MODULE_3__["redirectTo"])({
+                url: '/pages/index/details/index?jsonStr=' + str //传base64报错
+
+              });
+            }, 2000);
+          } else {
+            wx.showToast({
+              title: '评论失败',
+              icon: 'error',
+              duration: 2000
+            });
+          }
+        }
+      });
+    } else {
+      wx.showToast({
+        title: '请输入内容',
+        icon: 'error',
+        duration: 2000
+      });
+    }
   };
 
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(remax_one__WEBPACK_IMPORTED_MODULE_3__["View"], {
@@ -419,7 +511,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
     className: "content_one_bottom"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(remax_one__WEBPACK_IMPORTED_MODULE_3__["View"], {
     className: "content_bottom_title"
-  }, "".concat(body.isModalVisible === '失物' ? '失物时间：' : '拾物时间', " ").concat(body.isModalVisible === '失物' ? body.Lost_time : body.Rec_time)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(remax_one__WEBPACK_IMPORTED_MODULE_3__["View"], {
+  }, "".concat(body.isModalVisible === '失物' ? '失物时间：' : '拾物时间：', " ").concat(body.isModalVisible === '失物' ? body.Lost_time : body.Rec_time)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(remax_one__WEBPACK_IMPORTED_MODULE_3__["View"], {
     className: "content_bottom_title"
   }, "".concat(body.isModalVisible === '失物' ? '失物地点：' : '拾物地点：', " ").concat(body.isModalVisible === '失物' ? body.Lost_where : body.Rec_where)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(remax_one__WEBPACK_IMPORTED_MODULE_3__["View"], {
     className: "content_bottom_title"
@@ -482,15 +574,19 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
     }, item.Com_do_message));
   })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(remax_one__WEBPACK_IMPORTED_MODULE_3__["View"], {
     className: "comment"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(remax_one__WEBPACK_IMPORTED_MODULE_3__["Form"], {
+    onSubmit: sendComment
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(remax_one__WEBPACK_IMPORTED_MODULE_3__["Input"], {
     className: "comment_input",
     placeholder: buttonfocus,
+    name: "Com_do_message",
     focus: buttonfocus !== '说点什么吧..' ? true : false
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(remax_one__WEBPACK_IMPORTED_MODULE_3__["View"], {
     className: "comment_send"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(remax_one__WEBPACK_IMPORTED_MODULE_3__["Button"], {
-    className: "send_button"
-  }, "\u53D1\u9001"))));
+    className: "send_button",
+    type: "submit"
+  }, "\u53D1\u9001")))));
 });
 
 /***/ }),

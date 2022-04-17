@@ -9,6 +9,7 @@ import {
   switchTab,
   navigateTo,
   reLaunch,
+  redirectTo,
 } from 'remax/one'
 import { useQuery, usePageInstance } from 'remax'
 import { usePageEvent } from 'remax/macro'
@@ -19,6 +20,7 @@ export default () => {
   const [body, setBody] = useState({})
   const [data, setData] = useState([])
   const [buttonfocus, setButtonfocus] = useState('说点什么吧..')
+  const [be, setBe] = useState({ Com_be_name: '', Com_be_id: '' })
   const [telephone, setTelephone] = useState('')
   usePageEvent('onLoad', (options) => {
     let object = JSON.parse(options.jsonStr)
@@ -72,18 +74,41 @@ export default () => {
     fetchData2()
   })
   const onbutton = (item) => {
+    setBe({ Com_be_id: item.Com_do_id, Com_be_name: item.Com_do_name })
     setButtonfocus(`回复${item.Com_do_name}`)
   }
   const deletecomment = (item) => {
-    wx.showActionSheet({
-      itemList: ['删除'],
-      success: function (res) {
-        console.log(res.tapIndex)
-      },
-      fail: function (res) {
-        console.log(res.errMsg)
-      },
-    })
+    if (global.appData.Re_id === item.Com_do_id) {
+      wx.showActionSheet({
+        itemList: ['删除'],
+        success: function (res) {
+          wx.request({
+            url: `${ip}/comment/delete`,
+            data: { array: [item.Com_id] },
+            method: 'POST',
+            success(res) {
+              if ((res.data.result = 'true')) {
+                wx.showToast({
+                  title: '删除成功',
+                  icon: 'success',
+                  duration: 2000,
+                })
+                setTimeout(function () {
+                  delete body.Rec_img ? body.Rec_img : body.Lost_img
+                  let str = JSON.stringify({ item: body })
+                  redirectTo({
+                    url: '/pages/index/details/index?jsonStr=' + str, //传base64报错
+                  })
+                }, 2000)
+              }
+            },
+          })
+        },
+        fail: function (res) {
+          console.log(res.errMsg)
+        },
+      })
+    }
   }
   const iget = () => {
     //我捡到的 失物
@@ -112,7 +137,7 @@ export default () => {
                   setTimeout(function () {
                     delete body.Lost_img
                     let str = JSON.stringify({ item: body })
-                    reLaunch({
+                    redirectTo({
                       url: '/pages/index/details/index?jsonStr=' + str, //传base64报错
                     })
                   }, 2000)
@@ -159,7 +184,7 @@ export default () => {
                   setTimeout(function () {
                     delete body.Rec_img
                     let str = JSON.stringify({ item: body })
-                    reLaunch({
+                    redirectTo({
                       url: '/pages/index/details/index?jsonStr=' + str, //传base64报错
                     })
                   }, 2000)
@@ -197,7 +222,7 @@ export default () => {
                     duration: 2000,
                   })
                   setTimeout(function () {
-                    reLaunch({
+                    redirectTo({
                       url: '/pages/index/index',
                     })
                   }, 2000)
@@ -223,7 +248,7 @@ export default () => {
                     duration: 2000,
                   })
                   setTimeout(function () {
-                    reLaunch({
+                    redirectTo({
                       url: '/pages/index/index',
                     })
                   }, 2000)
@@ -242,6 +267,50 @@ export default () => {
         }
       },
     })
+  }
+  const sendComment = (item) => {
+    if (item.target.value.Com_do_message !== '') {
+      wx.request({
+        url: `${ip}/comment/add`,
+        data: {
+          ...be,
+          Com_do_message: item.target.value.Com_do_message,
+          Com_do_name: global.appData.Re_name,
+          Com_do_id: global.appData.Re_id,
+          Com_type: body.isModalVisible,
+          Com_type_id: body.Lost_id ? body.Lost_id : body.Rec_id,
+        },
+        method: 'POST',
+        success(res) {
+          if (res.data.result === 'true') {
+            wx.showToast({
+              title: '评论成功',
+              icon: 'success',
+              duration: 2000,
+            })
+            setTimeout(function () {
+              delete body.Rec_img ? body.Rec_img : body.Lost_img
+              let str = JSON.stringify({ item: body })
+              redirectTo({
+                url: '/pages/index/details/index?jsonStr=' + str, //传base64报错
+              })
+            }, 2000)
+          } else {
+            wx.showToast({
+              title: '评论失败',
+              icon: 'error',
+              duration: 2000,
+            })
+          }
+        },
+      })
+    } else {
+      wx.showToast({
+        title: '请输入内容',
+        icon: 'error',
+        duration: 2000,
+      })
+    }
   }
   return (
     <View className="app">
@@ -303,7 +372,7 @@ export default () => {
           </View>
           <View className="content_one_bottom">
             <View className="content_bottom_title">{`${
-              body.isModalVisible === '失物' ? '失物时间：' : '拾物时间'
+              body.isModalVisible === '失物' ? '失物时间：' : '拾物时间：'
             } ${
               body.isModalVisible === '失物' ? body.Lost_time : body.Rec_time
             }`}</View>
@@ -406,14 +475,19 @@ export default () => {
         )}
       </View>
       <View className="comment">
-        <Input
-          className="comment_input"
-          placeholder={buttonfocus}
-          focus={buttonfocus !== '说点什么吧..' ? true : false}
-        ></Input>
-        <View className="comment_send">
-          <Button className="send_button">发送</Button>
-        </View>
+        <Form onSubmit={sendComment}>
+          <Input
+            className="comment_input"
+            placeholder={buttonfocus}
+            name="Com_do_message"
+            focus={buttonfocus !== '说点什么吧..' ? true : false}
+          ></Input>
+          <View className="comment_send">
+            <Button className="send_button" type="submit">
+              发送
+            </Button>
+          </View>
+        </Form>
       </View>
     </View>
   )
