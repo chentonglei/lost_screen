@@ -112,7 +112,18 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
       telephone = _useState10[0],
       setTelephone = _useState10[1];
 
+  var _useState11 = Object(react__WEBPACK_IMPORTED_MODULE_2__["useState"])(true),
+      _useState12 = _slicedToArray(_useState11, 2),
+      loading = _useState12[0],
+      setLoading = _useState12[1];
+
   Object(_remax_runtime__WEBPACK_IMPORTED_MODULE_1__["usePageEvent"])('onLoad', function (options) {
+    wx.showLoading({
+      title: '加载中...',
+      success: function success() {
+        setLoading(true);
+      }
+    });
     var object = JSON.parse(options.jsonStr);
     var tel;
 
@@ -214,6 +225,13 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
     fetchData();
     fetchData2();
+    setTimeout(function () {
+      wx.hideLoading({
+        success: function success() {
+          setLoading(false);
+        }
+      });
+    }, 1000);
   });
 
   var onbutton = function onbutton(item) {
@@ -483,13 +501,37 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
     }
   };
 
+  var telflag = function telflag() {
+    if (body.isModalVisible === '失物') {
+      if (body.Lost_people_id === global.appData.Re_id) return body.Lost_people_phone;
+      if (body.Lost_status === '已找到') return body.Lost_people_phone;
+      return telephone;
+    } else {
+      if (body.Rec_people_id === global.appData.Re_id) return body.Rec_people_phone;
+      if (body.Rec_status === '已归还') return body.Rec_people_phone;
+      return telephone;
+    }
+    /*  ${
+      body.isModalVisible === '失物'
+        ? body.Lost_status === '未找到'
+          ? telephone
+          : body.Lost_people_phone
+        : body.Rec_status === '未归还'
+        ? telephone
+        : body.Rec_people_phone
+    } */
+
+  };
+
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(remax_one__WEBPACK_IMPORTED_MODULE_3__["View"], {
     className: "app"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(remax_one__WEBPACK_IMPORTED_MODULE_3__["View"], {
     className: "top"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(remax_one__WEBPACK_IMPORTED_MODULE_3__["View"], {
     className: "top_title"
-  }, "\u8BE6\u60C5")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(remax_one__WEBPACK_IMPORTED_MODULE_3__["View"], {
+  }, "\u8BE6\u60C5")), loading === true ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(remax_one__WEBPACK_IMPORTED_MODULE_3__["View"], {
+    className: "allcontent"
+  }) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(remax_one__WEBPACK_IMPORTED_MODULE_3__["View"], {
     className: "content"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(remax_one__WEBPACK_IMPORTED_MODULE_3__["View"], {
     className: "content_one"
@@ -497,7 +539,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
     className: "content_one_top"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(remax_one__WEBPACK_IMPORTED_MODULE_3__["View"], {
     className: "content_one_name"
-  }, "".concat(body.isModalVisible === '失物' ? body.Lost_people_name : body.Rec_people_name, "  ").concat(body.isModalVisible === '失物' ? body.Lost_status === '未找到' ? telephone : body.Lost_people_phone : body.Rec_status === '未归还' ? telephone : body.Rec_people_phone), body.isModalVisible === '失物' ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(remax_one__WEBPACK_IMPORTED_MODULE_3__["View"], {
+  }, "".concat(body.isModalVisible === '失物' ? body.Lost_people_name : body.Rec_people_name, " ").concat(telflag()), body.isModalVisible === '失物' ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(remax_one__WEBPACK_IMPORTED_MODULE_3__["View"], {
     className: body.Lost_status === '未找到' ? 'status_nofind' : 'status_find'
   }, body.Lost_status) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(remax_one__WEBPACK_IMPORTED_MODULE_3__["View"], {
     className: body.Rec_status === '未归还' ? 'status_nofind' : 'status_find'

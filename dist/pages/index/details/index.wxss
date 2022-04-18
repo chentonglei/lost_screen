@@ -201,3 +201,8 @@ float: right;
   margin-top: 10rpx;
   float: left;
 }
+.allcontent{
+  background: #FFFFFF;
+  width: 100%;
+  height: 100%;
+}

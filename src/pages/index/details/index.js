@@ -22,7 +22,14 @@ export default () => {
   const [buttonfocus, setButtonfocus] = useState('说点什么吧..')
   const [be, setBe] = useState({ Com_be_name: '', Com_be_id: '' })
   const [telephone, setTelephone] = useState('')
+  const [loading, setLoading] = useState(true)
   usePageEvent('onLoad', (options) => {
+    wx.showLoading({
+      title: '加载中...',
+      success() {
+        setLoading(true)
+      },
+    })
     let object = JSON.parse(options.jsonStr)
     var tel
     const fetchData = async () => {
@@ -72,6 +79,13 @@ export default () => {
     }
     fetchData()
     fetchData2()
+    setTimeout(function () {
+      wx.hideLoading({
+        success() {
+          setLoading(false)
+        },
+      })
+    }, 1000)
   })
   const onbutton = (item) => {
     setBe({ Com_be_id: item.Com_do_id, Com_be_name: item.Com_do_name })
@@ -312,144 +326,163 @@ export default () => {
       })
     }
   }
+  const telflag = () => {
+    if (body.isModalVisible === '失物') {
+      if (body.Lost_people_id === global.appData.Re_id)
+        return body.Lost_people_phone
+      if (body.Lost_status === '已找到') return body.Lost_people_phone
+      return telephone
+    } else {
+      if (body.Rec_people_id === global.appData.Re_id)
+        return body.Rec_people_phone
+      if (body.Rec_status === '已归还') return body.Rec_people_phone
+      return telephone
+    }
+    /*  ${
+      body.isModalVisible === '失物'
+        ? body.Lost_status === '未找到'
+          ? telephone
+          : body.Lost_people_phone
+        : body.Rec_status === '未归还'
+        ? telephone
+        : body.Rec_people_phone
+    } */
+  }
   return (
     <View className="app">
       <View className="top">
         <View className="top_title">详情</View>
       </View>
-
-      <View className="content">
-        <View className="content_one">
-          <View className="content_one_top">
-            <View className="content_one_name">
-              {`${
-                body.isModalVisible === '失物'
-                  ? body.Lost_people_name
-                  : body.Rec_people_name
-              }  ${
-                body.isModalVisible === '失物'
-                  ? body.Lost_status === '未找到'
-                    ? telephone
-                    : body.Lost_people_phone
-                  : body.Rec_status === '未归还'
-                  ? telephone
-                  : body.Rec_people_phone
-              }`}
-              {body.isModalVisible === '失物' ? (
-                <View
-                  className={
-                    body.Lost_status === '未找到'
-                      ? 'status_nofind'
-                      : 'status_find'
-                  }
-                >
-                  {body.Lost_status}
-                </View>
-              ) : (
-                <View
-                  className={
-                    body.Rec_status === '未归还'
-                      ? 'status_nofind'
-                      : 'status_find'
-                  }
-                >
-                  {body.Rec_status}
-                </View>
-              )}
-            </View>
-            <View className="content_one_mid">
-              <View className="content_one_time">
-                {body.isModalVisible === '失物'
-                  ? body.Lost_send_time
-                  : body.Rec_send_time}
+      {loading === true ? (
+        <View className="allcontent"></View>
+      ) : (
+        <View className="content">
+          <View className="content_one">
+            <View className="content_one_top">
+              <View className="content_one_name">
+                {`${
+                  body.isModalVisible === '失物'
+                    ? body.Lost_people_name
+                    : body.Rec_people_name
+                } ${telflag()}`}
+                {body.isModalVisible === '失物' ? (
+                  <View
+                    className={
+                      body.Lost_status === '未找到'
+                        ? 'status_nofind'
+                        : 'status_find'
+                    }
+                  >
+                    {body.Lost_status}
+                  </View>
+                ) : (
+                  <View
+                    className={
+                      body.Rec_status === '未归还'
+                        ? 'status_nofind'
+                        : 'status_find'
+                    }
+                  >
+                    {body.Rec_status}
+                  </View>
+                )}
               </View>
-              <View className="content_one_school">
-                {body.isModalVisible === '失物'
-                  ? body.Lost_school_name
-                  : body.Rec_school_name}
+              <View className="content_one_mid">
+                <View className="content_one_time">
+                  {body.isModalVisible === '失物'
+                    ? body.Lost_send_time
+                    : body.Rec_send_time}
+                </View>
+                <View className="content_one_school">
+                  {body.isModalVisible === '失物'
+                    ? body.Lost_school_name
+                    : body.Rec_school_name}
+                </View>
               </View>
             </View>
-          </View>
-          <View className="content_one_bottom">
-            <View className="content_bottom_title">{`${
-              body.isModalVisible === '失物' ? '失物时间：' : '拾物时间：'
-            } ${
-              body.isModalVisible === '失物' ? body.Lost_time : body.Rec_time
-            }`}</View>
-            <View className="content_bottom_title">{`${
-              body.isModalVisible === '失物' ? '失物地点：' : '拾物地点：'
-            } ${
-              body.isModalVisible === '失物' ? body.Lost_where : body.Rec_where
-            }`}</View>
-            <View className="content_bottom_title">{`${
-              body.isModalVisible === '失物' ? '失物内容：' : '拾物内容：'
-            } ${
-              body.isModalVisible === '失物'
-                ? body.Lost_content
-                : body.Rec_content
-            }`}</View>
-            <View className="content_bottom_title">
-              {body.isModalVisible === '失物' ? '失物图片：' : '拾物图片：'}
-              {body.isModalVisible === '失物'
-                ? body.Lost_img
+            <View className="content_one_bottom">
+              <View className="content_bottom_title">{`${
+                body.isModalVisible === '失物' ? '失物时间：' : '拾物时间：'
+              } ${
+                body.isModalVisible === '失物' ? body.Lost_time : body.Rec_time
+              }`}</View>
+              <View className="content_bottom_title">{`${
+                body.isModalVisible === '失物' ? '失物地点：' : '拾物地点：'
+              } ${
+                body.isModalVisible === '失物'
+                  ? body.Lost_where
+                  : body.Rec_where
+              }`}</View>
+              <View className="content_bottom_title">{`${
+                body.isModalVisible === '失物' ? '失物内容：' : '拾物内容：'
+              } ${
+                body.isModalVisible === '失物'
+                  ? body.Lost_content
+                  : body.Rec_content
+              }`}</View>
+              <View className="content_bottom_title">
+                {body.isModalVisible === '失物' ? '失物图片：' : '拾物图片：'}
+                {body.isModalVisible === '失物'
+                  ? body.Lost_img
+                    ? ''
+                    : '无'
+                  : body.Rec_img
                   ? ''
-                  : '无'
-                : body.Rec_img
-                ? ''
-                : '无'}
-            </View>
-            {body.isModalVisible === '失物' ? (
-              body.Lost_img ? (
+                  : '无'}
+              </View>
+              {body.isModalVisible === '失物' ? (
+                body.Lost_img ? (
+                  <View className="bottom_img_div">
+                    <Image
+                      src={body.Lost_img}
+                      mode="widthFix"
+                      className="bottom_img"
+                    />
+                  </View>
+                ) : (
+                  ''
+                )
+              ) : body.Rec_img ? (
                 <View className="bottom_img_div">
                   <Image
-                    src={body.Lost_img}
+                    src={body.Rec_img}
                     mode="widthFix"
                     className="bottom_img"
                   />
                 </View>
               ) : (
                 ''
-              )
-            ) : body.Rec_img ? (
-              <View className="bottom_img_div">
-                <Image
-                  src={body.Rec_img}
-                  mode="widthFix"
-                  className="bottom_img"
-                />
-              </View>
-            ) : (
-              ''
-            )}
-          </View>
-          {global.appData.Re_id ===
-            (body.Lost_people_id
-              ? body.Lost_people_id
-              : body.Rec_people_id) && (
-            <View className="bottom_button">
-              <Button className="submit" onClick={() => deleteLost()}>
-                删除
-              </Button>
+              )}
             </View>
-          )}
-          {body.Lost_status === '未找到' &&
-            global.appData.Re_id !== body.Lost_people_id && (
+            {global.appData.Re_id ===
+              (body.Lost_people_id
+                ? body.Lost_people_id
+                : body.Rec_people_id) && (
               <View className="bottom_button">
-                <Button className="submit" onClick={() => iget()}>
-                  我捡到了
+                <Button className="submit" onClick={() => deleteLost()}>
+                  删除
                 </Button>
               </View>
             )}
-          {body.Rec_status === '未归还' &&
-            global.appData.Re_id !== body.Rec_people_id && (
-              <View className="bottom_button">
-                <Button className="submit" onClick={() => youget()}>
-                  我遗失的
-                </Button>
-              </View>
-            )}
+            {body.Lost_status === '未找到' &&
+              global.appData.Re_id !== body.Lost_people_id && (
+                <View className="bottom_button">
+                  <Button className="submit" onClick={() => iget()}>
+                    我捡到了
+                  </Button>
+                </View>
+              )}
+            {body.Rec_status === '未归还' &&
+              global.appData.Re_id !== body.Rec_people_id && (
+                <View className="bottom_button">
+                  <Button className="submit" onClick={() => youget()}>
+                    我遗失的
+                  </Button>
+                </View>
+              )}
+          </View>
         </View>
-      </View>
+      )}
       <View className="comment_details">
         {data.length === 0 ? (
           <View className="placeholder">快写下你的评论吧~</View>

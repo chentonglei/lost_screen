@@ -21,7 +21,7 @@ export default () => {
   const global = useContext(AppContext) //全局变量
   const [isModalVisible, setIsModalVisible] = useState('失物')
   const [data, setData] = useState([])
-  const [loading, setLoading] = useState(false)
+  const [loading, setLoading] = useState(true)
   useEffect(() => {
     wx.showLoading({
       title: '加载中...',

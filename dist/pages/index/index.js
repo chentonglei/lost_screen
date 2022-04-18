@@ -94,7 +94,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
       data = _useState4[0],
       setData = _useState4[1];
 
-  var _useState5 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(false),
+  var _useState5 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(true),
       _useState6 = _slicedToArray(_useState5, 2),
       loading = _useState6[0],
       setLoading = _useState6[1];
