@@ -108,18 +108,29 @@ export default () => {
       url: '/pages/login/index',
     })
   }
+  const gocertification = () => {
+    navigateTo({
+      url: `/pages/login/certification/index`,
+    })
+  }
   return (
     <View className="app">
       <View className="top">
         {global.appData ? (
           <View className="top_left">
             <View className="top_title">{global.appData.Re_name}</View>
-            {global.appData.Re_school_name ? (
+            {global.appData.Re_school_name &&
+            global.appData.Re_status === '审核通过' ? (
               <View className="top_school">
                 {global.appData.Re_school_name}
               </View>
             ) : (
-              <View className="top_certification">点击去认证~</View>
+              <View
+                className="top_certification"
+                onClick={() => gocertification()}
+              >
+                点击去认证~
+              </View>
             )}
           </View>
         ) : (

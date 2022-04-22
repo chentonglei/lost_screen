@@ -144,3 +144,35 @@ float: right;
   margin: 20rpx auto;
   text-align: center;
 }
+
+.comment_details{
+  background: #FFFFFF;
+  margin-top: 20rpx;
+  height: 100%;
+  width: 100%;
+}
+.placeholder{
+  padding-top: 10rpx;
+  text-align: center;
+  color: #8a8a8a;
+}
+.comment_one{
+  width: 90%;
+  margin: auto;
+}
+.comment_one_top{
+  float: left;
+  margin-top: 20rpx;
+  width: 100%;
+}
+.comment_top_left{
+  float: left;
+}
+.comment_top_right{
+  float: right;
+  color: #8a8a8a;
+}
+.comment_one_content{
+  margin-top: 10rpx;
+  float: left;
+}

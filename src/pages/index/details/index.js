@@ -43,6 +43,10 @@ export default () => {
               res.data.data.isModalVisible = '失物'
               console.log(res.data.data)
               setBody(res.data.data)
+              setBe({
+                Com_be_name: res.data.data.Lost_people_name,
+                Com_be_id: res.data.data.Lost_people_id,
+              })
               tel = res.data.data.Lost_people_phone.slice(0, 3)
               setTelephone(tel + '********')
             }
@@ -58,6 +62,10 @@ export default () => {
               console.log(res.data.data)
               res.data.data.isModalVisible = '招领'
               setBody(res.data.data)
+              setBe({
+                Com_be_name: res.data.data.Rec_people_name,
+                Com_be_id: res.data.data.Rec_people_id,
+              })
               tel = res.data.data.Rec_people_phone.slice(0, 3)
               setTelephone(tel + '********')
             }
@@ -88,8 +96,10 @@ export default () => {
     }, 1000)
   })
   const onbutton = (item) => {
-    setBe({ Com_be_id: item.Com_do_id, Com_be_name: item.Com_do_name })
-    setButtonfocus(`回复${item.Com_do_name}`)
+    if (item.Com_do_id !== global.appData.Re_id) {
+      setBe({ Com_be_id: item.Com_do_id, Com_be_name: item.Com_do_name })
+      setButtonfocus(`回复${item.Com_do_name}`)
+    }
   }
   const deletecomment = (item) => {
     if (global.appData.Re_id === item.Com_do_id) {
@@ -283,6 +293,7 @@ export default () => {
     })
   }
   const sendComment = (item) => {
+    console.log(be)
     if (item.target.value.Com_do_message !== '') {
       wx.request({
         url: `${ip}/comment/add`,
@@ -488,7 +499,7 @@ export default () => {
           <View className="placeholder">快写下你的评论吧~</View>
         ) : (
           data.map((item, index) => (
-            <View className="comment_one">
+            <View className="comment_one" key={index}>
               <View className="comment_one_top">
                 <View className="comment_top_left">
                   {item.Com_do_name}{' '}

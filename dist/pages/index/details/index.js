@@ -150,6 +150,10 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
                       res.data.data.isModalVisible = '失物';
                       console.log(res.data.data);
                       setBody(res.data.data);
+                      setBe({
+                        Com_be_name: res.data.data.Lost_people_name,
+                        Com_be_id: res.data.data.Lost_people_id
+                      });
                       tel = res.data.data.Lost_people_phone.slice(0, 3);
                       setTelephone(tel + '********');
                     }
@@ -173,6 +177,10 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
                       console.log(res.data.data);
                       res.data.data.isModalVisible = '招领';
                       setBody(res.data.data);
+                      setBe({
+                        Com_be_name: res.data.data.Rec_people_name,
+                        Com_be_id: res.data.data.Rec_people_id
+                      });
                       tel = res.data.data.Rec_people_phone.slice(0, 3);
                       setTelephone(tel + '********');
                     }
@@ -235,11 +243,13 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
   });
 
   var onbutton = function onbutton(item) {
-    setBe({
-      Com_be_id: item.Com_do_id,
-      Com_be_name: item.Com_do_name
-    });
-    setButtonfocus("\u56DE\u590D".concat(item.Com_do_name));
+    if (item.Com_do_id !== global.appData.Re_id) {
+      setBe({
+        Com_be_id: item.Com_do_id,
+        Com_be_name: item.Com_do_name
+      });
+      setButtonfocus("\u56DE\u590D".concat(item.Com_do_name));
+    }
   };
 
   var deletecomment = function deletecomment(item) {
@@ -455,6 +465,8 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
   };
 
   var sendComment = function sendComment(item) {
+    console.log(be);
+
     if (item.target.value.Com_do_message !== '') {
       wx.request({
         url: "".concat(_ip__WEBPACK_IMPORTED_MODULE_6__["default"], "/comment/add"),
@@ -598,7 +610,9 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
     className: "placeholder"
   }, "\u5FEB\u5199\u4E0B\u4F60\u7684\u8BC4\u8BBA\u5427~") : data.map(function (item, index) {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(remax_one__WEBPACK_IMPORTED_MODULE_3__["View"], {
-      className: "comment_one"
+      className: "comment_one",
+      key: index,
+      __key: index
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(remax_one__WEBPACK_IMPORTED_MODULE_3__["View"], {
       className: "comment_one_top"
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(remax_one__WEBPACK_IMPORTED_MODULE_3__["View"], {

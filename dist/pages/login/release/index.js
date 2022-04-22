@@ -175,6 +175,28 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
                 });
 
               case 9:
+                if (!(isModalVisible === '评论')) {
+                  _context.next = 12;
+                  break;
+                }
+
+                _context.next = 12;
+                return wx.request({
+                  url: "".concat(_ip__WEBPACK_IMPORTED_MODULE_5__["default"], "/Comment/OneShow"),
+                  data: {
+                    Re_id: global.appData.Re_id
+                  },
+                  method: 'POST',
+                  success: function success(res) {
+                    console.log(res.data.data);
+
+                    if (res.data.data) {
+                      setData(res.data.data);
+                    }
+                  }
+                });
+
+              case 12:
               case "end":
                 return _context.stop();
             }
@@ -220,6 +242,19 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
         duration: 2000
       });
     }
+  };
+
+  var intodetail = function intodetail(item) {
+    var body = {};
+    body.isModalVisible = item.Com_type;
+    if (item.Com_type === '失物') body.Lost_id = item.Com_type_id;else body.Rec_id = item.Com_type_id;
+    var str = JSON.stringify({
+      item: body
+    });
+    Object(remax_one__WEBPACK_IMPORTED_MODULE_3__["navigateTo"])({
+      url: '/pages/index/details/index?jsonStr=' + str //传base64报错
+
+    });
   };
 
   var content = function content() {
@@ -318,6 +353,31 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
           mode: "widthFix",
           className: "bottom_img"
         })));
+      }));
+    }
+
+    if (isModalVisible === '评论') {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(remax_one__WEBPACK_IMPORTED_MODULE_3__["View"], {
+        className: "comment_details"
+      }, data.length === 0 ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(remax_one__WEBPACK_IMPORTED_MODULE_3__["View"], {
+        className: "placeholder"
+      }, "\u5FEB\u5199\u4E0B\u4F60\u7684\u8BC4\u8BBA\u5427~") : data.map(function (item, index) {
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(remax_one__WEBPACK_IMPORTED_MODULE_3__["View"], {
+          className: "comment_one",
+          key: index,
+          onClick: function onClick() {
+            return intodetail(item);
+          },
+          __key: index
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(remax_one__WEBPACK_IMPORTED_MODULE_3__["View"], {
+          className: "comment_one_top"
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(remax_one__WEBPACK_IMPORTED_MODULE_3__["View"], {
+          className: "comment_top_left"
+        }, item.Com_do_name, ' ', item.Com_be_name ? "=> ".concat(item.Com_be_name) : ''), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(remax_one__WEBPACK_IMPORTED_MODULE_3__["View"], {
+          className: "comment_top_right"
+        }, item.Com_do_time)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(remax_one__WEBPACK_IMPORTED_MODULE_3__["View"], {
+          className: "comment_one_content"
+        }, item.Com_do_message));
       }));
     }
   };

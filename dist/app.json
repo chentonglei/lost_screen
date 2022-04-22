@@ -7,6 +7,7 @@
     "pages/login/revise/index",
     "pages/login/help/index",
     "pages/login/setting/index",
+    "pages/login/certification/index",
     "pages/login/pwd/index",
     "pages/login/register/index",
     "pages/index/details/index",

@@ -230,6 +230,12 @@ var bottom = [{
     });
   };
 
+  var gocertification = function gocertification() {
+    Object(remax_one__WEBPACK_IMPORTED_MODULE_1__["navigateTo"])({
+      url: "/pages/login/certification/index"
+    });
+  };
+
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(remax_one__WEBPACK_IMPORTED_MODULE_1__["View"], {
     className: "app"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(remax_one__WEBPACK_IMPORTED_MODULE_1__["View"], {
@@ -238,10 +244,13 @@ var bottom = [{
     className: "top_left"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(remax_one__WEBPACK_IMPORTED_MODULE_1__["View"], {
     className: "top_title"
-  }, global.appData.Re_name), global.appData.Re_school_name ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(remax_one__WEBPACK_IMPORTED_MODULE_1__["View"], {
+  }, global.appData.Re_name), global.appData.Re_school_name && global.appData.Re_status === '审核通过' ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(remax_one__WEBPACK_IMPORTED_MODULE_1__["View"], {
     className: "top_school"
   }, global.appData.Re_school_name) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(remax_one__WEBPACK_IMPORTED_MODULE_1__["View"], {
-    className: "top_certification"
+    className: "top_certification",
+    onClick: function onClick() {
+      return gocertification();
+    }
   }, "\u70B9\u51FB\u53BB\u8BA4\u8BC1~")) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(remax_one__WEBPACK_IMPORTED_MODULE_1__["View"], {
     className: "top_left"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(remax_one__WEBPACK_IMPORTED_MODULE_1__["View"], {

@@ -956,6 +956,7 @@ module.exports = {
     "onLoad"
   ],
   "pages/login/setting/index": [],
+  "pages/login/certification/index": [],
   "pages/login/pwd/index": [],
   "pages/login/register/index": [],
   "pages/index/details/index": [

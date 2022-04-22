@@ -65,6 +65,18 @@ export default () => {
             }
           },
         })
+      if (isModalVisible === '评论')
+        await wx.request({
+          url: `${ip}/Comment/OneShow`,
+          data: { Re_id: global.appData.Re_id },
+          method: 'POST',
+          success(res) {
+            console.log(res.data.data)
+            if (res.data.data) {
+              setData(res.data.data)
+            }
+          },
+        })
     }
     fetchData()
     setTimeout(function () {
@@ -96,6 +108,16 @@ export default () => {
         duration: 2000,
       })
     }
+  }
+  const intodetail = (item) => {
+    var body = {}
+    body.isModalVisible = item.Com_type
+    if (item.Com_type === '失物') body.Lost_id = item.Com_type_id
+    else body.Rec_id = item.Com_type_id
+    let str = JSON.stringify({ item: body })
+    navigateTo({
+      url: '/pages/index/details/index?jsonStr=' + str, //传base64报错
+    })
   }
   const content = () => {
     if (isModalVisible === '失物' || isModalVisible === '招领') {
@@ -261,6 +283,34 @@ export default () => {
                 </View>
                 <View className="comment">
                   <Image src={comment} mode="widthFix" className="bottom_img" />
+                </View>
+              </View>
+            ))
+          )}
+        </View>
+      )
+    }
+    if (isModalVisible === '评论') {
+      return (
+        <View className="comment_details">
+          {data.length === 0 ? (
+            <View className="placeholder">快写下你的评论吧~</View>
+          ) : (
+            data.map((item, index) => (
+              <View
+                className="comment_one"
+                key={index}
+                onClick={() => intodetail(item)}
+              >
+                <View className="comment_one_top">
+                  <View className="comment_top_left">
+                    {item.Com_do_name}{' '}
+                    {item.Com_be_name ? `=> ${item.Com_be_name}` : ''}
+                  </View>
+                  <View className="comment_top_right">{item.Com_do_time}</View>
+                </View>
+                <View className="comment_one_content">
+                  {item.Com_do_message}
                 </View>
               </View>
             ))
