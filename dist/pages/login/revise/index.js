@@ -92,6 +92,13 @@ __webpack_require__.r(__webpack_exports__);
           icon: 'error',
           duration: 2000
         });
+      } else if (e.target.value.Re_password.length < 6 || e.target.value.Re_new_password.length < 6) {
+        wx.showToast({
+          title: '密码不低于6位',
+          icon: 'error',
+          duration: 2000
+        });
+        return;
       } else {
         wx.request({
           url: "".concat(_ip__WEBPACK_IMPORTED_MODULE_4__["default"], "/register/UserPassword"),
@@ -162,7 +169,7 @@ __webpack_require__.r(__webpack_exports__);
   })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(remax_one__WEBPACK_IMPORTED_MODULE_1__["Button"], {
     className: "submit",
     type: "submit"
-  }, "\u6CE8\u518C"))));
+  }, "\u4FEE\u6539"))));
 });
 
 /***/ }),

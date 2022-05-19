@@ -137,3 +137,33 @@ float: right;
   margin: 20px auto;
   text-align: center;
 }
+.box {
+  width: 100%;
+  margin: 10px auto;
+  overflow: hidden;
+  background: #fff;
+  border-radius: 5px;
+  padding: 5px;
+  box-sizing: border-box;
+}
+
+.r {
+  white-space: nowrap;
+  animation: 10s loop linear infinite normal;
+  display: inline-block;
+  vertical-align: top;
+  font-size: 26px;
+  color: #333;
+}
+
+@keyframes loop {
+  0% {
+    transform: translateX(700px);
+    -webkit-transform: translateX(700px);
+  }
+
+  100% {
+    transform: translateX(-100%);
+    -webkit-transform: translateX(-100%);
+  }
+}

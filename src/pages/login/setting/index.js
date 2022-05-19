@@ -9,6 +9,7 @@ import {
   switchTab,
   navigateTo,
 } from 'remax/one'
+import { usePageEvent } from 'remax/macro'
 import { clearStorage, picker } from 'remax/wechat'
 import { useQuery, usePageInstance } from 'remax'
 import { AppContext } from '../../../app'
@@ -16,8 +17,14 @@ import ip from '../../ip'
 export default () => {
   const global = useContext(AppContext) //全局变量
   const [index, setIndex] = useState(0)
-  const [sex, setSex] = useState(global.appData.Re_sex)
-  const [age, setAge] = useState(global.appData.Re_age)
+  const [sex, setSex] = useState('未知')
+  const [age, setAge] = useState('未知')
+  usePageEvent('onLoad', (options) => {
+    if (global.appData.Re_sex !== null && global.appData.Re_sex !== '')
+      setSex(global.appData.Re_sex)
+    if (global.appData.Re_age !== null && global.appData.Re_age !== '')
+      setAge(global.appData.Re_age)
+  })
   const array = ['男', '女']
   /*   const data = {
     Re_id: '123',
@@ -32,9 +39,21 @@ export default () => {
     console.log('form发生了reset事件，携带数据为：', e.target)
   }
   const formSubmit = (e) => {
+    if (
+      !/^(1([358][0-9]|4[579]|66|7[0135678]|9[89])[0-9]{8})$/.test(
+        e.target.value.Re_telephone
+      )
+    ) {
+      wx.showToast({
+        title: '电话格式有误',
+        icon: 'error',
+        duration: 2000,
+      })
+      return
+    }
     e.target.value.Re_power = 'user'
-    e.target.value.Re_sex = sex
-    e.target.value.Re_age = age
+    if (age !== '未知') e.target.value.Re_age = age
+    if (sex !== '未知') e.target.value.Re_sex = sex
     wx.request({
       url: `${ip}/register/update`,
       data: e.target.value,
@@ -133,8 +152,8 @@ export default () => {
             <picker
               mode="selector"
               range={array}
-              bindchange={bindPickerChange}
               className="bottom_right"
+              bindchange={bindPickerChange}
             >
               <View class="picker">{sex}</View>
             </picker>

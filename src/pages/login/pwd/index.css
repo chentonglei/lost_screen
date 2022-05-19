@@ -55,6 +55,12 @@ page{
   font-size: 30px;
   color: rgb(119, 116, 113);
 }
+.ps_left{
+  float: left;
+  margin-top: 20px;
+  font-size: 30px;
+  color: rgb(119, 116, 113);
+}
 .bottom_right_disable{
   width: 70%;
   text-align: center;

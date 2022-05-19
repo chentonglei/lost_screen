@@ -101,6 +101,20 @@ __webpack_require__.r(__webpack_exports__);
           icon: 'error',
           duration: 2000
         });
+      } else if (!/^(1([358][0-9]|4[579]|66|7[0135678]|9[89])[0-9]{8})$/.test(e.target.value.Re_telephone)) {
+        wx.showToast({
+          title: '电话格式有误',
+          icon: 'error',
+          duration: 2000
+        });
+        return;
+      } else if (e.target.value.Re_password.length < 6 || e.target.value.Re_new_password.length < 6) {
+        wx.showToast({
+          title: '密码不低于6位',
+          icon: 'error',
+          duration: 2000
+        });
+        return;
       } else {
         wx.request({
           url: "".concat(_ip__WEBPACK_IMPORTED_MODULE_4__["default"], "/register/UserAdd"),
@@ -187,7 +201,7 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ 9:
+/***/ 10:
 /*!*******************************************************!*\
   !*** multi ./src/pages/login/register/index.entry.js ***!
   \*******************************************************/
@@ -199,4 +213,4 @@ module.exports = __webpack_require__(/*! D:\福建工程学院\毕设\代码\los
 
 /***/ })
 
-},[[9,"runtime","remax-vendors"]]]);
+},[[10,"runtime","remax-vendors"]]]);

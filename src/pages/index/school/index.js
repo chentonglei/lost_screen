@@ -38,13 +38,31 @@ export default () => {
       url: '/pages/index/index',
     })
   }
+  const search = (e) => {
+    wx.request({
+      url: `${ip}/school/search`,
+      data: { search: e.target.value },
+      method: 'POST',
+      success(res) {
+        if (e.target.value === '') {
+          let school_one = { Sch_name: '全部学校' }
+          let allschool = [school_one, ...res.data.data]
+          setData(allschool)
+        } else setData(res.data.data)
+      },
+    })
+  }
   return (
     <View className="app">
       <View className="top">
         <View className="top_title">学校列表</View>
       </View>
       <View className="input_style">
-        <Input className="input_search" placeholder="搜索"></Input>
+        <Input
+          className="input_search"
+          placeholder="搜索"
+          onInput={search}
+        ></Input>
       </View>
       <View className="mid">
         <View className="mid_top">请选择学校</View>

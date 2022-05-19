@@ -55,6 +55,27 @@ export default () => {
           icon: 'error',
           duration: 2000,
         })
+      } else if (
+        !/^(1([358][0-9]|4[579]|66|7[0135678]|9[89])[0-9]{8})$/.test(
+          e.target.value.Re_telephone
+        )
+      ) {
+        wx.showToast({
+          title: '电话格式有误',
+          icon: 'error',
+          duration: 2000,
+        })
+        return
+      } else if (
+        e.target.value.Re_password.length < 6 ||
+        e.target.value.Re_new_password.length < 6
+      ) {
+        wx.showToast({
+          title: '密码不低于6位',
+          icon: 'error',
+          duration: 2000,
+        })
+        return
       } else {
         wx.request({
           url: `${ip}/register/UserAdd`,

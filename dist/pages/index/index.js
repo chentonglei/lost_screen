@@ -180,15 +180,21 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
   };
 
   var release = function release() {
-    if (global.appData) {
-      Object(remax_one__WEBPACK_IMPORTED_MODULE_2__["navigateTo"])({
-        url: "/pages/index/release/index"
-      });
-    } else {
+    if (!global.appData) {
       wx.showToast({
         title: '请先登录',
         icon: 'error',
         duration: 2000
+      });
+    } else if (!global.appData.Re_school_id) {
+      wx.showToast({
+        title: '请先认证',
+        icon: 'error',
+        duration: 2000
+      });
+    } else {
+      Object(remax_one__WEBPACK_IMPORTED_MODULE_2__["navigateTo"])({
+        url: "/pages/index/release/index"
       });
     }
   };
@@ -200,7 +206,19 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
   };
 
   var details = function details(item) {
-    if (global.appData) {
+    if (!global.appData) {
+      wx.showToast({
+        title: '请先登录',
+        icon: 'error',
+        duration: 2000
+      });
+    } else if (!global.appData.Re_school_id) {
+      wx.showToast({
+        title: '请先认证',
+        icon: 'error',
+        duration: 2000
+      });
+    } else {
       item.isModalVisible = isModalVisible;
       if (isModalVisible === '失物') delete item.Lost_img;else delete item.Rec_img;
       var str = JSON.stringify({
@@ -209,12 +227,6 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
       Object(remax_one__WEBPACK_IMPORTED_MODULE_2__["navigateTo"])({
         url: '/pages/index/details/index?jsonStr=' + str //传base64报错
 
-      });
-    } else {
-      wx.showToast({
-        title: '请先登录',
-        icon: 'error',
-        duration: 2000
       });
     }
   };
@@ -258,7 +270,11 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
     }
   }, global.school))), loading === true ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(remax_one__WEBPACK_IMPORTED_MODULE_2__["View"], null) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(remax_one__WEBPACK_IMPORTED_MODULE_2__["View"], {
     className: "content"
-  }, data.length === 0 ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(remax_one__WEBPACK_IMPORTED_MODULE_2__["View"], {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(remax_one__WEBPACK_IMPORTED_MODULE_2__["View"], {
+    class: "box flex-row"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(remax_one__WEBPACK_IMPORTED_MODULE_2__["Text"], {
+    class: "r"
+  }, "\u672C\u7CFB\u7EDF\u5E2E\u52A9\u9648\u5F64\u78CA\u3001\u674E\u5FD7\u8BDA\u7B4911\u4EBA\u5171\u8BA1\u5B8C\u6210100\u6B21\u7684\u5931\u7269\u5BFB\u56DE")), data.length === 0 ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(remax_one__WEBPACK_IMPORTED_MODULE_2__["View"], {
     className: "nothing"
   }, "\u6682\u65E0") : data.map(function (item, index) {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(remax_one__WEBPACK_IMPORTED_MODULE_2__["View"], {

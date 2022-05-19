@@ -955,7 +955,9 @@ module.exports = {
   "pages/login/help/index": [
     "onLoad"
   ],
-  "pages/login/setting/index": [],
+  "pages/login/setting/index": [
+    "onLoad"
+  ],
   "pages/login/certification/index": [],
   "pages/login/pwd/index": [],
   "pages/login/register/index": [],

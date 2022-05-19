@@ -55,6 +55,7 @@ export default () => {
                 })
               },
             })
+            console.log(res.data.user)
             global.setAppData(res.data.user)
           } else {
             wx.showToast({
@@ -70,6 +71,11 @@ export default () => {
   const register = () => {
     navigateTo({
       url: `/pages/login/register/index`,
+    })
+  }
+  const forget = () => {
+    wx.showModal({
+      content: '请联系管理员QQ:382023278',
     })
   }
   return (
@@ -96,6 +102,9 @@ export default () => {
           </Button>
         </View>
       </Form>
+      <View className="ps_left" onClick={() => forget()}>
+        忘记密码
+      </View>
       <View className="ps" onClick={() => register()}>
         我没有账号
       </View>

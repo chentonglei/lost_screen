@@ -44,6 +44,16 @@ export default () => {
           icon: 'error',
           duration: 2000,
         })
+      } else if (
+        e.target.value.Re_password.length < 6 ||
+        e.target.value.Re_new_password.length < 6
+      ) {
+        wx.showToast({
+          title: '密码不低于6位',
+          icon: 'error',
+          duration: 2000,
+        })
+        return
       } else {
         wx.request({
           url: `${ip}/register/UserPassword`,
@@ -108,7 +118,7 @@ export default () => {
             ></Input>
           </View>
           <Button className="submit" type="submit">
-            注册
+            修改
           </Button>
         </View>
       </Form>

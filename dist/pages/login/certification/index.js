@@ -164,7 +164,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
     onClick: function onClick() {
       return sendImg();
     }
-  }, "\u4E0A\u4F20\u5B66\u751F\u8BC1\u4FE1\u606F"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(remax_one__WEBPACK_IMPORTED_MODULE_1__["Image"], {
+  }, "\u4E0A\u4F20\u5B66\u751F/\u6559\u5E08/\u804C\u5DE5\u8BC1\u4FE1\u606F"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(remax_one__WEBPACK_IMPORTED_MODULE_1__["Image"], {
     src: img,
     mode: "widthFix",
     className: "img"
@@ -176,6 +176,18 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
   }, "\u8BF7\u901A\u8FC7\u767E\u5EA6\u786E\u4FDD\u6B63\u786E\u5B66\u6821\u4EE3\u7801\uFF0C\u63D0\u4EA4\u6210\u529F\u540E\u8BF7\u8010\u5FC3\u7B49\u5F85\u5982\u9700\u52A0\u6025\u8054\u7CFB\u7BA1\u7406\u5458QQ:382023278")));
 });
 
+/***/ }),
+
+/***/ 8:
+/*!************************************************************!*\
+  !*** multi ./src/pages/login/certification/index.entry.js ***!
+  \************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__(/*! D:\福建工程学院\毕设\代码\lost_screen\src\pages\login\certification\index.entry.js */"./src/pages/login/certification/index.entry.js");
+
+
 /***/ })
 
-},[["./src/pages/login/certification/index.entry.js","runtime","remax-vendors","remax-styles"]]]);
+},[[8,"runtime","remax-vendors","remax-styles"]]]);

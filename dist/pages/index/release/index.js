@@ -373,7 +373,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 /***/ }),
 
-/***/ 11:
+/***/ 12:
 /*!******************************************************!*\
   !*** multi ./src/pages/index/release/index.entry.js ***!
   \******************************************************/
@@ -385,4 +385,4 @@ module.exports = __webpack_require__(/*! D:\福建工程学院\毕设\代码\los
 
 /***/ })
 
-},[[11,"runtime","remax-vendors","remax-styles"]]]);
+},[[12,"runtime","remax-vendors","remax-styles"]]]);

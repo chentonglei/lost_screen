@@ -98,7 +98,7 @@ export default () => {
                 <Input name="Re_school_id" className="bottom_right"></Input>
               </View>
               <Button className="send" onClick={() => sendImg()}>
-                上传学生证信息
+                上传学生/教师/职工证信息
               </Button>
               <Image src={img} mode="widthFix" className="img" />
               <Button className="submit" type="submit">

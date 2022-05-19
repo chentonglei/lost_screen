@@ -101,6 +101,7 @@ __webpack_require__.r(__webpack_exports__);
                 });
               }
             });
+            console.log(res.data.user);
             global.setAppData(res.data.user);
           } else {
             wx.showToast({
@@ -117,6 +118,12 @@ __webpack_require__.r(__webpack_exports__);
   var register = function register() {
     Object(remax_one__WEBPACK_IMPORTED_MODULE_1__["navigateTo"])({
       url: "/pages/login/register/index"
+    });
+  };
+
+  var forget = function forget() {
+    wx.showModal({
+      content: '请联系管理员QQ:382023278'
     });
   };
 
@@ -150,6 +157,11 @@ __webpack_require__.r(__webpack_exports__);
     className: "submit",
     type: "submit"
   }, "\u767B\u5F55"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(remax_one__WEBPACK_IMPORTED_MODULE_1__["View"], {
+    className: "ps_left",
+    onClick: function onClick() {
+      return forget();
+    }
+  }, "\u5FD8\u8BB0\u5BC6\u7801"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(remax_one__WEBPACK_IMPORTED_MODULE_1__["View"], {
     className: "ps",
     onClick: function onClick() {
       return register();
@@ -159,7 +171,7 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ 8:
+/***/ 9:
 /*!**************************************************!*\
   !*** multi ./src/pages/login/pwd/index.entry.js ***!
   \**************************************************/
@@ -171,4 +183,4 @@ module.exports = __webpack_require__(/*! D:\福建工程学院\毕设\代码\los
 
 /***/ })
 
-},[[8,"runtime","remax-vendors","remax-styles"]]]);
+},[[9,"runtime","remax-vendors","remax-styles"]]]);

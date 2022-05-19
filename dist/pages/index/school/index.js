@@ -108,6 +108,25 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
     });
   };
 
+  var search = function search(e) {
+    wx.request({
+      url: "".concat(_ip__WEBPACK_IMPORTED_MODULE_5__["default"], "/school/search"),
+      data: {
+        search: e.target.value
+      },
+      method: 'POST',
+      success: function success(res) {
+        if (e.target.value === '') {
+          var school_one = {
+            Sch_name: '全部学校'
+          };
+          var allschool = [school_one].concat(_toConsumableArray(res.data.data));
+          setData(allschool);
+        } else setData(res.data.data);
+      }
+    });
+  };
+
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(remax_one__WEBPACK_IMPORTED_MODULE_2__["View"], {
     className: "app"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(remax_one__WEBPACK_IMPORTED_MODULE_2__["View"], {
@@ -118,7 +137,8 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
     className: "input_style"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(remax_one__WEBPACK_IMPORTED_MODULE_2__["Input"], {
     className: "input_search",
-    placeholder: "\u641C\u7D22"
+    placeholder: "\u641C\u7D22",
+    onInput: search
   })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(remax_one__WEBPACK_IMPORTED_MODULE_2__["View"], {
     className: "mid"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(remax_one__WEBPACK_IMPORTED_MODULE_2__["View"], {
@@ -139,7 +159,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 /***/ }),
 
-/***/ 12:
+/***/ 13:
 /*!*****************************************************!*\
   !*** multi ./src/pages/index/school/index.entry.js ***!
   \*****************************************************/
@@ -151,4 +171,4 @@ module.exports = __webpack_require__(/*! D:\福建工程学院\毕设\代码\los
 
 /***/ })
 
-},[[12,"runtime","remax-vendors","remax-styles"]]]);
+},[[13,"runtime","remax-vendors","remax-styles"]]]);

@@ -102,7 +102,14 @@ export default () => {
     }
   }
   const deletecomment = (item) => {
-    if (global.appData.Re_id === item.Com_do_id) {
+    if (
+      global.appData.Re_id === item.Com_do_id ||
+      global.appData.Re_id === item.Com_be_id ||
+      global.appData.Re_id ===
+        (body.isModalVisible === '失物'
+          ? body.Lost_people_id
+          : body.Rec_people_id)
+    ) {
       wx.showActionSheet({
         itemList: ['删除'],
         success: function (res) {
@@ -359,6 +366,78 @@ export default () => {
         : body.Rec_people_phone
     } */
   }
+  const showRec = () => {
+    wx.request({
+      url: `${ip}/return/show`,
+      data: {
+        Return_id: body.Return_id,
+      },
+      method: 'POST',
+      success(res) {
+        console.log(res)
+        wx.showModal({
+          title:
+            body.isModalVisible === '失物'
+              ? '他捡到了你遗失的物品'
+              : '这个物品是他遗失的',
+          content: `${res.data.Return_people_name}  ${res.data.Return_people_phone}`,
+        })
+      },
+    })
+  }
+  const nother = () => {
+    wx.showModal({
+      content: '是否确认他误点',
+      success: function (res) {
+        if (res.confirm) {
+          wx.request({
+            url: `${ip}/return/delete`,
+            data: {
+              Return_id: body.Return_id,
+              isModalVisible: body.isModalVisible,
+              id: body.isModalVisible === '失物' ? body.Lost_id : body.Rec_id,
+            },
+            method: 'POST',
+            success(res) {
+              console.log(res)
+              if (res.data.result === 'true') {
+                wx.showToast({
+                  title: '操作成功',
+                  icon: 'success',
+                  duration: 2000,
+                })
+                if (body.isModalVisible === '招领') {
+                  setTimeout(function () {
+                    delete body.Rec_img
+                    let str = JSON.stringify({ item: body })
+                    redirectTo({
+                      url: '/pages/index/details/index?jsonStr=' + str, //传base64报错
+                    })
+                  }, 2000)
+                } else {
+                  setTimeout(function () {
+                    delete body.Lost_img
+                    let str = JSON.stringify({ item: body })
+                    redirectTo({
+                      url: '/pages/index/details/index?jsonStr=' + str, //传base64报错
+                    })
+                  }, 2000)
+                }
+              } else {
+                wx.showToast({
+                  title: '操作失败',
+                  icon: 'error',
+                  duration: 2000,
+                })
+              }
+            },
+          })
+        } else if (res.cancel) {
+          console.log('用户点击取消')
+        }
+      },
+    })
+  }
   return (
     <View className="app">
       <View className="top">
@@ -488,6 +567,54 @@ export default () => {
                 <View className="bottom_button">
                   <Button className="submit" onClick={() => youget()}>
                     我遗失的
+                  </Button>
+                </View>
+              )}
+            {body.Lost_status === '已找到' &&
+              global.appData.Re_id === body.Lost_people_id && (
+                <View className="bottom_button">
+                  <Button className="submit" onClick={() => showRec()}>
+                    查看拾取人
+                  </Button>
+                </View>
+              )}
+            {body.Rec_status === '已归还' &&
+              global.appData.Re_id === body.Rec_people_id && (
+                <View className="bottom_button">
+                  <Button className="submit" onClick={() => showRec()}>
+                    查看失物人
+                  </Button>
+                </View>
+              )}
+            {body.Lost_status === '已找到' &&
+              global.appData.Re_id === body.Lost_people_id && (
+                <View className="bottom_button">
+                  <Button className="submit" onClick={() => nother()}>
+                    不是他捡到的
+                  </Button>
+                </View>
+              )}
+            {body.Rec_status === '已归还' &&
+              global.appData.Re_id === body.Rec_people_id && (
+                <View className="bottom_button">
+                  <Button className="submit" onClick={() => nother()}>
+                    不是他遗失的
+                  </Button>
+                </View>
+              )}
+            {body.Rec_status === '已归还' &&
+              global.appData.Re_id !== body.Rec_people_id && (
+                <View className="bottom_button">
+                  <Button className="submit" onClick={() => nother()}>
+                    不是我丢的
+                  </Button>
+                </View>
+              )}
+            {body.Lost_status === '已找到' &&
+              global.appData.Re_id !== body.Lost_people_id && (
+                <View className="bottom_button">
+                  <Button className="submit" onClick={() => nother()}>
+                    不是我捡的
                   </Button>
                 </View>
               )}

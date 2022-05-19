@@ -66,15 +66,21 @@ export default () => {
     setIsModalVisible(title)
   }
   const release = () => {
-    if (global.appData) {
-      navigateTo({
-        url: `/pages/index/release/index`,
-      })
-    } else {
+    if (!global.appData) {
       wx.showToast({
         title: '请先登录',
         icon: 'error',
         duration: 2000,
+      })
+    } else if (!global.appData.Re_school_id) {
+      wx.showToast({
+        title: '请先认证',
+        icon: 'error',
+        duration: 2000,
+      })
+    } else {
+      navigateTo({
+        url: `/pages/index/release/index`,
       })
     }
   }
@@ -84,19 +90,25 @@ export default () => {
     })
   }
   const details = (item) => {
-    if (global.appData) {
+    if (!global.appData) {
+      wx.showToast({
+        title: '请先登录',
+        icon: 'error',
+        duration: 2000,
+      })
+    } else if (!global.appData.Re_school_id) {
+      wx.showToast({
+        title: '请先认证',
+        icon: 'error',
+        duration: 2000,
+      })
+    } else {
       item.isModalVisible = isModalVisible
       if (isModalVisible === '失物') delete item.Lost_img
       else delete item.Rec_img
       let str = JSON.stringify({ item })
       navigateTo({
         url: '/pages/index/details/index?jsonStr=' + str, //传base64报错
-      })
-    } else {
-      wx.showToast({
-        title: '请先登录',
-        icon: 'error',
-        duration: 2000,
       })
     }
   }
@@ -135,6 +147,11 @@ export default () => {
         <View></View>
       ) : (
         <View className="content">
+          <View class="box flex-row">
+            <Text class="r">
+              本系统帮助陈彤磊、李志诚等11人共计完成100次的失物寻回
+            </Text>
+          </View>
           {data.length === 0 ? (
             <View className="nothing">暂无</View>
           ) : (

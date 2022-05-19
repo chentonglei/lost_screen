@@ -253,7 +253,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
   };
 
   var deletecomment = function deletecomment(item) {
-    if (global.appData.Re_id === item.Com_do_id) {
+    if (global.appData.Re_id === item.Com_do_id || global.appData.Re_id === item.Com_be_id || global.appData.Re_id === (body.isModalVisible === '失物' ? body.Lost_people_id : body.Rec_people_id)) {
       wx.showActionSheet({
         itemList: ['删除'],
         success: function success(res) {
@@ -535,6 +535,85 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
   };
 
+  var showRec = function showRec() {
+    wx.request({
+      url: "".concat(_ip__WEBPACK_IMPORTED_MODULE_6__["default"], "/return/show"),
+      data: {
+        Return_id: body.Return_id
+      },
+      method: 'POST',
+      success: function success(res) {
+        console.log(res);
+        wx.showModal({
+          title: body.isModalVisible === '失物' ? '他捡到了你遗失的物品' : '这个物品是他遗失的',
+          content: "".concat(res.data.Return_people_name, "  ").concat(res.data.Return_people_phone)
+        });
+      }
+    });
+  };
+
+  var nother = function nother() {
+    wx.showModal({
+      content: '是否确认他误点',
+      success: function success(res) {
+        if (res.confirm) {
+          wx.request({
+            url: "".concat(_ip__WEBPACK_IMPORTED_MODULE_6__["default"], "/return/delete"),
+            data: {
+              Return_id: body.Return_id,
+              isModalVisible: body.isModalVisible,
+              id: body.isModalVisible === '失物' ? body.Lost_id : body.Rec_id
+            },
+            method: 'POST',
+            success: function success(res) {
+              console.log(res);
+
+              if (res.data.result === 'true') {
+                wx.showToast({
+                  title: '操作成功',
+                  icon: 'success',
+                  duration: 2000
+                });
+
+                if (body.isModalVisible === '招领') {
+                  setTimeout(function () {
+                    delete body.Rec_img;
+                    var str = JSON.stringify({
+                      item: body
+                    });
+                    Object(remax_one__WEBPACK_IMPORTED_MODULE_3__["redirectTo"])({
+                      url: '/pages/index/details/index?jsonStr=' + str //传base64报错
+
+                    });
+                  }, 2000);
+                } else {
+                  setTimeout(function () {
+                    delete body.Lost_img;
+                    var str = JSON.stringify({
+                      item: body
+                    });
+                    Object(remax_one__WEBPACK_IMPORTED_MODULE_3__["redirectTo"])({
+                      url: '/pages/index/details/index?jsonStr=' + str //传base64报错
+
+                    });
+                  }, 2000);
+                }
+              } else {
+                wx.showToast({
+                  title: '操作失败',
+                  icon: 'error',
+                  duration: 2000
+                });
+              }
+            }
+          });
+        } else if (res.cancel) {
+          console.log('用户点击取消');
+        }
+      }
+    });
+  };
+
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(remax_one__WEBPACK_IMPORTED_MODULE_3__["View"], {
     className: "app"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(remax_one__WEBPACK_IMPORTED_MODULE_3__["View"], {
@@ -604,7 +683,49 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
     onClick: function onClick() {
       return youget();
     }
-  }, "\u6211\u9057\u5931\u7684")))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(remax_one__WEBPACK_IMPORTED_MODULE_3__["View"], {
+  }, "\u6211\u9057\u5931\u7684")), body.Lost_status === '已找到' && global.appData.Re_id === body.Lost_people_id && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(remax_one__WEBPACK_IMPORTED_MODULE_3__["View"], {
+    className: "bottom_button"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(remax_one__WEBPACK_IMPORTED_MODULE_3__["Button"], {
+    className: "submit",
+    onClick: function onClick() {
+      return showRec();
+    }
+  }, "\u67E5\u770B\u62FE\u53D6\u4EBA")), body.Rec_status === '已归还' && global.appData.Re_id === body.Rec_people_id && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(remax_one__WEBPACK_IMPORTED_MODULE_3__["View"], {
+    className: "bottom_button"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(remax_one__WEBPACK_IMPORTED_MODULE_3__["Button"], {
+    className: "submit",
+    onClick: function onClick() {
+      return showRec();
+    }
+  }, "\u67E5\u770B\u5931\u7269\u4EBA")), body.Lost_status === '已找到' && global.appData.Re_id === body.Lost_people_id && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(remax_one__WEBPACK_IMPORTED_MODULE_3__["View"], {
+    className: "bottom_button"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(remax_one__WEBPACK_IMPORTED_MODULE_3__["Button"], {
+    className: "submit",
+    onClick: function onClick() {
+      return nother();
+    }
+  }, "\u4E0D\u662F\u4ED6\u6361\u5230\u7684")), body.Rec_status === '已归还' && global.appData.Re_id === body.Rec_people_id && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(remax_one__WEBPACK_IMPORTED_MODULE_3__["View"], {
+    className: "bottom_button"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(remax_one__WEBPACK_IMPORTED_MODULE_3__["Button"], {
+    className: "submit",
+    onClick: function onClick() {
+      return nother();
+    }
+  }, "\u4E0D\u662F\u4ED6\u9057\u5931\u7684")), body.Rec_status === '已归还' && global.appData.Re_id !== body.Rec_people_id && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(remax_one__WEBPACK_IMPORTED_MODULE_3__["View"], {
+    className: "bottom_button"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(remax_one__WEBPACK_IMPORTED_MODULE_3__["Button"], {
+    className: "submit",
+    onClick: function onClick() {
+      return nother();
+    }
+  }, "\u4E0D\u662F\u6211\u4E22\u7684")), body.Lost_status === '已找到' && global.appData.Re_id !== body.Lost_people_id && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(remax_one__WEBPACK_IMPORTED_MODULE_3__["View"], {
+    className: "bottom_button"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(remax_one__WEBPACK_IMPORTED_MODULE_3__["Button"], {
+    className: "submit",
+    onClick: function onClick() {
+      return nother();
+    }
+  }, "\u4E0D\u662F\u6211\u6361\u7684")))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(remax_one__WEBPACK_IMPORTED_MODULE_3__["View"], {
     className: "comment_details"
   }, data.length === 0 ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(remax_one__WEBPACK_IMPORTED_MODULE_3__["View"], {
     className: "placeholder"
@@ -647,7 +768,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 /***/ }),
 
-/***/ 10:
+/***/ 11:
 /*!******************************************************!*\
   !*** multi ./src/pages/index/details/index.entry.js ***!
   \******************************************************/
@@ -659,4 +780,4 @@ module.exports = __webpack_require__(/*! D:\福建工程学院\毕设\代码\los
 
 /***/ })
 
-},[[10,"runtime","remax-vendors","remax-styles"]]]);
+},[[11,"runtime","remax-vendors","remax-styles"]]]);
