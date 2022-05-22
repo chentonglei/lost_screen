@@ -81,6 +81,14 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
+var color = {
+  未找到: 'status_nofind',
+  已找到: 'status_find',
+  未归还: 'status_nofind',
+  已归还: 'status_find',
+  审核中: 'status_shenhe',
+  审核拒绝: 'status_refuse'
+};
 /* harmony default export */ __webpack_exports__["default"] = (function () {
   var global = Object(react__WEBPACK_IMPORTED_MODULE_2__["useContext"])(_app__WEBPACK_IMPORTED_MODULE_5__["AppContext"]); //全局变量
 
@@ -631,9 +639,9 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(remax_one__WEBPACK_IMPORTED_MODULE_3__["View"], {
     className: "content_one_name"
   }, "".concat(body.isModalVisible === '失物' ? body.Lost_people_name : body.Rec_people_name, " ").concat(telflag()), body.isModalVisible === '失物' ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(remax_one__WEBPACK_IMPORTED_MODULE_3__["View"], {
-    className: body.Lost_status === '未找到' ? 'status_nofind' : 'status_find'
+    className: color[body.Lost_status]
   }, body.Lost_status) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(remax_one__WEBPACK_IMPORTED_MODULE_3__["View"], {
-    className: body.Rec_status === '未归还' ? 'status_nofind' : 'status_find'
+    className: color[body.Rec_status]
   }, body.Rec_status)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(remax_one__WEBPACK_IMPORTED_MODULE_3__["View"], {
     className: "content_one_mid"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(remax_one__WEBPACK_IMPORTED_MODULE_3__["View"], {

@@ -94,10 +94,15 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
       data = _useState4[0],
       setData = _useState4[1];
 
-  var _useState5 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(true),
+  var _useState5 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])('系统崩溃啦~~'),
       _useState6 = _slicedToArray(_useState5, 2),
-      loading = _useState6[0],
-      setLoading = _useState6[1];
+      welcome = _useState6[0],
+      setWelcome = _useState6[1];
+
+  var _useState7 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(true),
+      _useState8 = _slicedToArray(_useState7, 2),
+      loading = _useState8[0],
+      setLoading = _useState8[1];
 
   Object(react__WEBPACK_IMPORTED_MODULE_1__["useEffect"])(function () {
     wx.showLoading({
@@ -165,7 +170,38 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
       };
     }();
 
+    var fetchData2 = /*#__PURE__*/function () {
+      var _ref2 = _asyncToGenerator( /*#__PURE__*/regenerator_runtime__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2() {
+        return regenerator_runtime__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
+          while (1) {
+            switch (_context2.prev = _context2.next) {
+              case 0:
+                _context2.next = 2;
+                return wx.request({
+                  url: "".concat(_ip__WEBPACK_IMPORTED_MODULE_8__["default"], "/chart/welcome"),
+                  method: 'POST',
+                  success: function success(res) {
+                    if (res.data) {
+                      setWelcome(res.data);
+                    }
+                  }
+                });
+
+              case 2:
+              case "end":
+                return _context2.stop();
+            }
+          }
+        }, _callee2);
+      }));
+
+      return function fetchData2() {
+        return _ref2.apply(this, arguments);
+      };
+    }();
+
     fetchData();
+    fetchData2();
     setTimeout(function () {
       wx.hideLoading({
         success: function success() {
@@ -274,7 +310,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
     class: "box flex-row"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(remax_one__WEBPACK_IMPORTED_MODULE_2__["Text"], {
     class: "r"
-  }, "\u672C\u7CFB\u7EDF\u5E2E\u52A9\u9648\u5F64\u78CA\u3001\u674E\u5FD7\u8BDA\u7B4911\u4EBA\u5171\u8BA1\u5B8C\u6210100\u6B21\u7684\u5931\u7269\u5BFB\u56DE")), data.length === 0 ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(remax_one__WEBPACK_IMPORTED_MODULE_2__["View"], {
+  }, welcome)), data.length === 0 ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(remax_one__WEBPACK_IMPORTED_MODULE_2__["View"], {
     className: "nothing"
   }, "\u6682\u65E0") : data.map(function (item, index) {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(remax_one__WEBPACK_IMPORTED_MODULE_2__["View"], {

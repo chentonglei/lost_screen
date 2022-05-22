@@ -113,7 +113,7 @@ float: right;
   border-top-left-radius: 25rpx;
   border-bottom-left-radius: 25rpx;
 }
-.status_find{
+.status_shenhe{
   text-align: center;
   margin-right: -70rpx;
   float: right;
@@ -121,6 +121,28 @@ float: right;
   width: 25%;
   color: #FFFFFF;
   background-color: #CCCCCC;
+  border-top-left-radius: 25rpx;
+  border-bottom-left-radius: 25rpx;
+}
+.status_find{
+  text-align: center;
+  margin-right: -70rpx;
+  float: right;
+  height: 100%;
+  width: 25%;
+  color: #FFFFFF;
+  background-color: #8cea2e;
+  border-top-left-radius: 25rpx;
+  border-bottom-left-radius: 25rpx;
+}
+.status_refuse{
+  text-align: center;
+  margin-right: -70rpx;
+  float: right;
+  height: 100%;
+  width: 25%;
+  color: #FFFFFF;
+  background-color: #FF4D4F;
   border-top-left-radius: 25rpx;
   border-bottom-left-radius: 25rpx;
 }

@@ -21,6 +21,7 @@ export default () => {
   const global = useContext(AppContext) //全局变量
   const [isModalVisible, setIsModalVisible] = useState('失物')
   const [data, setData] = useState([])
+  const [welcome, setWelcome] = useState('系统崩溃啦~~')
   const [loading, setLoading] = useState(true)
   useEffect(() => {
     wx.showLoading({
@@ -53,7 +54,19 @@ export default () => {
           },
         })
     }
+    const fetchData2 = async () => {
+      await wx.request({
+        url: `${ip}/chart/welcome`,
+        method: 'POST',
+        success(res) {
+          if (res.data) {
+            setWelcome(res.data)
+          }
+        },
+      })
+    }
     fetchData()
+    fetchData2()
     setTimeout(function () {
       wx.hideLoading({
         success() {
@@ -148,9 +161,7 @@ export default () => {
       ) : (
         <View className="content">
           <View class="box flex-row">
-            <Text class="r">
-              本系统帮助陈彤磊、李志诚等11人共计完成100次的失物寻回
-            </Text>
+            <Text class="r">{welcome}</Text>
           </View>
           {data.length === 0 ? (
             <View className="nothing">暂无</View>

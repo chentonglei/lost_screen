@@ -131,7 +131,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
         });
       } else {
         e.target.value.Lost_time = todaydate;
-        e.target.value.Lost_status = '未找到';
+        e.target.value.Lost_status = '审核中';
         e.target.value.Lost_img = img;
         e.target.value.Lost_people_id = global.appData.Re_id;
         e.target.value.Lost_people_name = global.appData.Re_name;
@@ -145,15 +145,21 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
           success: function success(res) {
             if (res.data.result === 'true') {
               wx.showToast({
-                title: '发布成功',
+                title: '等待审核',
                 icon: 'success',
                 duration: 2000
               });
               setTimeout(function () {
-                Object(remax_one__WEBPACK_IMPORTED_MODULE_2__["reLaunch"])({
-                  url: '/pages/index/index'
+                Object(remax_one__WEBPACK_IMPORTED_MODULE_2__["redirectTo"])({
+                  url: '/pages/login/release/index?title=失物'
                 });
               }, 2000);
+            } else {
+              wx.showToast({
+                title: '发布失败',
+                icon: 'error',
+                duration: 2000
+              });
             }
           }
         });
@@ -184,7 +190,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
       } else {
         console.log('进入');
         e.target.value.Rec_time = todaydate;
-        e.target.value.Rec_status = '未归还';
+        e.target.value.Rec_status = '审核中';
         e.target.value.Rec_img = img;
         e.target.value.Rec_people_id = global.appData.Re_id;
         e.target.value.Rec_people_name = global.appData.Re_name;
@@ -198,15 +204,21 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
           success: function success(res) {
             if (res.data.result === 'true') {
               wx.showToast({
-                title: '发布成功',
+                title: '等待审核',
                 icon: 'success',
                 duration: 2000
               });
               setTimeout(function () {
-                Object(remax_one__WEBPACK_IMPORTED_MODULE_2__["reLaunch"])({
-                  url: '/pages/index/index'
+                Object(remax_one__WEBPACK_IMPORTED_MODULE_2__["redirectTo"])({
+                  url: '/pages/login/release/index?title=招领'
                 });
               }, 2000);
+            } else {
+              wx.showToast({
+                title: '发布失败',
+                icon: 'error',
+                duration: 2000
+              });
             }
           }
         });

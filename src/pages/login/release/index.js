@@ -14,6 +14,14 @@ import { usePageEvent } from 'remax/macro'
 import ip from '../../ip'
 import { AppContext } from '../../../app'
 import comment from './评论.png'
+const color = {
+  未找到: 'status_nofind',
+  已找到: 'status_find',
+  未归还: 'status_nofind',
+  已归还: 'status_find',
+  审核中: 'status_shenhe',
+  审核拒绝: 'status_refuse',
+}
 export default () => {
   const global = useContext(AppContext) //全局变量
   const [isModalVisible, setIsModalVisible] = useState('失物')
@@ -138,23 +146,11 @@ export default () => {
                       ? item.Lost_people_name
                       : item.Rec_people_name}
                     {isModalVisible === '失物' ? (
-                      <View
-                        className={
-                          item.Lost_status === '未找到'
-                            ? 'status_nofind'
-                            : 'status_find'
-                        }
-                      >
+                      <View className={color[item.Lost_status]}>
                         {item.Lost_status}
                       </View>
                     ) : (
-                      <View
-                        className={
-                          item.Rec_status === '未归还'
-                            ? 'status_nofind'
-                            : 'status_find'
-                        }
-                      >
+                      <View className={color[item.Rec_status]}>
                         {item.Rec_status}
                       </View>
                     )}
@@ -220,23 +216,11 @@ export default () => {
                       ? item.Lost_people_name
                       : item.Rec_people_name}
                     {item.isModalVisible === '失物' ? (
-                      <View
-                        className={
-                          item.Lost_status === '未找到'
-                            ? 'status_nofind'
-                            : 'status_find'
-                        }
-                      >
+                      <View className={color[item.Lost_status]}>
                         {item.Lost_status}
                       </View>
                     ) : (
-                      <View
-                        className={
-                          item.Rec_status === '未归还'
-                            ? 'status_nofind'
-                            : 'status_find'
-                        }
-                      >
+                      <View className={color[item.Rec_status]}>
                         {item.Rec_status}
                       </View>
                     )}

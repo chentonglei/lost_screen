@@ -15,6 +15,14 @@ import { useQuery, usePageInstance } from 'remax'
 import { usePageEvent } from 'remax/macro'
 import { AppContext } from '../../../app'
 import ip from '../../ip'
+const color = {
+  未找到: 'status_nofind',
+  已找到: 'status_find',
+  未归还: 'status_nofind',
+  已归还: 'status_find',
+  审核中: 'status_shenhe',
+  审核拒绝: 'status_refuse',
+}
 export default () => {
   const global = useContext(AppContext) //全局变量
   const [body, setBody] = useState({})
@@ -456,23 +464,11 @@ export default () => {
                     : body.Rec_people_name
                 } ${telflag()}`}
                 {body.isModalVisible === '失物' ? (
-                  <View
-                    className={
-                      body.Lost_status === '未找到'
-                        ? 'status_nofind'
-                        : 'status_find'
-                    }
-                  >
+                  <View className={color[body.Lost_status]}>
                     {body.Lost_status}
                   </View>
                 ) : (
-                  <View
-                    className={
-                      body.Rec_status === '未归还'
-                        ? 'status_nofind'
-                        : 'status_find'
-                    }
-                  >
+                  <View className={color[body.Rec_status]}>
                     {body.Rec_status}
                   </View>
                 )}
