@@ -8,6 +8,7 @@ import {
   Form,
   switchTab,
   navigateTo,
+  reLaunch,
 } from 'remax/one'
 import { useQuery, usePageInstance } from 'remax'
 import { AppContext } from '../../../app'
@@ -52,6 +53,11 @@ export default () => {
               icon: 'success',
               duration: 2000,
             })
+            setTimeout(function () {
+              reLaunch({
+                url: '/pages/login/index',
+              })
+            }, 2000)
           } else {
             wx.showToast({
               title: '申请失败',

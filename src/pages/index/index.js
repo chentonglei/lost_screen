@@ -85,7 +85,10 @@ export default () => {
         icon: 'error',
         duration: 2000,
       })
-    } else if (!global.appData.Re_school_id) {
+    } else if (
+      !global.appData.Re_school_id ||
+      global.appData.Re_status !== '审核通过'
+    ) {
       wx.showToast({
         title: '请先认证',
         icon: 'error',
@@ -109,7 +112,10 @@ export default () => {
         icon: 'error',
         duration: 2000,
       })
-    } else if (!global.appData.Re_school_id) {
+    } else if (
+      !global.appData.Re_school_id ||
+      global.appData.Re_status !== '审核通过'
+    ) {
       wx.showToast({
         title: '请先认证',
         icon: 'error',

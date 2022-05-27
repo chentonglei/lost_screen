@@ -32232,7 +32232,7 @@ var App = function App(props) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-var ip = 'http://192.168.52.1:3000';
+var ip = 'http://192.168.137.1:3000';
 /* harmony default export */ __webpack_exports__["default"] = (ip);
 
 /***/ }),
@@ -32319,6 +32319,11 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
               icon: 'success',
               duration: 2000
             });
+            setTimeout(function () {
+              Object(remax_one__WEBPACK_IMPORTED_MODULE_1__["reLaunch"])({
+                url: '/pages/login/index'
+              });
+            }, 2000);
           } else {
             wx.showToast({
               title: '申请失败',

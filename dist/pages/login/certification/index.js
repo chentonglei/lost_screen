@@ -104,12 +104,20 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
         data: e.target.value,
         method: 'POST',
         success: function success(res) {
+          console.log(res);
+
           if (res.data.result === 'true') {
             wx.showToast({
               title: '申请成功',
               icon: 'success',
               duration: 2000
             });
+            global.appData.Re_status = '审核中';
+            setTimeout(function () {
+              Object(remax_one__WEBPACK_IMPORTED_MODULE_1__["reLaunch"])({
+                url: '/pages/login/index'
+              });
+            }, 2000);
           } else {
             wx.showToast({
               title: res.data.msg,

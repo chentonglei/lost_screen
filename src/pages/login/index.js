@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react'
+import React, { useState, useContext, useEffect } from 'react'
 import {
   View,
   Text,
@@ -38,6 +38,25 @@ const bottom = [
 ]
 export default () => {
   const global = useContext(AppContext) //全局变量
+  usePageEvent(
+    'onShow',
+    () => {
+      const fetchData = async () => {
+        wx.request({
+          url: `${ip}/register/userInfo`,
+          data: { Re_id: global.appData.Re_id, Re_power: 'user' },
+          method: 'POST',
+          success(res) {
+            if (res.data) {
+              global.setAppData(res.data.user)
+            }
+          },
+        })
+      }
+      fetchData()
+    },
+    []
+  )
   const MidButton = (item) => {
     if (global.appData) {
       navigateTo({
