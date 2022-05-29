@@ -420,13 +420,13 @@ var color = {
                   wx.showToast({
                     title: '删除成功',
                     icon: 'success',
-                    duration: 2000
+                    duration: 2000,
+                    success: function success() {
+                      Object(remax_one__WEBPACK_IMPORTED_MODULE_3__["switchTab"])({
+                        url: '/pages/index/index'
+                      });
+                    }
                   });
-                  setTimeout(function () {
-                    Object(remax_one__WEBPACK_IMPORTED_MODULE_3__["redirectTo"])({
-                      url: '/pages/index/index'
-                    });
-                  }, 2000);
                 } else {
                   wx.showToast({
                     title: '删除失败',
@@ -448,7 +448,12 @@ var color = {
                   wx.showToast({
                     title: '删除成功',
                     icon: 'success',
-                    duration: 2000
+                    duration: 2000,
+                    success: function success() {
+                      Object(remax_one__WEBPACK_IMPORTED_MODULE_3__["switchTab"])({
+                        url: '/pages/index/index'
+                      });
+                    }
                   });
                   setTimeout(function () {
                     Object(remax_one__WEBPACK_IMPORTED_MODULE_3__["redirectTo"])({

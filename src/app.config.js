@@ -1,7 +1,7 @@
 module.exports = {
   pages: [
-    'pages/login/index',
     'pages/index/index',
+    'pages/login/index',
     'pages/login/release/index',
     'pages/login/school/index',
     'pages/login/revise/index',

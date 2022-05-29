@@ -945,12 +945,15 @@ module.exports = {
   }
 },
       pageEvents: {
+  "pages/index/index": [
+    "onPullDownRefresh"
+  ],
   "pages/login/index": [
     "onShow"
   ],
-  "pages/index/index": [],
   "pages/login/release/index": [
-    "onLoad"
+    "onLoad",
+    "onPullDownRefresh"
   ],
   "pages/login/school/index": [],
   "pages/login/revise/index": [],

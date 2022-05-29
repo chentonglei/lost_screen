@@ -91,18 +91,17 @@ __webpack_require__.r(__webpack_exports__);
         method: 'POST',
         success: function success(res) {
           if (res.data.status === '登录成功') {
+            global.setAppData(res.data.user);
             wx.showToast({
               title: '登录成功',
               icon: 'success',
               duration: 2000,
               success: function success() {
-                Object(remax_one__WEBPACK_IMPORTED_MODULE_1__["reLaunch"])({
+                Object(remax_one__WEBPACK_IMPORTED_MODULE_1__["switchTab"])({
                   url: '/pages/login/index'
                 });
               }
             });
-            console.log(res.data.user);
-            global.setAppData(res.data.user);
           } else {
             wx.showToast({
               title: '登录失败',

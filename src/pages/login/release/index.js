@@ -27,11 +27,7 @@ export default () => {
   const [isModalVisible, setIsModalVisible] = useState('失物')
   const [loading, setLoading] = useState(true)
   const [data, setData] = useState([])
-  usePageEvent('onLoad', (options) => {
-    console.log(options.title)
-    setIsModalVisible(options.title)
-  })
-  useEffect(() => {
+  const one_request = () => {
     wx.showLoading({
       title: '加载中...',
       success() {
@@ -94,6 +90,22 @@ export default () => {
         },
       })
     }, 1000)
+  }
+  usePageEvent('onLoad', (options) => {
+    console.log(options.title)
+    setIsModalVisible(options.title)
+  })
+  usePageEvent('onPullDownRefresh', () => {
+    // 可以返回一个 promise，控制何时停止下来刷新行为
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        one_request()
+        wx.stopPullDownRefresh()
+      }, 1000)
+    })
+  })
+  useEffect(() => {
+    one_request()
   }, [isModalVisible])
   const changeButton = (title) => {
     setLoading(true)

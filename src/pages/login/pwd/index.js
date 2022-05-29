@@ -8,6 +8,7 @@ import {
   Form,
   switchTab,
   navigateTo,
+  redirectTo,
   navigateBack,
   reLaunch,
 } from 'remax/one'
@@ -45,18 +46,17 @@ export default () => {
         method: 'POST',
         success(res) {
           if (res.data.status === '登录成功') {
+            global.setAppData(res.data.user)
             wx.showToast({
               title: '登录成功',
               icon: 'success',
               duration: 2000,
               success() {
-                reLaunch({
+                switchTab({
                   url: '/pages/login/index',
                 })
               },
             })
-            console.log(res.data.user)
-            global.setAppData(res.data.user)
           } else {
             wx.showToast({
               title: '登录失败',

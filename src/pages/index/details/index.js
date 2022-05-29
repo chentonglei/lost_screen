@@ -259,12 +259,12 @@ export default () => {
                     title: '删除成功',
                     icon: 'success',
                     duration: 2000,
+                    success() {
+                      switchTab({
+                        url: '/pages/index/index',
+                      })
+                    },
                   })
-                  setTimeout(function () {
-                    redirectTo({
-                      url: '/pages/index/index',
-                    })
-                  }, 2000)
                 } else {
                   wx.showToast({
                     title: '删除失败',
@@ -285,6 +285,11 @@ export default () => {
                     title: '删除成功',
                     icon: 'success',
                     duration: 2000,
+                    success() {
+                      switchTab({
+                        url: '/pages/index/index',
+                      })
+                    },
                   })
                   setTimeout(function () {
                     redirectTo({

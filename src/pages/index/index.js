@@ -17,13 +17,15 @@ import comment from './评论.png'
 import school from '../login/school'
 import ip from '../ip'
 import { AppContext } from '../../app'
+import { stopPullDownRefresh } from 'remax/wechat'
 export default () => {
   const global = useContext(AppContext) //全局变量
   const [isModalVisible, setIsModalVisible] = useState('失物')
   const [data, setData] = useState([])
   const [welcome, setWelcome] = useState('系统崩溃啦~~')
   const [loading, setLoading] = useState(true)
-  useEffect(() => {
+
+  const one_request = () => {
     wx.showLoading({
       title: '加载中...',
       success() {
@@ -74,6 +76,18 @@ export default () => {
         },
       })
     }, 1000)
+  }
+  usePageEvent('onPullDownRefresh', () => {
+    // 可以返回一个 promise，控制何时停止下来刷新行为
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        one_request()
+        wx.stopPullDownRefresh()
+      }, 1000)
+    })
+  })
+  useEffect(() => {
+    one_request()
   }, [isModalVisible])
   const changeButton = (title) => {
     setIsModalVisible(title)

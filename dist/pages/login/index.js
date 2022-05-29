@@ -475,7 +475,7 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ 2:
+/***/ 1:
 /*!**********************************************!*\
   !*** multi ./src/pages/login/index.entry.js ***!
   \**********************************************/
@@ -487,4 +487,4 @@ module.exports = __webpack_require__(/*! D:\福建工程学院\毕设\代码\los
 
 /***/ })
 
-},[[2,"runtime","remax-vendors","remax-styles"]]]);
+},[[1,"runtime","remax-vendors","remax-styles"]]]);

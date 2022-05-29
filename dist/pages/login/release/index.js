@@ -103,11 +103,7 @@ var color = {
       data = _useState6[0],
       setData = _useState6[1];
 
-  Object(_remax_runtime__WEBPACK_IMPORTED_MODULE_1__["usePageEvent"])('onLoad', function (options) {
-    console.log(options.title);
-    setIsModalVisible(options.title);
-  });
-  Object(react__WEBPACK_IMPORTED_MODULE_2__["useEffect"])(function () {
+  var one_request = function one_request() {
     wx.showLoading({
       title: '加载中...',
       success: function success() {
@@ -225,6 +221,23 @@ var color = {
         }
       });
     }, 1000);
+  };
+
+  Object(_remax_runtime__WEBPACK_IMPORTED_MODULE_1__["usePageEvent"])('onLoad', function (options) {
+    console.log(options.title);
+    setIsModalVisible(options.title);
+  });
+  Object(_remax_runtime__WEBPACK_IMPORTED_MODULE_1__["usePageEvent"])('onPullDownRefresh', function () {
+    // 可以返回一个 promise，控制何时停止下来刷新行为
+    return new Promise(function (resolve) {
+      setTimeout(function () {
+        one_request();
+        wx.stopPullDownRefresh();
+      }, 1000);
+    });
+  });
+  Object(react__WEBPACK_IMPORTED_MODULE_2__["useEffect"])(function () {
+    one_request();
   }, [isModalVisible]);
 
   var changeButton = function changeButton(title) {
